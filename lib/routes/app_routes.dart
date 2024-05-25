@@ -63,6 +63,10 @@ class AppRoutes {
         DashboardBinding(),
       ],
     ),
+
+
+
+
     GetPage(
       name: notificationPage,
       page: () => NotificationScreen(),
