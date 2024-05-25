@@ -1,6 +1,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import '../presentarion/dashboard_screen/binding/dashboard_binding.dart';
 import '../presentarion/dashboard_screen/dashboard_screen.dart';
+
 import '../presentarion/eventselection_screen/binding/eventselection_binding.dart';
 import '../presentarion/eventselection_screen/eventselection_screen.dart';
 import '../presentarion/login_screen/binding/login_binding.dart';
