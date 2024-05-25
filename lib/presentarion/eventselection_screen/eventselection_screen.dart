@@ -12,6 +12,7 @@ import 'controller/eventselection_controller.dart';
 class EventSelectionScreen extends StatelessWidget {
   EventSelectionController controller = Get.put(EventSelectionController());
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
