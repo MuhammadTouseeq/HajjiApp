@@ -22,7 +22,7 @@ import '../../../widgets/paginations/paged_view.dart';
 /// This class manages the state of the DiscoverScreen, including the
 /// current discoverModelObj
 ///
-class EventSelectionController extends GetxController {
+class SectionsController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
 

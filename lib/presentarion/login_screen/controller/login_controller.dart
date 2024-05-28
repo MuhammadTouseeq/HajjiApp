@@ -57,6 +57,8 @@ class LoginController extends GetxController {
                 if (response.data['data'] != null) {
                   LoginModel loginResponseModel = LoginModel.fromJson(response.data['data']);
                   print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
+                  print('[ LOGIN dev ===> ${response.data['data']}]');
+                  print('[ LOGIN dev1 ===> ${response.data}]');
 
                   _appPreferences.setIsLoggedIn(loggedIn: true);
                  // _appPreferences.setAccessToken(token: loginResponseModel!.sessionCode!);
@@ -66,7 +68,7 @@ class LoginController extends GetxController {
 
                   Utils.showToast(response.data['message'], false,);
                   print("masg ${response.data['message']}");
-                  Get.toNamed(AppRoutes.dashboradPage);
+                 // Get.toNamed(AppRoutes.dashboradPage);
                 } else {
                   Utils.showToast('', true);
                   // Handle the case where data is null in the response
