@@ -17,14 +17,16 @@ class Section11 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Row(
-            children: [
-              HBedWidget(bed: beds[0]),
-              HBedWidget(bed: beds[1]),
-              HBedWidget(bed: beds[0]),
-              HBedWidget(bed: beds[1]),
+          FittedBox(
+            child: Row(
+              children: [
+                HBedWidget(bed: beds[0]),
+                HBedWidget(bed: beds[1]),
+                HBedWidget(bed: beds[0]),
+                HBedWidget(bed: beds[1]),
 
-            ],
+              ],
+            ),
           ),
           FittedBox(
             child: Row(
@@ -90,14 +92,16 @@ class Section11 extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            children: [
-              HBedWidget(bed: beds[0]),
-              HBedWidget(bed: beds[1]),
-              HBedWidget(bed: beds[0]),
-              HBedWidget(bed: beds[1]),
+          FittedBox(
+            child: Row(
+              children: [
+                HBedWidget(bed: beds[0]),
+                HBedWidget(bed: beds[1]),
+                HBedWidget(bed: beds[0]),
+                HBedWidget(bed: beds[1]),
 
-            ],
+              ],
+            ),
           ),
 
 

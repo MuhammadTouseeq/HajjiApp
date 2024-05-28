@@ -21,7 +21,7 @@ import '../../../widgets/custom_snackbar.dart';
 /// current loginModelObj
 class LoginController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
-  TextEditingController hajjIdController = TextEditingController();
+  TextEditingController hajjIdController = TextEditingController(text: "test");
 
   TextEditingController passwordController = TextEditingController();
   Rx<bool> isShowPassword = false.obs;
@@ -61,14 +61,14 @@ class LoginController extends GetxController {
                   print('[ LOGIN dev1 ===> ${response.data}]');
 
                   _appPreferences.setIsLoggedIn(loggedIn: true);
-                 // _appPreferences.setAccessToken(token: loginResponseModel!.sessionCode!);
+                  _appPreferences.setAccessToken(token: loginResponseModel!.token!);
                   _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
                   await _appPreferences.isPreferenceReady;
 
                   Utils.showToast(response.data['message'], false,);
                   print("masg ${response.data['message']}");
-                 // Get.toNamed(AppRoutes.dashboradPage);
+                  Get.toNamed(AppRoutes.userInformationPage);
                 } else {
                   Utils.showToast('', true);
                   // Handle the case where data is null in the response

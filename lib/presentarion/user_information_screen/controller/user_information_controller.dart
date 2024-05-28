@@ -22,9 +22,9 @@ import '../../../widgets/custom_snackbar.dart';
 /// current loginModelObj
 class UserInformationController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
-  TextEditingController emailController = TextEditingController(text: 'sharjeelahmed92@hotmail.com');
+  TextEditingController emailController = TextEditingController(text: 'test@gmail.com');
 
-  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController(text: "+923111888909");
   Rx<bool> isShowPassword = false.obs;
   RxBool isValidate = false.obs;
   RxString phoneNo = "".obs;
@@ -32,12 +32,25 @@ class UserInformationController extends GetxController {
   GlobalKey<FormState> formKey = new GlobalKey();
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
   AppPreferences _appPreferences = AppPreferences();
-  AppPreferences appPreferences = AppPreferences();
-
-  String generateGuestToken() {
-    // Generate a placeholder or generic token for the guest user
-    return 'guest_token';
+  LoginModel? userDetails;
+  void sendPhoneNumber() {
+    String fullPhoneNumber = phoneNo.value;
+    // Code to send the phone number to your backend or another service
+    print("Sending phone number: $fullPhoneNumber");
   }
+
+
+  Future<dynamic> getProfileData() async {
+    await _appPreferences.isPreferenceReady;
+    var data= await _appPreferences.getProfileData();
+    Map<String,dynamic> userMap = jsonDecode(data!);
+    print('map $userMap');
+
+    userDetails = LoginModel.fromJson(userMap);
+    print('map1 $userDetails');
+  }
+
+
 
   Future<void> UserApi(context) async {
     final formState = formKey.currentState;
@@ -53,20 +66,23 @@ class UserInformationController extends GetxController {
 
                 if (response.data['data'] != null) {
                   LoginModel loginResponseModel = LoginModel.fromJson(response.data['data']);
-                  print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
+                  print('[ otp RESPONSE ===> ${loginResponseModel.toJson()}]');
 
-                  _appPreferences.setIsLoggedIn(loggedIn: true);
-                 //  _appPreferences.setAccessToken(token: loginResponseModel.sessionCode!);
-                  _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
+                  if (loginResponseModel.status == '1') {
+                   // _appPreferences.setIsLoggedIn(loggedIn: true);
+                  //   _appPreferences.setAccessToken(token: loginResponseModel.token!);
+                   // _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
-                  await _appPreferences.isPreferenceReady;
+                    await _appPreferences.isPreferenceReady;
 
-                  Utils.showToast(response.data['message'], false,);
-                  print("masg  ${response.data['message']}");
-                   Get.toNamed(AppRoutes.otpPage);
+                    Utils.showToast(response.data['message'], false);
+                    print("msg ${response.data['message']}");
+                  //  Get.toNamed(AppRoutes.otpPage);
+                  } else {
+                    Utils.showToast("${response.data['message']}", true);
+                  }
                 } else {
-                  Utils.showToast('Incorrect Password or Email', true);
-                  // Handle the case where data is null in the response
+                  Utils.showToast('', true);
                 }
               },
               onError: (error) {
@@ -76,13 +92,13 @@ class UserInformationController extends GetxController {
               },
               data: {
                 'device_type': (Platform.isIOS) ? 'ios' : 'android',
-                'user_id': 2,
+                'user_id': userDetails!.userId,
                 'email_id': emailController.text,
                 'phone_number': phoneNumber.text,
-                //'phone_number': phoneNumber.text,
+                //'phone_number': phoneNo.value,
+                'token': userDetails!.token,
               }
           );
-
         } else {
           CustomSnackBar.showCustomErrorToast(
             message: Strings.noInternetConnection.tr,
@@ -98,6 +114,14 @@ class UserInformationController extends GetxController {
 
   void setSelectedValue(bool value) {
     selectedValue.value = value;
+  }
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    getProfileData();
+
   }
 
 

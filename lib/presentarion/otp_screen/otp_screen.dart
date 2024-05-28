@@ -30,6 +30,7 @@ class OtpScreen extends GetWidget<OtpController> {
 
   @override
   Widget build(BuildContext context) {
+    String strDigits(int n) => n.toString().padLeft(2, '0');
     return BaseviewAuthScreen(
       image: true,
       imageShown: ImageConstant.backgroundImage,
@@ -69,7 +70,7 @@ class OtpScreen extends GetWidget<OtpController> {
                           ),
                         ),
                         TextSpan(
-                          text: controller.phone,
+                          text: controller.phoneNumber,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -108,13 +109,26 @@ class OtpScreen extends GetWidget<OtpController> {
                     ),
                   ),
                   SizedBox(height: getVerticalSize(10)),
-                  Center(
-                    child: MyText(
-                      title:  "Get new code in: ${controller.expiryTime}",
-                      clr: ColorConstant.black900,
-                      fontSize: 16,
-                      //customWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: getPadding(top: 1),
+                        child:
+                        Obx(
+                              () =>
+                              Text('Expire in: ${strDigits(controller.myDuration.value.inMinutes)
+                              }:${strDigits(controller.myDuration.value.inSeconds.remainder(60))}',
+                                //Text('0${controller.min}:${controller.sec.toString().length == 1 ? '0${controller.sec}' : controller.sec}',
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                // style: AppStyle.txtSourceSansProSemiBold14Gray600.copyWith(height: 1.29)
+                              ),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(height: getVerticalSize(16),),
                   MyAnimatedButton(

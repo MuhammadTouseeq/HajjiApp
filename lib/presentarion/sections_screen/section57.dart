@@ -17,66 +17,72 @@ class Section57 extends StatelessWidget {
       child: Column(
         children: [
           // First row with 4 beds
-          Row(
-              children: [
-                HBedWidget(bed: beds[0]),
-                HBedWidget(bed: beds[1]),
-                HBedWidget(bed: beds[2]),
-                HBedWidget(bed: beds[3]),
-              ]),
-
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
+          FittedBox(
+            child: Row(
                 children: [
-                  VBedWidget(bed: beds[4]),
-                  VBedWidget(bed: beds[5]),
-                  VBedWidget(bed: beds[6]),
-                ],
-              ),
-              Column(
-                children: [
-                  Row(
-                      children: [
-                        HBedWidget(bed: beds[7]),
-                        HBedWidget(bed: beds[8]),
-                        HBedWidget(bed: beds[9]),
-                      ]),
-
-                  Row(
-                      children: [
-                        HBedWidget(bed: beds[10]),
-                        HBedWidget(bed: beds[11]),
-                        HBedWidget(bed: beds[12]),
-                      ]),
-
-                  Container(height: 30,),
-                  Row(
-                      children: [
-                        HBedWidget(bed: beds[13]),
-                        HBedWidget(bed: beds[14]),
-                        HBedWidget(bed: beds[15]),
-                      ]),
-
-                  Row(
-                      children: [
-                        HBedWidget(bed: beds[16]),
-                        HBedWidget(bed: beds[17]),
-                        HBedWidget(bed: beds[18]),
-                      ]),
-                ],
-              )
-            ],
+                  HBedWidget(bed: beds[0]),
+                  HBedWidget(bed: beds[1]),
+                  HBedWidget(bed: beds[2]),
+                  HBedWidget(bed: beds[3]),
+                ]),
           ),
 
-          Row(
+          FittedBox(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                HBedWidget(bed: beds[19]),
-                HBedWidget(bed: beds[20]),
-                HBedWidget(bed: beds[21]),
-                HBedWidget(bed: beds[22]),
-              ]),
+                Column(
+                  children: [
+                    VBedWidget(bed: beds[4]),
+                    VBedWidget(bed: beds[5]),
+                    VBedWidget(bed: beds[6]),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                        children: [
+                          HBedWidget(bed: beds[7]),
+                          HBedWidget(bed: beds[8]),
+                          HBedWidget(bed: beds[9]),
+                        ]),
+
+                    Row(
+                        children: [
+                          HBedWidget(bed: beds[10]),
+                          HBedWidget(bed: beds[11]),
+                          HBedWidget(bed: beds[12]),
+                        ]),
+
+                    Container(height: 30,),
+                    Row(
+                        children: [
+                          HBedWidget(bed: beds[13]),
+                          HBedWidget(bed: beds[14]),
+                          HBedWidget(bed: beds[15]),
+                        ]),
+
+                    Row(
+                        children: [
+                          HBedWidget(bed: beds[16]),
+                          HBedWidget(bed: beds[17]),
+                          HBedWidget(bed: beds[18]),
+                        ]),
+                  ],
+                )
+              ],
+            ),
+          ),
+
+          FittedBox(
+            child: Row(
+                children: [
+                  HBedWidget(bed: beds[19]),
+                  HBedWidget(bed: beds[20]),
+                  HBedWidget(bed: beds[21]),
+                  HBedWidget(bed: beds[22]),
+                ]),
+          ),
 
         ],
       ),

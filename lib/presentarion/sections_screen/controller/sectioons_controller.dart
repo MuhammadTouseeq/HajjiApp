@@ -31,6 +31,8 @@ class SectionsController extends GetxController {
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
 
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
+  final List<String> itemsContidions = [ 'Camp # 01', 'Camp # 02',];
+  final selectedValueConditions = ''.obs;
 
   // LoginModel? userDetails;
   //

@@ -168,7 +168,7 @@ class ReservedbedScreen extends StatelessWidget {
                 title: 'View Full Layout',
                 clr: ColorConstant.whiteA700,
               ),
-            )
+            ),
           ],
         ),
       ),
