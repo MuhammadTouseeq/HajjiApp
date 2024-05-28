@@ -25,6 +25,8 @@ import '../../../widgets/paginations/paged_view.dart';
 class SectionsController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
+  final List<String> itemsContidions = [ 'Camp # 01', 'Camp # 02',];
+  final selectedValueConditions = ''.obs;
 
   // LoginModel? userDetails;
   //

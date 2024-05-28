@@ -16,6 +16,7 @@ import '../../../localization/strings_enum.dart';
 import '../../../routes/app_routes.dart';
 import '../../../widgets/custom_snackbar.dart';
 import '../../../widgets/custom_toast.dart';
+import '../../user_information_screen/controller/user_information_controller.dart';
 
 /// A controller class for the LoginScreen.
 ///
@@ -27,6 +28,7 @@ class OtpController extends GetxController {
   //final TextEditingController otpController = TextEditingController();
   final String phone = "+92 22222222222";
   String get expiryTime => "5 minutes"; // Example expiry time
+  String phoneNumber =Get.find<UserInformationController>().phoneNumber.text;
 
   TextEditingController passwordController = TextEditingController();
   Rx<bool> isShowPassword = false.obs;
@@ -40,7 +42,7 @@ class OtpController extends GetxController {
   RxBool resendOtpBool = false.obs;
   Rx<int> start = 120.obs;
   Rx<Duration> myDuration = Duration(seconds: 119).obs;
-
+  LoginModel? userDetails;
   Rx<String> email = "".obs;
 
   Timer? countdownTimer;
@@ -48,6 +50,16 @@ class OtpController extends GetxController {
   String generateGuestToken() {
     // Generate a placeholder or generic token for the guest user
     return 'guest_token';
+  }
+
+  Future<dynamic> getProfileData() async {
+    await _appPreferences.isPreferenceReady;
+    var data= await _appPreferences.getProfileData();
+    Map<String,dynamic> userMap = jsonDecode(data!);
+    print('map $userMap');
+
+    userDetails = LoginModel.fromJson(userMap);
+    print('map1 $userDetails');
   }
 
   void startTimer() {
@@ -114,46 +126,55 @@ class OtpController extends GetxController {
     await BaseClient.post(
         Constants.otpVerifyUrl, // url
         onSuccess: (response) async { // ap
-          print(response.data);// i done successfully
+          print(response.data); // i done successfully
 
           LoginModel loginResponseModel = LoginModel.fromJson(response.data['data']);
           print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
 
           Utils.showToast(response.data['message'], false);
 
-
           await _appPreferences.isPreferenceReady;
 
-         // _appPreferences.setAccessToken(token: loginResponseModel.sessionCode!);
+         // _appPreferences.setAccessToken(token: loginResponseModel.token!);
           _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
-          apiCallStatus = ApiCallStatus.success;
-          update();
+          if (loginResponseModel.status == "1") {
+            apiCallStatus = ApiCallStatus.success;
+            update();
 
-          _appPreferences.setIsLoggedIn(loggedIn: true);
-          Get.offAllNamed(AppRoutes.loginPage);
+            _appPreferences.setIsLoggedIn(loggedIn: true);
+            Get.offAllNamed(AppRoutes.dashboradPage);
+          } else {
+            Utils.showToast("${response.data['message']}", true);
+          }
         },
-        onError: (error){
-
+        onError: (error) {
           BaseClient.handleApiError(error);
 
           apiCallStatus = ApiCallStatus.error;
           update();
         },
-
         data: {
-          'user_id': 2,
+          'user_id': userDetails!.userId,
           'otp': otpController.text,
-        }// error while performing request
+          'token': userDetails!.token,
+        }
     );
-
   }
 
 
 
 
 
+  @override
+  Future<void> onInit() async {
+    getProfileData();
+    startTimer();
+    phoneNumber = Get.arguments['phonenumber'];
 
+   // startTimer();
+    super.onInit();
+  }
 
 
 

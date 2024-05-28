@@ -61,24 +61,128 @@ class SectionsScreen extends StatelessWidget {
             },
           ),
         ),
-        body: Padding(
-          padding: getPadding(all: 10),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black, // Specify the color of the border
-                        width: 2, // Specify the width of the border
+        body: SingleChildScrollView(
+          child: Column(
+          //  mainAxisAlignment: MainAxisAlignment.center,
+          //  crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      color: ColorConstant.pinkcolor,
+                      padding: getPadding(all: 10),
+                      child: MyText(
+                        title: "Booked",
+                        clr: ColorConstant.whiteA700,
+                        center: true,
                       ),
-                      borderRadius: BorderRadius.circular(1),
                     ),
-                    child: Section52(beds: beds)),
-              ],
-            ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: ColorConstant.greencolor,
+                      padding: getPadding(all: 10),
+                      child: MyText(
+                        title: "Available",
+                        clr: ColorConstant.whiteA700,
+                        center: true,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: ColorConstant.bluecolor,
+                      padding: getPadding(all: 10),
+                      child: MyText(
+                        title: "You Selected",
+                        clr: ColorConstant.whiteA700,
+                        center: true,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: double.infinity,
+                padding: getPadding(all: 10),
+                color: ColorConstant.appBackgroundgrayColor,
+                child: MyText(
+                  center: true,
+                  title: 'Click on bed to reserve',
+                ),
+              ),
+              Obx(() => Container(
+                padding: getPadding(left: 10),
+                // width: double.infinity,
+                decoration: BoxDecoration(
+                  color: ColorConstant.dropdowncolor,
+                  border: Border.all(color: Colors.grey), // Add border decoration
+                  borderRadius: BorderRadius.circular(8.0), // Optional: Add border radius
+                ),
+                child: DropdownButton<String>(
+                  //  isExpanded: false,
+                  hint: Text(
+                    "Select Camp",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).hintColor,
+                    ),
+                  ), // Set the hint text
+                  iconSize: 35,
+                  iconEnabledColor: ColorConstant.blackColor,
+                  iconDisabledColor: ColorConstant.appDescriptionTextColor,
+                  underline: SizedBox(),
+                  value: controller.selectedValueConditions.value.isNotEmpty ? controller.selectedValueConditions.value : null,
+                  items: controller.itemsContidions.map<DropdownMenuItem<String>>((String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: MyText(
+                        title: item,
+                        clr: ColorConstant.black900,
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      controller.selectedValueConditions.value = newValue;
+                    }
+                  },
+                ),
+              )),
+              InteractiveViewer(
+                boundaryMargin: EdgeInsets.all(8.0),
+                minScale: 0.1,  // minimum zoom scale
+                maxScale: 40.0,
+                child: Padding(
+                  padding: getPadding(all: 10),
+                  child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black, // Specify the color of the border
+                          width: 2, // Specify the width of the border
+                        ),
+                        borderRadius: BorderRadius.circular(1),
+                      ),
+                      child: Section57(beds: beds)),
+                ),
+              ),
+              SizedBox(height: getVerticalSize(100),),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: ColorConstant.layoutcolor,
+                      borderRadius: BorderRadius.circular(5.0)
+                  ),
+                  padding: getPadding(all: 10),
+                  child: MyText(
+                    title: 'View Full Layout',
+                    clr: ColorConstant.whiteA700,
+                  ),
+                ),
+              ),
+            ],
           ),
         ));
   }

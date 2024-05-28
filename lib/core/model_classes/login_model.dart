@@ -19,6 +19,7 @@ class LoginModel {
   String? status;
   String? deleted;
   String? sessionCode;
+  String? token;
 
   LoginModel(
       {this.userId,
@@ -40,7 +41,9 @@ class LoginModel {
         this.hajjStatus,
         this.status,
         this.deleted,
-        this.sessionCode});
+        this.sessionCode,
+        this.token
+      });
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
@@ -63,6 +66,7 @@ class LoginModel {
     status = json['status'];
     deleted = json['deleted'];
     sessionCode = json['session_code'];
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -87,6 +91,7 @@ class LoginModel {
     data['status'] = this.status;
     data['deleted'] = this.deleted;
     data['session_code'] = this.sessionCode;
+    data['token'] = this.token;
     return data;
   }
 }

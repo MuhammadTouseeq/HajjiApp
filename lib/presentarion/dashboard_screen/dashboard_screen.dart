@@ -51,44 +51,47 @@ class DashboardScreen extends StatelessWidget {
           ],
 
         ),
-        body: Padding(
-          padding: getPadding(all: 10),
-          child: Column(
-            children: [
-              SizedBox(height: getVerticalSize(30),),
-              CommonImageView(
-                imagePath: ImageConstant.logoImage,
-                height: 100,
+        body:Obx(() {
+          if (controller.isLoading.value) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Padding(
+              padding: getPadding(all: 10),
+              child: Column(
+                children: [
+                  SizedBox(height: getVerticalSize(30),),
+                  CommonImageView(
+                    imagePath: ImageConstant.logoImage,
+                    height: 100,
+                  ),
+                  SizedBox(height: getVerticalSize(30),),
+                  MyText(title: "Your Name:",clr: ColorConstant.black900,customWeight: FontWeight.w500,fontSize: 18,),
+                  SizedBox(height: getVerticalSize(10),),
+                  MyText(title: controller.userDetails!.haajiId ?? "N/A",clr: ColorConstant.whiteA700,customWeight: FontWeight.w500,fontSize: 25,),
+                  SizedBox(height: getVerticalSize(10),),
+                  MyText(title: "Your Hajji ID:",clr: ColorConstant.black900,customWeight: FontWeight.w500),
+                  SizedBox(height: getVerticalSize(10),),
+                  MyText(title: controller.userDetails!.haajiId ?? "N/A",clr: ColorConstant.whiteA700,customWeight: FontWeight.w500,fontSize: 25,),
+                  SizedBox(height: getVerticalSize(50),),
+                  MyAnimatedButton(
+                    radius: 25.0,
+                    height: getVerticalSize(60),
+                    width: getHorizontalSize(400),
+                    fontSize: 18,
+                    bgColor: ColorConstant.anbtnBlue,
+                    controller: controller.btnController,
+                    title: "Reserved Bed".tr,
+                    onTap: () async {
+                      Get.toNamed(AppRoutes.sectionsPage);
+                    },
+                  ),
+                ],
               ),
-              SizedBox(height: getVerticalSize(30),),
-              MyText(title: "Your Name:",clr: ColorConstant.black900,customWeight: FontWeight.w500,fontSize: 18,),
-              SizedBox(height: getVerticalSize(10),),
-              MyText(title: "Waseem Qayyum",clr: ColorConstant.whiteA700,customWeight: FontWeight.w500,fontSize: 25,),
-              SizedBox(height: getVerticalSize(10),),
-              MyText(title: "Your Hajji ID:",clr: ColorConstant.black900,customWeight: FontWeight.w500),
-              SizedBox(height: getVerticalSize(10),),
-              MyText(title: "Waseem123",clr: ColorConstant.whiteA700,customWeight: FontWeight.w500,fontSize: 25,),
-              SizedBox(height: getVerticalSize(50),),
-              MyAnimatedButton(
-                radius: 25.0,
-                height: getVerticalSize(60),
-                width: getHorizontalSize(400),
-                fontSize: 18 ,
-                bgColor: ColorConstant.anbtnBlue,
-                controller: controller.btnController,
-                title: "Reserved Bed".tr,
-                onTap: () async {
-                  Get.toNamed(AppRoutes.reservedbedPage);
-
-
-
-                },
-              ),
-
-
-            ],
-          ),
-        ),
+            );
+          }
+        }),
       ),
     );
   }
