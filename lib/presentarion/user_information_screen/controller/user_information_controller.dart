@@ -77,7 +77,7 @@ class UserInformationController extends GetxController {
 
                     Utils.showToast(response.data['message'], false);
                     print("msg ${response.data['message']}");
-                  //  Get.toNamed(AppRoutes.otpPage);
+                    Get.toNamed(AppRoutes.otpPage);
                   } else {
                     Utils.showToast("${response.data['message']}", true);
                   }
@@ -109,6 +109,8 @@ class UserInformationController extends GetxController {
       print("Form validation failed");
     }
   }
+
+
 
   var selectedValue = false.obs;
 

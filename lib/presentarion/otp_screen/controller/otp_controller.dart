@@ -40,8 +40,8 @@ class OtpController extends GetxController {
   RxInt min = 01.obs;
   RxInt sec = 59.obs;
   RxBool resendOtpBool = false.obs;
-  Rx<int> start = 120.obs;
-  Rx<Duration> myDuration = Duration(seconds: 119).obs;
+  Rx<int> start = 60.obs;
+  Rx<Duration> myDuration = Duration(seconds: 60).obs;
   LoginModel? userDetails;
   Rx<String> email = "".obs;
 
@@ -73,7 +73,7 @@ class OtpController extends GetxController {
 
   void resetTimer() {
     stopTimer();
-    myDuration.value = Duration(seconds: 119);
+    myDuration.value = Duration(seconds: 60);
     startTimer();
   }
   void setCountDown() {
@@ -160,6 +160,52 @@ class OtpController extends GetxController {
           'token': userDetails!.token,
         }
     );
+  }
+
+  Future<void> resendApi(context) async {
+    Utils.check().then((value) async {
+      if (value) {
+        btnController.start();
+        await BaseClient.post(
+          Constants.userUrl,
+          onSuccess: (response) async {
+            btnController.stop();
+            apiCallStatus = ApiCallStatus.success;
+
+            if (response.data['data'] != null) {
+              LoginModel loginResponseModel = LoginModel.fromJson(response.data['data']);
+              print('[ otp RESPONSE ===> ${loginResponseModel.toJson()}]');
+
+              if (loginResponseModel.status == '1') {
+                await _appPreferences.isPreferenceReady;
+                Utils.showToast(response.data['message'], false);
+                print("msg ${response.data['message']}");
+              } else {
+                Utils.showToast("${response.data['message']}", true);
+              }
+            } else {
+              Utils.showToast('', true);
+            }
+          },
+          onError: (error) {
+            BaseClient.handleApiError(error);
+            btnController.stop();
+            apiCallStatus = ApiCallStatus.error;
+          },
+          data: {
+            'device_type': (Platform.isIOS) ? 'ios' : 'android',
+            'user_id': userDetails!.userId,
+            'email_id': userDetails!.emailId,
+            'phone_number': userDetails!.phoneNumber,
+            'token': userDetails!.token,
+          },
+        );
+      } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
   }
 
 

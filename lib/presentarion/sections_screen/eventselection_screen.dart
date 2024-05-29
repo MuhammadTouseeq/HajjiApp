@@ -10,13 +10,14 @@ import 'package:hajjiapp/presentarion/sections_screen/section40.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section19.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section2.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section20.dart';
-import 'package:hajjiapp/presentarion/sections_screen/section3.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section60.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section32.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section35.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section36.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section5.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section6.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section52.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section8.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section9.dart';
 import 'package:hajjiapp/widgets/common_image_view.dart';
 import 'package:hajjiapp/widgets/custom_text.dart';
@@ -164,7 +165,7 @@ class SectionsScreen extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.circular(1),
                       ),
-                      child: Section57(beds: beds)),
+                      child: Section53(beds: beds)),
                 ),
               ),
               SizedBox(height: getVerticalSize(100),),

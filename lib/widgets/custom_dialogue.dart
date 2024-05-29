@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hajjiapp/widgets/custom_text.dart';
 import '../core/utils/color_constant.dart';
 import '../core/utils/responsive.dart';
 import '../core/utils/size_utils.dart';
@@ -34,22 +35,15 @@ class CustomDialogue extends StatelessWidget {
             SizedBox(
               height: responsive.setHeight(3),
             ),
-            Text(dialogueBoxHeading,
-                style: AppStyle
-                    .txtAgeoSemiBold16WhiteA700 /*fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold*/
-                /*.copyWith(letterSpacing: 0.09),*/
-                ),
+            MyText(title: "Exit"),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
-              child: Text(
-                dialogueBoxText,
-                textAlign: TextAlign.center,
-                style: AppStyle.txtAgeoSemiBold16WhiteA700
-                    /*     fontSize: 13,
-                  color: Colors.black,*/
-                    .copyWith(letterSpacing: 0.09),
-              ),
+              child: MyText(
+                title: dialogueBoxText,
+                clr: ColorConstant.black900,
+                center: true,
+              )
             ),
             Spacer(),
             const Spacer(),
@@ -71,17 +65,9 @@ class CustomDialogue extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
                             border: Border.all(color: Colors.transparent)),
-                        child: Text(
-                          'No',
-                          style:  AppStyle.txtAgeoSemiBold16WhiteA700.copyWith(
-                            letterSpacing: getHorizontalSize(
-                              0.06,
-                            ),
-                            height: getVerticalSize(
-                              1.00,
-                            ),
-                          ),
-                        ),
+                        child: MyText(
+                          title: "No",
+                        )
                       ),
                     ),
                   ),
@@ -97,17 +83,9 @@ class CustomDialogue extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
                             border: Border.all(color: Colors.transparent)),
-                        child: Text(
-                          'Yes',
-                          style:  AppStyle.txtAgeoSemiBold16WhiteA700.copyWith(
-                            letterSpacing: getHorizontalSize(
-                              0.06,
-                            ),
-                            height: getVerticalSize(
-                              1.00,
-                            ),
-                          ),
-                        ),
+                        child: MyText(
+                          title: "yes",
+                        )
                       ),
                     ),
                   ),

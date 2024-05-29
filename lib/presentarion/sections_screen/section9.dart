@@ -19,16 +19,18 @@ class Section9 extends StatelessWidget {
           FittedBox(
             child: Row(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      HBedWidget(bed: beds[0]),
-                      HBedWidget(bed: beds[1]),
-                      HBedWidget(bed: beds[0]),
-                      HBedWidget(bed: beds[1]),
-                      SizedBox(width: 10,),
-                      VBedWidget(bed: beds[1]),
-                    ]),
+                FittedBox(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HBedWidget(bed: beds[0]),
+                        HBedWidget(bed: beds[1]),
+                        HBedWidget(bed: beds[0]),
+                        HBedWidget(bed: beds[1]),
+                        SizedBox(width: 10,),
+                        VBedWidget(bed: beds[1]),
+                      ]),
+                ),
               ],
             ),
           ),
@@ -37,49 +39,82 @@ class Section9 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    Row(
+                   Column(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                     children: [
+                       VBedWidget(bed: beds[0]),
+                       SizedBox(height: getVerticalSize(30),),
+                       VBedWidget(bed: beds[0]),
+                     ],
+                   ),
+                    Column(
                       children: [
-                        SizedBox(width: getHorizontalSize(25),),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: getHorizontalSize(25),),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
+
+                        Row(
+                          children: [
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                          //  SizedBox(width: getHorizontalSize(25),),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                          ],
+                        ),
+                        SizedBox(height: 20,),
+                        Row(
+                          children: [
+                           // SizedBox(width: getHorizontalSize(30),),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                          ],
+                        ),
+                        Row(
+                          children: [
+
+                           // SizedBox(width: getHorizontalSize(25),),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
 
 
+                          ],
+                        ),
+
+
+                        SizedBox(height: getVerticalSize(30),),
+                        Container(
+                         // color: ColorConstant.blackColor,
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                                SizedBox(width: 10,),
+                                VBedWidget(bed: beds[0]),
+                              ]),
+                        ),
 
                       ],
                     ),
-                    SizedBox(height: 20,),
-                    Row(
-                      children: [
-                        SizedBox(width: getHorizontalSize(25),),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: getHorizontalSize(25),),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                      ],
-                    ),
+
+
                   ],
                 ),
                 Column(
@@ -87,13 +122,14 @@ class Section9 extends StatelessWidget {
                     VBedWidget(bed: beds[0]),
                     SizedBox(height: 20,),
                     VBedWidget(bed: beds[1]),
-                    VBedWidget(bed: beds[0]),
+                   // VBedWidget(bed: beds[0]),
                   ],
                 ),
 
               ],
             ),
           ),
+
 
 
         ],

@@ -14,16 +14,42 @@ class Section19 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        // crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              VBedWidget(bed: beds[1]),
-              VBedWidget(bed: beds[0]),
-            ],
-          ),
+          FittedBox(
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    HBedWidget(bed: beds[0]),
+                    SizedBox(height: getVerticalSize(100),),
+                    HBedWidget(bed: beds[0]),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HBedWidget(bed: beds[0]),
+                   // SizedBox(width: getHorizontalSize(150),),
+
+                    Column(
+                      children: [
+                        VBedWidget(bed: beds[1]),
+                        SizedBox(height: getVerticalSize(10),),
+                        VBedWidget(bed: beds[0]),
+                      ],
+                    )
+                  ],
+                ),
+
+              ],
+            ),
+          )
+
+
+
 
 
 

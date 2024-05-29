@@ -24,6 +24,7 @@ import '../../../widgets/paginations/paged_view.dart';
 ///
 class DashboardController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
+  final RoundedLoadingButtonController btn1Controller = RoundedLoadingButtonController();
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
   AppPreferences _appPreferences = AppPreferences();
  // AppPreferences appPreferences = AppPreferences();
