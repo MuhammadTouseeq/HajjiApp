@@ -21,7 +21,7 @@ import '../../../widgets/custom_snackbar.dart';
 /// current loginModelObj
 class LoginController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
-  TextEditingController hajjIdController = TextEditingController(text: "test");
+  TextEditingController hajjIdController = TextEditingController();//text: "test"
 
   TextEditingController passwordController = TextEditingController();
   Rx<bool> isShowPassword = false.obs;

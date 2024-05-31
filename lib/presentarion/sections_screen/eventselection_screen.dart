@@ -26,6 +26,7 @@ import '../../core/utils/size_utils.dart';
 import '../../section_screen.dart';
 import '../../widgets/animated_custom_button.dart';
 import 'controller/sectioons_controller.dart';
+import 'custom_ac.dart';
 import 'models/sections_model.dart';
 
 class SectionsScreen extends StatelessWidget {
@@ -151,38 +152,46 @@ class SectionsScreen extends StatelessWidget {
                   },
                 ),
               )),
-              InteractiveViewer(
-                boundaryMargin: EdgeInsets.all(8.0),
-                minScale: 0.1,  // minimum zoom scale
-                maxScale: 40.0,
-                child: Padding(
-                  padding: getPadding(all: 10),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black, // Specify the color of the border
-                          width: 2, // Specify the width of the border
-                        ),
-                        borderRadius: BorderRadius.circular(1),
-                      ),
-                      child: Section53(beds: beds)),
-                ),
-              ),
-              SizedBox(height: getVerticalSize(100),),
-              Align(
-                alignment: Alignment.bottomCenter,
+              Padding(
+                padding: getPadding(all: 20),
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: ColorConstant.layoutcolor,
-                      borderRadius: BorderRadius.circular(5.0)
-                  ),
-                  padding: getPadding(all: 10),
-                  child: MyText(
-                    title: 'View Full Layout',
-                    clr: ColorConstant.whiteA700,
-                  ),
+                  child: Section3(beds: beds),
                 ),
               ),
+              SizedBox(height: getVerticalSize(10),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MyAnimatedButton(
+                  radius: 25.0,
+                  height: getVerticalSize(60),
+                  width: getHorizontalSize(400),
+                  fontSize: 20 ,
+                  bgColor: ColorConstant.anbtnBlue,
+                  controller: controller.btnController,
+                  title: "View My Bed in Full Layout".tr,
+                  onTap: () async {
+
+
+                  },
+                ),
+              ),
+              SizedBox(height: getVerticalSize(10),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MyAnimatedButton(
+                  radius: 25.0,
+                  height: getVerticalSize(60),
+                  width: getHorizontalSize(400),
+                  fontSize: 20 ,
+                  bgColor: ColorConstant.anbtnBlue,
+                  controller: controller.btnController,
+                  title: "View Full Layout".tr,
+                  onTap: () async {
+
+                  },
+                ),
+              ),
+
             ],
           ),
         ));

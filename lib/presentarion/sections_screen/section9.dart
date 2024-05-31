@@ -13,127 +13,139 @@ class Section9 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          FittedBox(
-            child: Row(
-              children: [
-                FittedBox(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                        HBedWidget(bed: beds[0]),
-                        HBedWidget(bed: beds[1]),
-                        SizedBox(width: 10,),
-                        VBedWidget(bed: beds[1]),
-                      ]),
-                ),
-              ],
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.black, // Specify the color of the border
+              width: 2, // Specify the width of the border
             ),
+            borderRadius: BorderRadius.circular(1),
           ),
-          FittedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          child: Column(
+            children: [
+              FittedBox(
+                child: Row(
+                  children: [
+                    FittedBox(
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            SizedBox(width: 10,),
+                            VBedWidget(bed: beds[1]),
+                          ]),
+                    ),
+                  ],
+                ),
+              ),
+              FittedBox(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                   Column(
-                     mainAxisAlignment: MainAxisAlignment.start,
-                     children: [
-                       VBedWidget(bed: beds[0]),
-                       SizedBox(height: getVerticalSize(30),),
-                       VBedWidget(bed: beds[0]),
-                     ],
-                   ),
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
-                        Row(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
+                            VBedWidget(bed: beds[0]),
+                            SizedBox(height: getVerticalSize(30),),
+                            VBedWidget(bed: beds[0]),
                           ],
                         ),
-                        Row(
-                          children: [
-                          //  SizedBox(width: getHorizontalSize(25),),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-                          ],
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
-                          children: [
-                           // SizedBox(width: getHorizontalSize(30),),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-                          ],
-                        ),
-                        Row(
+                        Column(
                           children: [
 
-                           // SizedBox(width: getHorizontalSize(25),),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-                            HBedWidget(bed: beds[0]),
-                            HBedWidget(bed: beds[1]),
-
-
-                          ],
-                        ),
-
-
-                        SizedBox(height: getVerticalSize(30),),
-                        Container(
-                         // color: ColorConstant.blackColor,
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            Row(
                               children: [
                                 HBedWidget(bed: beds[0]),
                                 HBedWidget(bed: beds[1]),
                                 HBedWidget(bed: beds[0]),
                                 HBedWidget(bed: beds[1]),
-                                SizedBox(width: 10,),
-                                VBedWidget(bed: beds[0]),
-                              ]),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                //  SizedBox(width: getHorizontalSize(25),),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              children: [
+                                // SizedBox(width: getHorizontalSize(30),),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                              ],
+                            ),
+                            Row(
+                              children: [
+
+                                // SizedBox(width: getHorizontalSize(25),),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+                                HBedWidget(bed: beds[0]),
+                                HBedWidget(bed: beds[1]),
+
+
+                              ],
+                            ),
+
+
+                            SizedBox(height: getVerticalSize(30),),
+                            Container(
+                              // color: ColorConstant.blackColor,
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    HBedWidget(bed: beds[0]),
+                                    HBedWidget(bed: beds[1]),
+                                    HBedWidget(bed: beds[0]),
+                                    HBedWidget(bed: beds[1]),
+                                    SizedBox(width: 10,),
+                                    VBedWidget(bed: beds[0]),
+                                  ]),
+                            ),
+
+                          ],
                         ),
+
 
                       ],
                     ),
-
+                    Column(
+                      children: [
+                        VBedWidget(bed: beds[0]),
+                        SizedBox(height: 20,),
+                        VBedWidget(bed: beds[1]),
+                        // VBedWidget(bed: beds[0]),
+                      ],
+                    ),
 
                   ],
                 ),
-                Column(
-                  children: [
-                    VBedWidget(bed: beds[0]),
-                    SizedBox(height: 20,),
-                    VBedWidget(bed: beds[1]),
-                   // VBedWidget(bed: beds[0]),
-                  ],
-                ),
+              ),
 
-              ],
-            ),
+
+
+            ],
           ),
-
-
-
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
