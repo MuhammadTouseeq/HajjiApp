@@ -16,5 +16,7 @@ class Constants {
   static const userUrl = baseUrl + 'send_otp';
   static const otpVerifyUrl = baseUrl + 'verify_otp';
   static const sectionDataUrl = reservationbaseUrl + 'sections_data';
+  static const bedDataUrl = reservationbaseUrl + 'beds_data';
+  static const reserveBedUrl = reservationbaseUrl + 'reserve_bed';
 
 }

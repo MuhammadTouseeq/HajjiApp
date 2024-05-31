@@ -31,9 +31,14 @@ class SectionsController extends GetxController {
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
 
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
-  final List<String> itemsContidions = [ 'Camp # 01', 'Camp # 02',];
+  late List<String> itemsContidions = [ ];
   final selectedValueConditions = ''.obs;
 
+  RxList<DataItem> sectionList = List<DataItem>.empty().obs;
+  RxList<String> sections = List<String>.empty().obs;
+  RxList<BedData> bedList = List<BedData>.empty().obs;
+  RxList<String?> availableBedList = List<String?>.empty().obs;
+  RxList<Bed> generateBedList = List<Bed>.empty().obs;
   // LoginModel? userDetails;
   //
   // Future<dynamic> getProfileData() async {
@@ -43,8 +48,19 @@ class SectionsController extends GetxController {
   //   print('map $userMap');
   //   userDetails = LoginModel.fromJson(userMap);
   // }
-  final sectionData = <DataItem>[].obs;
 
+generateBedData({int count=24})
+{
+  print("available beds $availableBedList");
+generateBedList.value= List.generate(
+    count,
+        (index) => Bed(
+      id: index+1,
+      name: 'Bed ${index + 1}',
+      isReserved: availableBedList.contains((index+1).toString()) ? false : true, // Specify indices where isReserved should be true
+    ),
+  );
+}
 
   Future<void> getSectionData() async {
 
@@ -55,34 +71,36 @@ class SectionsController extends GetxController {
               onSuccess: (response) async {
 
                 apiCallStatus = ApiCallStatus.success;
+List<DataItem> dataSection = [];
 
-                if (response.data['data'] != null) {
+                if (response.data['status'] == true) {
 
-                  // Map<String, dynamic> parsedJson = jsonDecode(jsonData);
+                    response.data['data'].forEach((v) {
+                      dataSection.add(new DataItem.fromJson(v));
+                    });
 
-                  sectionData.value= List<DataItem>.from(response.data['data'].map((x) => DataItem.fromJson(x)));
+                    sections.value=dataSection.map((e) => e.sectionNumber).toSet().toList();
+                    sectionList.value.addAll(dataSection);
+                    sectionList.refresh();
 
-                  // Now you can access the parsed data
-                  print(sectionData.value[0].sectionNumber); // Output: 1
-                  print(sectionData.value[0].type); // Output: Female
-                  Utils.showToast(response.data['message'], false,);
-                  print("masg ${response.data['message']}");
+                    selectedValueConditions.value=sections.value[0];
+                    getBedsData(selectedValueConditions.value);
+
                 } else {
                   Utils.showToast('', true);
                   // Handle the case where data is null in the response
                 }
               },
               onError: (error) {
+
                 BaseClient.handleApiError(error);
                 apiCallStatus = ApiCallStatus.error;
               },
 
 
               data: {
-                {
-                  "user_id": "778",
+                  "user_id": 778,
                   "session_code": "b6b845e9d24faffae128"
-                }
               }
           );
 
@@ -96,6 +114,117 @@ class SectionsController extends GetxController {
   }
 
 
+  Future<void> getBedsData(String sectionNumber) async {
+print("====section number ${sectionNumber}");
+    Utils.check().then((value) async {
+      if (value) {
+        await BaseClient.post(
+            Constants.bedDataUrl,
+            onSuccess: (response) async {
+
+              apiCallStatus = ApiCallStatus.success;
+              List<BedData> dataBeds = [];
+print("Bed Api response========  ${response.data['data']}");
+              if (response.data['status'] == true) {
+
+                response.data['data'].forEach((v) {
+                  dataBeds.add(new BedData.fromJson(v));
+                });
+
+                bedList.value.clear();
+                availableBedList.value.clear();
+                bedList.value.addAll(dataBeds);
+                generateBedList.value.clear();
+                availableBedList.value.addAll(
+                  bedList.value
+                      .where((bedData) => bedData.isReserved != true) // Filter out reserved beds
+                      .map((bedData) => bedData.bedNumber) // Extract the bed numbers
+                      .toSet() // Remove duplicates
+                      .toList(), // Convert to list
+                );
+               // availableBedList.value.addAll(bedList.value.map((bedData) => bedData.bedNumber).toSet().toList());
+                availableBedList.refresh();
+                bedList.refresh();
+                generateBedData();
+              } else {
+                Utils.showToast('', true);
+                // Handle the case where data is null in the response
+              }
+            },
+            onError: (error) {
+
+              BaseClient.handleApiError(error);
+              apiCallStatus = ApiCallStatus.error;
+            },
+
+
+            data: {
+              "user_id": 778,
+              "session_code": "b6b845e9d24faffae128",
+              "section_number":sectionNumber
+            }
+        );
+
+      } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
+
+  }
+
+
+
+  Future<void> reserveBed(int bedNumber) async {
+
+    Utils.check().then((value) async {
+      if (value) {
+        await BaseClient.post(
+            Constants.reserveBedUrl,
+            onSuccess: (response) async {
+
+              apiCallStatus = ApiCallStatus.success;
+              List<BedData> dataBeds = [];
+              print("Bed Api response========  ${response}");
+              if (response.data['status'] == true) {
+                CustomSnackBar.showCustomToast(
+                  message:response.data['message'],
+                );
+                availableBedList.clear();
+                getBedsData(selectedValueConditions.value);
+              } else {
+                CustomSnackBar.showCustomErrorToast(
+                  message:response.data['message'],
+                );
+                // Handle the case where data is null in the response
+              }
+            },
+            onError: (error) {
+
+              BaseClient.handleApiError(error);
+              apiCallStatus = ApiCallStatus.error;
+            },
+
+
+            data: {
+              "user_id": 778,
+              "session_code": "b6b845e9d24faffae128",
+              "section_number":selectedValueConditions.value,
+              "bed_number":bedNumber,
+            }
+        );
+
+      } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
+
+  }
+
+
 
 
   @override
@@ -103,6 +232,7 @@ class SectionsController extends GetxController {
     super.onInit();
 
 getSectionData();
+
 
   }
 

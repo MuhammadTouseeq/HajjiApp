@@ -22,6 +22,7 @@ import 'package:hajjiapp/widgets/common_image_view.dart';
 import 'package:hajjiapp/widgets/custom_text.dart';
 import '../../core/utils/color_constant.dart';
 import '../../core/utils/size_utils.dart';
+import '../../core/utils/utils.dart';
 import '../../section_screen.dart';
 import '../../widgets/animated_custom_button.dart';
 import 'controller/sectioons_controller.dart';
@@ -35,14 +36,7 @@ class SectionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Bed> beds = List.generate(
-      25,
-          (index) => Bed(
-        id: index.toString(),
-        name: 'Bed ${index + 1}',
-        isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
-      ),
-    );
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -134,7 +128,7 @@ class SectionsScreen extends StatelessWidget {
                   iconDisabledColor: ColorConstant.appDescriptionTextColor,
                   underline: SizedBox(),
                   value: controller.selectedValueConditions.value.isNotEmpty ? controller.selectedValueConditions.value : null,
-                  items: controller.itemsContidions.map<DropdownMenuItem<String>>((String item) {
+                  items: controller.sections.value.map<DropdownMenuItem<String>>((String item) {
                     return DropdownMenuItem<String>(
                       value: item,
                       child: MyText(
@@ -146,27 +140,36 @@ class SectionsScreen extends StatelessWidget {
                   onChanged: (String? newValue) {
                     if (newValue != null) {
                       controller.selectedValueConditions.value = newValue;
+                      controller.getBedsData(controller.selectedValueConditions.value);
                     }
                   },
                 ),
               )),
-              InteractiveViewer(
-                boundaryMargin: EdgeInsets.all(8.0),
-                minScale: 0.1,  // minimum zoom scale
-                maxScale: 40.0,
-                child: Padding(
-                  padding: getPadding(all: 10),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black, // Specify the color of the border
-                          width: 2, // Specify the width of the border
+              Obx(() {
+                if (controller.availableBedList.value != null && controller.availableBedList.value.isNotEmpty) {
+                  return InteractiveViewer(
+                    boundaryMargin: EdgeInsets.all(8.0),
+                    minScale: 0.1,
+                    maxScale: 40.0,
+                    child: Padding(
+                      padding: getPadding(all: 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(1),
                         ),
-                        borderRadius: BorderRadius.circular(1),
+                        child: Section9(beds: controller.generateBedList.value),
                       ),
-                      child: Section57(beds: beds)),
-                ),
-              ),
+                    ),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              }),
+
               SizedBox(height: getVerticalSize(100),),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -195,47 +198,112 @@ class SectionsScreen extends StatelessWidget {
 }
 
 class HBedWidget extends StatelessWidget {
+  SectionsController controller = Get.put(SectionsController());
+
   final Bed bed;
 
   HBedWidget({required this.bed});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      padding: EdgeInsets.symmetric(horizontal: 3),
-      child:
-      bed.isReserved==true? Image.asset(
-        "assets/images/h_bed_red.png",
-        width: 90,
-        height: 90,
-      ): Image.asset(
-        "assets/images/h_bed_green.png",
-        width: 90,
-        height: 90,
+    return GestureDetector(
+      onTap: (){
+        if(bed.isReserved==true) {
+          Utils.showToast('Bed Already reserved', false);
+        }
+        else
+        {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alert'),
+                content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      // Close the AlertDialog
+                      Navigator.of(context).pop();
+                      controller.reserveBed(bed.id as int);
+
+                    },
+                    child: Text('Confirm'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      },
+      child: Container(
+        height: 50,
+        padding: EdgeInsets.symmetric(horizontal: 3),
+        child:
+        bed.isReserved==true?
+        Image.asset(
+          "assets/images/h_bed_red.png",
+          width: 90,
+          height: 90,
+        ): Image.asset(
+          "assets/images/h_bed_green.png",
+          width: 90,
+          height: 90,
+        ),
       ),
     );
   }
 }
 class VBedWidget extends StatelessWidget {
+  SectionsController controller = Get.put(SectionsController());
+
   final Bed bed;
 
   VBedWidget({required this.bed});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      padding: EdgeInsets.symmetric(vertical: 3),
+    return GestureDetector(
+      onTap: (){
+        if(bed.isReserved==true) {
+          Utils.showToast('Bed Already reserved', false);
+        }
+        else
+          {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Alert'),
+                  content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        // Close the AlertDialog
+                        Navigator.of(context).pop();
+                        controller.reserveBed(bed.id as int);
 
-      child:  bed.isReserved==true? Image.asset(
-        "assets/images/v_bed_red.png",
-        width: 90,
-        height: 90,
-      ): Image.asset(
-        "assets/images/v_bed_green.png",
-        width: 90,
-        height: 90,
+                      },
+                      child: Text('Confirm'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+      },
+      child: Container(
+        width: 50,
+        padding: EdgeInsets.symmetric(vertical: 3),
+
+        child:  bed.isReserved==true? Image.asset(
+          "assets/images/v_bed_red.png",
+          width: 90,
+          height: 90,
+        ): Image.asset(
+          "assets/images/v_bed_green.png",
+          width: 90,
+          height: 90,
+        ),
       ),
     );
   }

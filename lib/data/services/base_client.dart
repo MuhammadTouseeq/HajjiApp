@@ -174,6 +174,7 @@ class BaseClient {
       // 3) return response (api done successfully)
       await onSuccess.call(response);
     } on DioError catch (error) { // dio error (api reach the server but not performed successfully
+      print("tsq error ${error}");
 
       // no response
       if(error.response == null){

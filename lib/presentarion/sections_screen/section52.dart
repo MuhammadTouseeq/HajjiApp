@@ -73,8 +73,8 @@ class Section52 extends StatelessWidget {
                 children: [
                   HBedWidget(bed: beds[1]),
                   HBedWidget(bed: beds[1]),
-                  HBedWidget(bed: beds[21]),
-                  HBedWidget(bed: beds[22]),
+                  HBedWidget(bed: beds[2]),
+                  HBedWidget(bed: beds[2]),
                 ]),
           ),
 
