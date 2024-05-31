@@ -22,9 +22,9 @@ import '../../../widgets/custom_snackbar.dart';
 /// current loginModelObj
 class UserInformationController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
-  TextEditingController emailController = TextEditingController(text: 'test@gmail.com');
+  TextEditingController emailController = TextEditingController();//text: 'test@gmail.com'
 
-  TextEditingController phoneNumber = TextEditingController(text: "+923111888909");
+  TextEditingController phoneNumber = TextEditingController();//text: "+923111888909"
   Rx<bool> isShowPassword = false.obs;
   RxBool isValidate = false.obs;
   RxString phoneNo = "".obs;
@@ -77,7 +77,7 @@ class UserInformationController extends GetxController {
 
                     Utils.showToast(response.data['message'], false);
                     print("msg ${response.data['message']}");
-                  //  Get.toNamed(AppRoutes.otpPage);
+                    Get.toNamed(AppRoutes.otpPage);
                   } else {
                     Utils.showToast("${response.data['message']}", true);
                   }
@@ -94,8 +94,8 @@ class UserInformationController extends GetxController {
                 'device_type': (Platform.isIOS) ? 'ios' : 'android',
                 'user_id': userDetails!.userId,
                 'email_id': emailController.text,
-                'phone_number': phoneNumber.text,
-                //'phone_number': phoneNo.value,
+                //'phone_number': phoneNumber.text,
+                'phone_number': phoneNo.value,
                 'token': userDetails!.token,
               }
           );
@@ -109,6 +109,8 @@ class UserInformationController extends GetxController {
       print("Form validation failed");
     }
   }
+
+
 
   var selectedValue = false.obs;
 

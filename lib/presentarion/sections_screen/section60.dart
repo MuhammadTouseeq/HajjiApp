@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hajjiapp/core/utils/size_utils.dart';
 
 import '../../core/utils/color_constant.dart';
+import '../../core/utils/size_utils.dart';
 import 'custom_ac.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
 
-class Section19 extends StatelessWidget {
+class Section60 extends StatelessWidget {
   final List<Bed> beds;
 
-  Section19({required this.beds});
+  Section60({required this.beds});
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +30,28 @@ class Section19 extends StatelessWidget {
             children: [
               FittedBox(
                 child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
-                        HBedWidget(bed: beds[0]),
-                        SizedBox(height: getVerticalSize(100),),
-                        HBedWidget(bed: beds[0]),
+                        VBedWidget(bed: beds[0]),
+                        SizedBox(height: getVerticalSize(10),),
+                        VBedWidget(bed: beds[0]),
+
                       ],
                     ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        HBedWidget(bed: beds[0]),
-                        // SizedBox(width: getHorizontalSize(150),),
+                        HBedWidget(bed: beds[1]),
+                        SizedBox(width: getHorizontalSize(150),),
 
                         Column(
                           children: [
-                            VBedWidget(bed: beds[1]),
-                            SizedBox(height: getVerticalSize(10),),
-                            VBedWidget(bed: beds[0]),
+                            HBedWidget(bed: beds[1]),
+                            SizedBox(height: getVerticalSize(100),),
+                            HBedWidget(bed: beds[1]),
                           ],
                         )
                       ],
@@ -66,11 +69,12 @@ class Section19 extends StatelessWidget {
             ],
           ),
         ),
-        // Right border AC labels
-
+        // Left border AC labels
         Positioned(
-          top: 90, // Adjust the position as needed
-          right: -25, // Adjust the position as needed
+          // top: (MediaQuery.of(context).size.height / 2) - 40, // Adjust the position as needed
+          left: -25, // Adjust the position as needed
+          top: 90,
+          // bottom: -10,
           child: ACLabel(
             title: "AC",
             backgroundColor: ColorConstant.blackColor,
@@ -78,8 +82,8 @@ class Section19 extends StatelessWidget {
             isVertical: true,
           ),
         ),
-      ],
 
+      ],
     );
   }
 }

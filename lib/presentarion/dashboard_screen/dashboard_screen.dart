@@ -69,7 +69,7 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(height: getVerticalSize(30),),
                   MyText(title: "Your Name:",clr: ColorConstant.black900,customWeight: FontWeight.w500,fontSize: 18,),
                   SizedBox(height: getVerticalSize(10),),
-                  MyText(title: controller.userDetails!.haajiId ?? "N/A",clr: ColorConstant.whiteA700,customWeight: FontWeight.w500,fontSize: 25,),
+                  MyText(title: controller.userDetails!.haajiName ?? "N/A",clr: ColorConstant.whiteA700,customWeight: FontWeight.w500,fontSize: 25,),
                   SizedBox(height: getVerticalSize(10),),
                   MyText(title: "Your Hajji ID:",clr: ColorConstant.black900,customWeight: FontWeight.w500),
                   SizedBox(height: getVerticalSize(10),),
@@ -87,6 +87,20 @@ class DashboardScreen extends StatelessWidget {
                       Get.toNamed(AppRoutes.sectionsPage);
                     },
                   ),
+                  SizedBox(height: getVerticalSize(20),),
+                  MyAnimatedButton(
+                    radius: 25.0,
+                    height: getVerticalSize(60),
+                    width: getHorizontalSize(400),
+                    fontSize: 18,
+                    bgColor: ColorConstant.anbtnBlue,
+                    controller: controller.btn1Controller,
+                    title: "View My Reserved Bed".tr,
+                    onTap: () async {
+                      Get.toNamed(AppRoutes.sectionsPage);
+                    },
+                  ),
+
                 ],
               ),
             );

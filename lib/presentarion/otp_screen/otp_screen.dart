@@ -10,9 +10,11 @@ import '../../core/utils/color_constant.dart';
 import '../../core/utils/helper_functions.dart';
 import '../../core/utils/image_constant.dart';
 import '../../core/utils/size_utils.dart';
+import '../../data/services/api_call_status.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/animated_custom_button.dart';
+import '../../widgets/app_bar/custom_multitext.dart';
 import '../../widgets/common_image_view.dart';
 import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/custom_radio_button.dart';
@@ -101,11 +103,49 @@ class OtpScreen extends GetWidget<OtpController> {
                   ),
                   SizedBox(height: getVerticalSize(16)),
                   Center(
-                    child: MyText(
-                      title:  "Didn't receive OTP?",
-                      clr: ColorConstant.black900,
-                      fontSize: 16,
-                      //customWeight: FontWeight.bold,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (controller.resendOtpBool.value) {
+                          controller.countDown();
+                          print("true");
+                          // getCtrl.sendOtp(context);
+                        } else {
+                          print("False");
+                        }
+                      },
+                      child: Obx(() => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                              onTap: () {},
+                              child: MyText(
+                                title: "Didn't receive OTP?",
+                                customWeight: FontWeight.w300,
+                                clr: Colors.black,
+                              )),
+                          GestureDetector(
+                              onTap: () {
+                                if(controller.myDuration.value.inSeconds<=0){
+                                  controller.resendApi(context).then((value) => {
+
+                                    if(controller.apiCallStatus==ApiCallStatus.success){
+                                      print('OTP sent successfull'),
+                                      controller.resetTimer(),
+                                    }
+
+                                  });
+                                }
+
+                              },
+                              child: MyText(
+                                title: " Resend",
+                                customWeight: FontWeight.w500,
+                                clr: controller.myDuration.value.inSeconds>0?Colors.white10:Colors.black,
+                              )),
+
+                        ],
+                      ),)
                     ),
                   ),
                   SizedBox(height: getVerticalSize(10)),
@@ -130,6 +170,7 @@ class OtpScreen extends GetWidget<OtpController> {
                       )
                     ],
                   ),
+                  SizedBox(height: getVerticalSize(16),),
                   SizedBox(height: getVerticalSize(16),),
                   MyAnimatedButton(
                     radius: 30.0,

@@ -10,13 +10,14 @@ import 'package:hajjiapp/presentarion/sections_screen/section40.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section19.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section2.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section20.dart';
-import 'package:hajjiapp/presentarion/sections_screen/section3.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section60.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section32.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section35.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section36.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section5.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section6.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section52.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section8.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section9.dart';
 import 'package:hajjiapp/widgets/common_image_view.dart';
 import 'package:hajjiapp/widgets/custom_text.dart';
@@ -26,6 +27,7 @@ import '../../core/utils/utils.dart';
 import '../../section_screen.dart';
 import '../../widgets/animated_custom_button.dart';
 import 'controller/sectioons_controller.dart';
+import 'custom_ac.dart';
 import 'models/sections_model.dart';
 
 class SectionsScreen extends StatelessWidget {
@@ -36,7 +38,14 @@ class SectionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    List<Bed> beds = List.generate(
+      25,
+          (index) => Bed(
+        id: index.toString(),
+        name: 'Bed ${index + 1}',
+        isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
+      ),
+    );
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -174,17 +183,43 @@ class SectionsScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: ColorConstant.layoutcolor,
-                      borderRadius: BorderRadius.circular(5.0)
-                  ),
-                  padding: getPadding(all: 10),
-                  child: MyText(
-                    title: 'View Full Layout',
-                    clr: ColorConstant.whiteA700,
-                  ),
+                  child: Section3(beds: beds),
                 ),
               ),
+              SizedBox(height: getVerticalSize(10),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MyAnimatedButton(
+                  radius: 25.0,
+                  height: getVerticalSize(60),
+                  width: getHorizontalSize(400),
+                  fontSize: 20 ,
+                  bgColor: ColorConstant.anbtnBlue,
+                  controller: controller.btnController,
+                  title: "View My Bed in Full Layout".tr,
+                  onTap: () async {
+
+
+                  },
+                ),
+              ),
+              SizedBox(height: getVerticalSize(10),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MyAnimatedButton(
+                  radius: 25.0,
+                  height: getVerticalSize(60),
+                  width: getHorizontalSize(400),
+                  fontSize: 20 ,
+                  bgColor: ColorConstant.anbtnBlue,
+                  controller: controller.btnController,
+                  title: "View Full Layout".tr,
+                  onTap: () async {
+
+                  },
+                ),
+              ),
+
             ],
           ),
         ));

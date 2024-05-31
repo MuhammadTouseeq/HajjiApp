@@ -65,95 +65,95 @@ class UserInformationScreen extends GetWidget<UserInformationController> {
                     // customWeight: FontWeight.bold,
                   ),
                   SizedBox(height: getVerticalSize(10),),
-                  CustomTextField(
-                    hintText: 'Email@domain.com',
-                    controller: controller.phoneNumber,
-                    isFinal: false,
-                    keyboardType: TextInputType.emailAddress,
-                   // limit: HelperFunction.EMAIL_VALIDATION,
-                    // validator: (value) {
-                    //   return HelperFunction.emailValidate(value!);
-                    // },
-                  ),
-                  // InternationalPhoneNumberInput(
-                  //   cursorColor: ColorConstant.hintTextColor,
-                  //   validator: (value) {
-                  //     if (value!.isEmpty) {
-                  //       return 'Phone number is required';
-                  //     } else if (!controller.isValidate.value) {
-                  //       return 'Phone number is invalid';
-                  //     }
-                  //   },
-                  //   countrySelectorScrollControlled: true,
-                  //   textFieldController: controller.phoneNumber,
-                  //   onInputChanged: (PhoneNumber number) {
-                  //     print(number.phoneNumber);  // This will print the full phone number including country code
-                  //     controller.phoneNo.value = number.phoneNumber!;
-                  //   },
-                  //   onInputValidated: (bool value) {
-                  //     print(value);
-                  //     controller.isValidate.value = value;
-                  //   },
-                  //   selectorConfig: SelectorConfig(
-                  //     leadingPadding: 10.0,
-                  //     showFlags: true,
-                  //     trailingSpace: false,
-                  //     selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                  //     setSelectorButtonAsPrefixIcon: true,
-                  //   ),
-                  //   autoValidateMode: AutovalidateMode.onUserInteraction,
-                  //   initialValue: controller.initialPhone,
-                  //   searchBoxDecoration: InputDecoration(
-                  //     hintText: "Search",
-                  //     focusedBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       borderSide: BorderSide(color: ColorConstant.gray600, width: 1.0),
-                  //     ),
-                  //     errorBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
-                  //     ),
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
-                  //     ),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
-                  //     ),
-                  //     disabledBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
-                  //     ),
-                  //   ),
-                  //   inputDecoration: InputDecoration(
-                  //     fillColor: ColorConstant.whiteA700,
-                  //     filled: true,
-                  //     contentPadding: EdgeInsets.all(15),
-                  //     hintStyle: TextStyle(color: ColorConstant.gray600),
-                  //     labelStyle: TextStyle(color: ColorConstant.gray600),
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(30.0),
-                  //       borderSide: BorderSide(color: ColorConstant.whiteA700),
-                  //     ),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(30.0),
-                  //       borderSide: BorderSide(width: 1.0, color: ColorConstant.textfieldborder),
-                  //     ),
-                  //     errorBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(30.0),
-                  //       borderSide: BorderSide(width: 1.0, color: ColorConstant.textfieldborder),
-                  //     ),
-                  //     disabledBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(30.0),
-                  //       borderSide: BorderSide(width: 1.0, color: ColorConstant.textfieldborder),
-                  //     ),
-                  //     focusedBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(30.0),
-                  //       borderSide: BorderSide(width: 1, color: ColorConstant.textfieldborder),
-                  //     ),
-                  //   ),
+                  // CustomTextField(
+                  //   hintText: 'Email@domain.com',
+                  //   controller: controller.phoneNumber,
+                  //   isFinal: false,
+                  //   keyboardType: TextInputType.emailAddress,
+                  //  // limit: HelperFunction.EMAIL_VALIDATION,
+                  //   // validator: (value) {
+                  //   //   return HelperFunction.emailValidate(value!);
+                  //   // },
                   // ),
+                  InternationalPhoneNumberInput(
+                    cursorColor: ColorConstant.hintTextColor,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Phone number is required';
+                      } else if (!controller.isValidate.value) {
+                        return 'Phone number is invalid';
+                      }
+                    },
+                    countrySelectorScrollControlled: true,
+                    textFieldController: controller.phoneNumber,
+                    onInputChanged: (PhoneNumber number) {
+                      print(number.phoneNumber);  // This will print the full phone number including country code
+                      controller.phoneNo.value = number.phoneNumber!;
+                    },
+                    onInputValidated: (bool value) {
+                      print(value);
+                      controller.isValidate.value = value;
+                    },
+                    selectorConfig: SelectorConfig(
+                      leadingPadding: 10.0,
+                      showFlags: true,
+                      trailingSpace: false,
+                      selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                      setSelectorButtonAsPrefixIcon: true,
+                    ),
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    initialValue: controller.initialPhone,
+                    searchBoxDecoration: InputDecoration(
+                      hintText: "Search",
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(color: ColorConstant.gray600, width: 1.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(color: ColorConstant.hintTextColor, width: 1.0),
+                      ),
+                    ),
+                    inputDecoration: InputDecoration(
+                      fillColor: ColorConstant.whiteA700,
+                      filled: true,
+                      contentPadding: EdgeInsets.all(15),
+                      hintStyle: TextStyle(color: ColorConstant.gray600),
+                      labelStyle: TextStyle(color: ColorConstant.gray600),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(color: ColorConstant.whiteA700),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(width: 1.0, color: ColorConstant.textfieldborder),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(width: 1.0, color: ColorConstant.textfieldborder),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(width: 1.0, color: ColorConstant.textfieldborder),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: BorderSide(width: 1, color: ColorConstant.textfieldborder),
+                      ),
+                    ),
+                  ),
 
                   SizedBox(height: getVerticalSize(20),),
                   MyText(
