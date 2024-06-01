@@ -139,7 +139,7 @@ class SectionsScreen extends StatelessWidget {
                     return DropdownMenuItem<String>(
                       value: item,
                       child: MyText(
-                        title: item,
+                        title: "Section $item",
                         clr: ColorConstant.black900,
                       ),
                     );
@@ -168,8 +168,8 @@ class SectionsScreen extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(1),
                         ),
-                        child: Section60(beds: beds,)
-                        // child: getSectionView()
+                        // child: Section60(beds: beds,)
+                        child: getSectionView()
 
 
                       ),
@@ -188,44 +188,90 @@ class SectionsScreen extends StatelessWidget {
               //   ),
               // ),
               SizedBox(height: getVerticalSize(10),),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MyAnimatedButton(
-                  radius: 25.0,
-                  height: getVerticalSize(60),
-                  width: getHorizontalSize(400),
-                  fontSize: 20 ,
-                  bgColor: ColorConstant.anbtnBlue,
-                  controller: controller.btnController,
-                  title: "View My Bed in Full Layout".tr,
-                  onTap: () async {
 
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MyAnimatedButton(
+                radius: 25.0,
+                height: getVerticalSize(60),
+                width: getHorizontalSize(400),
+                fontSize: 20 ,
+                bgColor: ColorConstant.anbtnBlue,
+                controller: controller.btnController,
+                title: "View My Bed in Full Layout".tr,
+                onTap: () async {
+                  if(controller.myBedMapURL.value.isNotEmpty) {
+                    controller.launchURL(controller.myBedMapURL.value);
+                  }
+                  else
+                    {
+                      _showAlertDialog(context);
 
-                  },
-                ),
+                    }
+                },
               ),
+            ),
+
+
               SizedBox(height: getVerticalSize(10),),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MyAnimatedButton(
-                  radius: 25.0,
-                  height: getVerticalSize(60),
-                  width: getHorizontalSize(400),
-                  fontSize: 20 ,
-                  bgColor: ColorConstant.anbtnBlue,
-                  controller: controller.btnController,
-                  title: "View Full Layout".tr,
-                  onTap: () async {
+              padding: const EdgeInsets.all(8.0),
+              child: MyAnimatedButton(
+                radius: 25.0,
+                height: getVerticalSize(60),
+                width: getHorizontalSize(400),
+                fontSize: 20 ,
+                bgColor: ColorConstant.anbtnBlue,
+                controller: controller.btnController,
+                title: "View Full Layout".tr,
+                onTap: ()  {
+                  controller.launchURL(controller.mapURL.value);
 
-                  },
-                ),
+                },
               ),
+            )
+
 
             ],
           ),
         ));
   }
-
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Theme(
+          data: ThemeData(
+            dialogBackgroundColor: ColorConstant.greencolor, // Light green background color
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.blue, // Blue button color
+              ),
+            ),
+          ),
+          child: AlertDialog(
+            title: Text("Alert",style:TextStyle(color: Colors.red)),
+            content: Text("Your bed is not found in section ${controller.selectedValueConditions.value}",style: TextStyle(color: Colors.black),),
+            actions: <Widget>[
+              Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0), // Rounded border
+                  color: Colors.blue, // Button color
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("OK",style:TextStyle(color: Colors.white)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
   dynamic getSectionView() {
 
     switch (controller.selectedValueConditions.value) {
@@ -370,12 +416,18 @@ class HBedWidget extends StatelessWidget {
             height: 50,
             padding: EdgeInsets.symmetric(horizontal: 3),
             child:
-            bed.isReserved==true?
+            bed.isReserved==true && bed.isMyBed==true?
             Image.asset(
+              "assets/images/my_bed.png",
+              width: 90,
+              height: 90,
+            ):
+            bed.isReserved==true && bed.isMyBed==false? Image.asset(
               "assets/images/h_bed_red.png",
               width: 90,
               height: 90,
-            ): Image.asset(
+            ):
+            Image.asset(
               "assets/images/h_bed_green.png",
               width: 90,
               height: 90,
@@ -484,11 +536,20 @@ class VBedWidget extends StatelessWidget {
             width: 50,
             padding: EdgeInsets.symmetric(vertical: 3),
 
-            child:  bed.isReserved==true? Image.asset(
+            child:
+            bed.isReserved==true && bed.isMyBed==true? RotatedBox(
+              quarterTurns: -1,
+              child: Image.asset(
+                "assets/images/my_bed.png",
+                width: 90,
+                height: 90,
+              ),
+            ): bed.isReserved==true && bed.isMyBed==false? Image.asset(
               "assets/images/v_bed_red.png",
               width: 90,
               height: 90,
-            ): Image.asset(
+            )
+                : Image.asset(
               "assets/images/v_bed_green.png",
               width: 90,
               height: 90,

@@ -1,7 +1,9 @@
 class Bed {
   final int id;
   final String name;
+   String? mapURL="";
   bool? isReserved=false;
+  bool? isMyBed=false;
   final bool? hasAC;
 
   Bed({
@@ -9,6 +11,8 @@ class Bed {
     required this.name,
     this.isReserved,
     this.hasAC,
+    this.isMyBed,
+    this.mapURL
   });
 }
 
@@ -16,7 +20,9 @@ class BedData {
   String? sectionNumber;
   String? bedNumber;
   String? type;
+  String? reservation_map;
   bool? isReserved;
+  bool? isMyBed;
 
   BedData({this.sectionNumber, this.bedNumber, this.type, this.isReserved});
 
@@ -25,6 +31,8 @@ class BedData {
     bedNumber = json['bed_number'];
     type = json['type'];
     isReserved = json['is_reserved'];
+    isMyBed = json['is_my_bed'];
+    reservation_map = json['reservation_map'];
   }
 
   Map<String, dynamic> toJson() {
@@ -33,6 +41,8 @@ class BedData {
     data['bed_number'] = this.bedNumber;
     data['type'] = this.type;
     data['is_reserved'] = this.isReserved;
+    data['is_my_bed'] = this.isMyBed;
+    data['reservation_map'] = this.reservation_map;
     return data;
   }
 }
