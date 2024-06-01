@@ -7,10 +7,10 @@ import 'custom_ac.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
 
-class Section53 extends StatelessWidget {
+class Section8 extends StatelessWidget {
   final List<Bed> beds;
 
-  Section53({required this.beds});
+  Section8({required this.beds});
 
   @override
   Widget build(BuildContext context) {

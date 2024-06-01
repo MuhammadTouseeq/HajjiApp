@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hajjiapp/core/utils/image_constant.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section10.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section57.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section11.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section13.dart';
@@ -167,7 +168,9 @@ class SectionsScreen extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(1),
                         ),
-                        child: Section3(beds: controller.generateBedList.value),
+                        child: getSectionView()
+
+
                       ),
                     ),
                   );
@@ -220,6 +223,99 @@ class SectionsScreen extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  dynamic getSectionView() {
+
+    switch (controller.selectedValueConditions.value) {
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+   return Section3(beds: controller.generateBedList.value);
+    break;
+    case '5':
+      return Section5(beds: controller.generateBedList.value);
+    break;
+      case '6':
+      case '7':
+      case '8':
+        return Section6(beds: controller.generateBedList.value);
+        break;
+      case '9':
+      case '10':
+        return Section8(beds: controller.generateBedList.value);
+        break;
+      case '11':
+      case '12':
+        return Section9(beds: controller.generateBedList.value);
+        break;
+      case '13':
+      case '14':
+        // return Section10(beds: controller.generateBedList.value);
+        break;
+      case '15':
+      case '16':
+      case '17':
+        return Section11(beds: controller.generateBedList.value);
+        break;
+      case '19':
+      case '20':
+      case '21':
+      case '22':
+      case '23':
+      case '24':
+      case '25':
+        // return Section12(beds: controller.generateBedList.value);
+        break;
+      case '26':
+      case '27':
+      case '28':
+      case '29':
+      case '30':
+      case '31':
+        return Section13(beds: controller.generateBedList.value);
+        break;
+
+      case '32':
+        // return Section14(beds: controller.generateBedList.value);
+        break;
+      case '35':
+        return Section19(beds: controller.generateBedList.value);
+        break;
+      case '36,37':
+        return Section20(beds: controller.generateBedList.value);
+        break;
+      case '38':
+        return Section32(beds: controller.generateBedList.value);
+        break;
+
+
+      case '40,41,42,45,46,47,48,49,50':
+        return Section35(beds: controller.generateBedList.value);
+        break;
+      case '51':
+        return Section36(beds: controller.generateBedList.value);
+        break;
+      case '52':
+        return Section40(beds: controller.generateBedList.value);
+        break;
+      case '53':
+        return Section51(beds: controller.generateBedList.value);
+        break;
+      case '55,56,57':
+        return Section52(beds: controller.generateBedList.value);
+        break;
+      case '58,59':
+        return Section57(beds: controller.generateBedList.value);
+        break;
+      case '60':
+        return Section60(beds: controller.generateBedList.value);
+        break;
+
+    default:
+    return Center(child: Text('Section data not found'),);
+    }
   }
 
 
