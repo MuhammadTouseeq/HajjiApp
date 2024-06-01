@@ -32,9 +32,9 @@ class Section3 extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    HBedWidget(bed: beds[1]),
                     HBedWidget(bed: beds[0]),
                     HBedWidget(bed: beds[1]),
+                    HBedWidget(bed: beds[2]),
 
                   ]),
 
@@ -44,8 +44,8 @@ class Section3 extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        VBedWidget(bed: beds[1]),
-                        VBedWidget(bed: beds[5]),
+                        VBedWidget(bed: beds[3]),
+                        VBedWidget(bed: beds[4]),
                       ],
                     ),
                     Container(width: getHorizontalSize(100),),
@@ -58,15 +58,15 @@ class Section3 extends StatelessWidget {
                             children: [
                               Row(
                                   children: [
-                                    HBedWidget(bed: beds[0]),
-                                    HBedWidget(bed: beds[1]),
+                                    HBedWidget(bed: beds[5]),
+                                    HBedWidget(bed: beds[6]),
 
                                   ]),
 
                               Row(
                                   children: [
-                                    HBedWidget(bed: beds[0]),
-                                    HBedWidget(bed: beds[1]),
+                                    HBedWidget(bed: beds[7]),
+                                    HBedWidget(bed: beds[8]),
                                   ]),
 
                             ],
@@ -79,15 +79,15 @@ class Section3 extends StatelessWidget {
 
                               Row(
                                   children: [
-                                    HBedWidget(bed: beds[0]),
-                                    HBedWidget(bed: beds[1]),
+                                    HBedWidget(bed: beds[9]),
+                                    HBedWidget(bed: beds[10]),
 
                                   ]),
 
                               Row(
                                   children: [
-                                    HBedWidget(bed: beds[0]),
-                                    HBedWidget(bed: beds[1]),
+                                    HBedWidget(bed: beds[11]),
+                                    HBedWidget(bed: beds[12]),
                                   ]),
                             ],
                           ),
@@ -102,9 +102,9 @@ class Section3 extends StatelessWidget {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    HBedWidget(bed: beds[1]),
-                    HBedWidget(bed: beds[20]),
-                    HBedWidget(bed: beds[1]),
+                    HBedWidget(bed: beds[13]),
+                    HBedWidget(bed: beds[14]),
+                    HBedWidget(bed: beds[15]),
 
                   ]),
 

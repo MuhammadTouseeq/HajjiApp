@@ -33,19 +33,16 @@ import 'models/sections_model.dart';
 class SectionsScreen extends StatelessWidget {
   SectionsController controller = Get.put(SectionsController());
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    List<Bed> beds = List.generate(
-      25,
-          (index) => Bed(
-        id: index.toString(),
-        name: 'Bed ${index + 1}',
-        isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
-      ),
-    );
+    // List<Bed> beds = List.generate(
+    //   25,
+    //       (index) => Bed(
+    //     id: index.toString(),
+    //     name: 'Bed ${index + 1}',
+    //     isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
+    //   ),
+    // );
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -161,7 +158,7 @@ class SectionsScreen extends StatelessWidget {
                     minScale: 0.1,
                     maxScale: 40.0,
                     child: Padding(
-                      padding: getPadding(all: 10),
+                      padding: getPadding(all: 20),
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -170,7 +167,7 @@ class SectionsScreen extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(1),
                         ),
-                        child: Section9(beds: controller.generateBedList.value),
+                        child: Section3(beds: controller.generateBedList.value),
                       ),
                     ),
                   );
@@ -179,13 +176,13 @@ class SectionsScreen extends StatelessWidget {
                 }
               }),
 
-              SizedBox(height: getVerticalSize(100),),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  child: Section3(beds: beds),
-                ),
-              ),
+              // SizedBox(height: getVerticalSize(100),),
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Container(
+              //     child: Section3(beds: controller.generateBedList),
+              //   ),
+              // ),
               SizedBox(height: getVerticalSize(10),),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -270,24 +267,82 @@ class HBedWidget extends StatelessWidget {
           );
         }
       },
-      child: Container(
-        height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 3),
-        child:
-        bed.isReserved==true?
-        Image.asset(
-          "assets/images/h_bed_red.png",
-          width: 90,
-          height: 90,
-        ): Image.asset(
-          "assets/images/h_bed_green.png",
-          width: 90,
-          height: 90,
-        ),
+      child: Stack(
+        children: [
+          Container(
+            height: 50,
+            padding: EdgeInsets.symmetric(horizontal: 3),
+            child:
+            bed.isReserved==true?
+            Image.asset(
+              "assets/images/h_bed_red.png",
+              width: 90,
+              height: 90,
+            ): Image.asset(
+              "assets/images/h_bed_green.png",
+              width: 90,
+              height: 90,
+            ),
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: H_BedNumberStyle(bed: bed),
+            ),
+          )
+        ],
       ),
     );
   }
 }
+
+class H_BedNumberStyle extends StatelessWidget {
+  const H_BedNumberStyle({
+    super.key,
+    required this.bed,
+  });
+
+  final Bed bed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20,
+      width: 20,
+      margin: bed.isReserved!? EdgeInsets.only(  left: 20):EdgeInsets.only(  right: 20),
+
+      decoration: BoxDecoration(
+        color: Colors.red[300],
+        shape: BoxShape.circle
+      ),
+      child: Center(child: Text(bed.id.toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
+    );
+  }
+}
+
+class V_BedNumberStyle extends StatelessWidget {
+  const V_BedNumberStyle({
+    super.key,
+    required this.bed,
+  });
+
+  final Bed bed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20,
+      width: 20,
+      margin: bed.isReserved!? EdgeInsets.only(  bottom: 20):EdgeInsets.only(  right: 0,top: 10),
+      decoration: BoxDecoration(
+          color: Colors.red[300],
+          shape: BoxShape.circle
+      ),
+      child: Center(child: Text(bed.id.toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
+    );
+  }
+}
+
 class VBedWidget extends StatelessWidget {
   SectionsController controller = Get.put(SectionsController());
 
@@ -326,19 +381,29 @@ class VBedWidget extends StatelessWidget {
             );
           }
       },
-      child: Container(
-        width: 50,
-        padding: EdgeInsets.symmetric(vertical: 3),
+      child: Stack(
+        children: [
+          Container(
+            width: 50,
+            padding: EdgeInsets.symmetric(vertical: 3),
 
-        child:  bed.isReserved==true? Image.asset(
-          "assets/images/v_bed_red.png",
-          width: 90,
-          height: 90,
-        ): Image.asset(
-          "assets/images/v_bed_green.png",
-          width: 90,
-          height: 90,
-        ),
+            child:  bed.isReserved==true? Image.asset(
+              "assets/images/v_bed_red.png",
+              width: 90,
+              height: 90,
+            ): Image.asset(
+              "assets/images/v_bed_green.png",
+              width: 90,
+              height: 90,
+            ),
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: V_BedNumberStyle(bed: bed),
+            ),
+          )
+        ],
       ),
     );
   }
