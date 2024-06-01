@@ -33,8 +33,8 @@ class Section36 extends StatelessWidget {
                       HBedWidget(bed: beds[0]),
                       HBedWidget(bed: beds[1]),
                       HBedWidget(bed: beds[2]),
-                      HBedWidget(bed: beds[1]),
-                      HBedWidget(bed: beds[1]),
+                      HBedWidget(bed: beds[3]),
+                      HBedWidget(bed: beds[4]),
                     ]),
               ),
 
@@ -44,48 +44,48 @@ class Section36 extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        VBedWidget(bed: beds[4]),
-                        SizedBox(height: getVerticalSize(10),),
                         VBedWidget(bed: beds[5]),
+                        SizedBox(height: getVerticalSize(10),),
                         VBedWidget(bed: beds[6]),
+                        VBedWidget(bed: beds[7]),
                       ],
                     ),
                     Column(
                       children: [
                         Row(
                             children: [
-                              HBedWidget(bed: beds[7]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[8]),
                               HBedWidget(bed: beds[9]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[10]),
+                              HBedWidget(bed: beds[11]),
                               SizedBox(width: getHorizontalSize(30),)
                             ]),
 
                         Row(
                             children: [
-                              HBedWidget(bed: beds[10]),
-                              HBedWidget(bed: beds[1]),
-                              HBedWidget(bed: beds[0]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[12]),
+                              HBedWidget(bed: beds[13]),
+                              HBedWidget(bed: beds[14]),
+                              HBedWidget(bed: beds[15]),
                               SizedBox(width: getHorizontalSize(30),)
                             ]),
 
                         Container(height: 30,),
                         Row(
                             children: [
-                              HBedWidget(bed: beds[13]),
-                              HBedWidget(bed: beds[1]),
-                              HBedWidget(bed: beds[15]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[16]),
+                              HBedWidget(bed: beds[17]),
+                              HBedWidget(bed: beds[18]),
+                              HBedWidget(bed: beds[19]),
                               SizedBox(width: getHorizontalSize(30),)
                             ]),
 
                         Row(
                             children: [
-                              HBedWidget(bed: beds[16]),
-                              HBedWidget(bed: beds[1]),
-                              HBedWidget(bed: beds[18]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[20]),
+                              HBedWidget(bed: beds[21]),
+                              HBedWidget(bed: beds[22]),
+                              HBedWidget(bed: beds[23]),
                               SizedBox(width: getHorizontalSize(30),)
                             ]),
                       ],
@@ -97,11 +97,11 @@ class Section36 extends StatelessWidget {
               FittedBox(
                 child: Row(
                     children: [
-                      HBedWidget(bed: beds[19]),
-                      HBedWidget(bed: beds[20]),
-                      HBedWidget(bed: beds[21]),
-                      HBedWidget(bed: beds[22]),
-                      HBedWidget(bed: beds[22]),
+                      HBedWidget(bed: beds[24]),
+                      HBedWidget(bed: beds[25]),
+                      HBedWidget(bed: beds[26]),
+                      HBedWidget(bed: beds[27]),
+                      HBedWidget(bed: beds[28]),
                     ]),
               ),
 

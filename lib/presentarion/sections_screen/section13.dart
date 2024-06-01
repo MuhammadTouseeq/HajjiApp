@@ -19,11 +19,11 @@ class Section13 extends StatelessWidget {
         children: [
           Row(
             children: [
-              HBedWidget(bed: beds[1]),
-              SizedBox(width: getHorizontalSize(10),),
               HBedWidget(bed: beds[0]),
-              SizedBox(width: getHorizontalSize(10),),
+              SizedBox(width: getHorizontalSize(11),),
               HBedWidget(bed: beds[1]),
+              SizedBox(width: getHorizontalSize(10),),
+              HBedWidget(bed: beds[2]),
             ],
           ),
           SizedBox(
@@ -35,7 +35,7 @@ class Section13 extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  VBedWidget(bed: beds[1]),
+                  VBedWidget(bed: beds[3]),
                   VBedWidget(bed: beds[4]),
                 ],
               ),
@@ -50,15 +50,15 @@ class Section13 extends StatelessWidget {
                            children: [
                              Row(
                                children: [
-                                 HBedWidget(bed: beds[0]),
-                                 HBedWidget(bed: beds[1]),
+                                 HBedWidget(bed: beds[5]),
+                                 HBedWidget(bed: beds[6]),
 
                                ],
                              ),
                              Row(
                                children: [
-                                 HBedWidget(bed: beds[0]),
-                                 HBedWidget(bed: beds[1]),
+                                 HBedWidget(bed: beds[7]),
+                                 HBedWidget(bed: beds[8]),
                                ],
                              ),
 
@@ -66,21 +66,21 @@ class Section13 extends StatelessWidget {
                          )
                        ],
                      ),
-                     SizedBox(height: getVerticalSize(10),),
+                     SizedBox(height: getVerticalSize(9),),
                      Row(
                        children: [
                          Column(
                            children: [
                              Row(
                                children: [
-                                 HBedWidget(bed: beds[0]),
-                                 HBedWidget(bed: beds[1]),
+                                 HBedWidget(bed: beds[10]),
+                                 HBedWidget(bed: beds[11]),
                                ],
                              ),
                              Row(
                                children: [
-                                 HBedWidget(bed: beds[0]),
-                                 HBedWidget(bed: beds[1]),
+                                 HBedWidget(bed: beds[12]),
+                                 HBedWidget(bed: beds[13]),
                                ],
                              ),
 
@@ -103,11 +103,11 @@ class Section13 extends StatelessWidget {
 
           Row(
             children: [
-              HBedWidget(bed: beds[1]),
+              HBedWidget(bed: beds[14]),
               SizedBox(width: getHorizontalSize(10),),
-              HBedWidget(bed: beds[0]),
+              HBedWidget(bed: beds[15]),
               SizedBox(width: getHorizontalSize(10),),
-              HBedWidget(bed: beds[1]),
+              HBedWidget(bed: beds[16]),
             ],
           ),
 

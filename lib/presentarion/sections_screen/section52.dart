@@ -32,10 +32,10 @@ class Section52 extends StatelessWidget {
                 child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      HBedWidget(bed: beds[1]),
+                      HBedWidget(bed: beds[0]),
                       HBedWidget(bed: beds[1]),
                       HBedWidget(bed: beds[2]),
-                      HBedWidget(bed: beds[1]),
+                      HBedWidget(bed: beds[3]),
 
                     ]),
               ),
@@ -47,9 +47,9 @@ class Section52 extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        VBedWidget(bed: beds[1]),
+                        VBedWidget(bed: beds[4]),
                         SizedBox(height: getVerticalSize(5),),
-                        VBedWidget(bed: beds[0]),
+                        VBedWidget(bed: beds[5]),
 
                       ],
                     ),
@@ -58,18 +58,18 @@ class Section52 extends StatelessWidget {
                         Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              HBedWidget(bed: beds[1]),
-                              HBedWidget(bed: beds[0]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[6]),
+                              HBedWidget(bed: beds[7]),
+                              HBedWidget(bed: beds[8]),
 
                             ]),
 
                         Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              HBedWidget(bed: beds[1]),
-                              HBedWidget(bed: beds[0]),
-                              HBedWidget(bed: beds[1]),
+                              HBedWidget(bed: beds[9]),
+                              HBedWidget(bed: beds[10]),
+                              HBedWidget(bed: beds[11]),
                             ]),
                       ],
                     )
@@ -82,10 +82,10 @@ class Section52 extends StatelessWidget {
                 child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      HBedWidget(bed: beds[1]),
-                      HBedWidget(bed: beds[1]),
-                      HBedWidget(bed: beds[21]),
-                      HBedWidget(bed: beds[22]),
+                      HBedWidget(bed: beds[12]),
+                      HBedWidget(bed: beds[13]),
+                      HBedWidget(bed: beds[14]),
+                      HBedWidget(bed: beds[15]),
                     ]),
               ),
 

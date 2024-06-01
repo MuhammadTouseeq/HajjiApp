@@ -36,7 +36,7 @@ class Section60 extends StatelessWidget {
                       children: [
                         VBedWidget(bed: beds[0]),
                         SizedBox(height: getVerticalSize(10),),
-                        VBedWidget(bed: beds[0]),
+                        VBedWidget(bed: beds[1]),
 
                       ],
                     ),
@@ -44,14 +44,14 @@ class Section60 extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        HBedWidget(bed: beds[1]),
+                        HBedWidget(bed: beds[2]),
                         SizedBox(width: getHorizontalSize(150),),
 
                         Column(
                           children: [
-                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[3]),
                             SizedBox(height: getVerticalSize(100),),
-                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[4]),
                           ],
                         )
                       ],

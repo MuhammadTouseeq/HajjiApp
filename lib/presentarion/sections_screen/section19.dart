@@ -35,20 +35,20 @@ class Section19 extends StatelessWidget {
                       children: [
                         HBedWidget(bed: beds[0]),
                         SizedBox(height: getVerticalSize(100),),
-                        HBedWidget(bed: beds[0]),
+                        HBedWidget(bed: beds[1]),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        HBedWidget(bed: beds[0]),
+                        HBedWidget(bed: beds[2]),
                         // SizedBox(width: getHorizontalSize(150),),
 
                         Column(
                           children: [
-                            VBedWidget(bed: beds[1]),
+                            VBedWidget(bed: beds[3]),
                             SizedBox(height: getVerticalSize(10),),
-                            VBedWidget(bed: beds[0]),
+                            VBedWidget(bed: beds[4]),
                           ],
                         )
                       ],

@@ -37,9 +37,9 @@ class SectionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // List<Bed> beds = List.generate(
-    //   25,
+    //   50,
     //       (index) => Bed(
-    //     id: index.toString(),
+    //     id: index,
     //     name: 'Bed ${index + 1}',
     //     isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
     //   ),
@@ -64,8 +64,8 @@ class SectionsScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
-          //  mainAxisAlignment: MainAxisAlignment.center,
-          //  crossAxisAlignment: CrossAxisAlignment.stretch,
+            //  mainAxisAlignment: MainAxisAlignment.center,
+            //  crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
                 children: [
@@ -181,9 +181,9 @@ class SectionsScreen extends StatelessWidget {
 
               // SizedBox(height: getVerticalSize(100),),
               // Align(
-              //   alignment: Alignment.bottomCenter,
+              //   alignment: Alignment.bottomCenter,//controller.generateBedList
               //   child: Container(
-              //     child: Section3(beds: controller.generateBedList),
+              //     child: Section19(beds: beds),
               //   ),
               // ),
               SizedBox(height: getVerticalSize(10),),
@@ -228,15 +228,15 @@ class SectionsScreen extends StatelessWidget {
   dynamic getSectionView() {
 
     switch (controller.selectedValueConditions.value) {
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-   return Section3(beds: controller.generateBedList.value);
-    break;
-    case '5':
-      return Section5(beds: controller.generateBedList.value);
-    break;
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+        return Section3(beds: controller.generateBedList.value);
+        break;
+      case '5':
+        return Section5(beds: controller.generateBedList.value);
+        break;
       case '6':
       case '7':
       case '8':
@@ -252,7 +252,7 @@ class SectionsScreen extends StatelessWidget {
         break;
       case '13':
       case '14':
-        // return Section10(beds: controller.generateBedList.value);
+      // return Section10(beds: controller.generateBedList.value);
         break;
       case '15':
       case '16':
@@ -266,7 +266,7 @@ class SectionsScreen extends StatelessWidget {
       case '23':
       case '24':
       case '25':
-        // return Section12(beds: controller.generateBedList.value);
+      // return Section12(beds: controller.generateBedList.value);
         break;
       case '26':
       case '27':
@@ -278,7 +278,7 @@ class SectionsScreen extends StatelessWidget {
         break;
 
       case '32':
-        // return Section14(beds: controller.generateBedList.value);
+      // return Section14(beds: controller.generateBedList.value);
         break;
       case '35':
         return Section19(beds: controller.generateBedList.value);
@@ -313,8 +313,8 @@ class SectionsScreen extends StatelessWidget {
         return Section60(beds: controller.generateBedList.value);
         break;
 
-    default:
-    return Center(child: Text('Section data not found'),);
+      default:
+        return Center(child: Text('Section data not found'),);
     }
   }
 
@@ -408,8 +408,8 @@ class H_BedNumberStyle extends StatelessWidget {
       margin: bed.isReserved!? EdgeInsets.only(  left: 20):EdgeInsets.only(  right: 20),
 
       decoration: BoxDecoration(
-        color: Colors.red[300],
-        shape: BoxShape.circle
+          color: Colors.red[300],
+          shape: BoxShape.circle
       ),
       child: Center(child: Text(bed.id.toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
     );
@@ -454,28 +454,28 @@ class VBedWidget extends StatelessWidget {
           Utils.showToast('Bed Already reserved', false);
         }
         else
-          {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Alert'),
-                  content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        // Close the AlertDialog
-                        Navigator.of(context).pop();
-                        controller.reserveBed(bed.id as int);
+        {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alert'),
+                content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      // Close the AlertDialog
+                      Navigator.of(context).pop();
+                      controller.reserveBed(bed.id as int);
 
-                      },
-                      child: Text('Confirm'),
-                    ),
-                  ],
-                );
-              },
-            );
-          }
+                    },
+                    child: Text('Confirm'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       },
       child: Stack(
         children: [
@@ -675,3 +675,4 @@ class VBedWidget extends StatelessWidget {
 //     );
 //   }
 // }
+

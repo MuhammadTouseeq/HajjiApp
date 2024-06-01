@@ -44,8 +44,8 @@ class Section57 extends StatelessWidget {
                     Column(
                       children: [
                         VBedWidget(bed: beds[4]),
+                        VBedWidget(bed: beds[5]),
                         VBedWidget(bed: beds[6]),
-                        VBedWidget(bed: beds[0]),
                       ],
                     ),
                     Column(

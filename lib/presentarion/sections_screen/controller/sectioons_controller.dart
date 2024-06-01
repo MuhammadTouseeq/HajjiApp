@@ -71,7 +71,7 @@ generateBedList.value= List.generate(
               onSuccess: (response) async {
 
                 apiCallStatus = ApiCallStatus.success;
-List<DataItem> dataSection = [];
+                 List<DataItem> dataSection = [];
 
                 if (response.data['status'] == true) {
 
@@ -124,7 +124,7 @@ print("====section number ${sectionNumber}");
 
               apiCallStatus = ApiCallStatus.success;
               List<BedData> dataBeds = [];
-print("Bed Api response========  ${response.data['data']}");
+            print("Bed Api response========  ${response.data['data']}");
               if (response.data['status'] == true) {
 
                 response.data['data'].forEach((v) {
