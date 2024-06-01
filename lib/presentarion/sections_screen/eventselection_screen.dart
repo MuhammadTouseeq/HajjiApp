@@ -155,7 +155,7 @@ class SectionsScreen extends StatelessWidget {
               Padding(
                 padding: getPadding(all: 20),
                 child: Container(
-                  child: Section3(beds: beds),
+                  child: Section5(beds: beds),
                 ),
               ),
               SizedBox(height: getVerticalSize(10),),
