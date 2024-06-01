@@ -36,14 +36,14 @@ class SectionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List<Bed> beds = List.generate(
-    //   50,
-    //       (index) => Bed(
-    //     id: index,
-    //     name: 'Bed ${index + 1}',
-    //     isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
-    //   ),
-    // );
+    List<Bed> beds = List.generate(
+      50,
+          (index) => Bed(
+        id: index+1,
+        name: 'Bed ${index + 1}',
+        isReserved: index == 1 || index == 6 || index==12|| index==18 || index==22 ? true : null, // Specify indices where isReserved should be true
+      ),
+    );
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -168,7 +168,8 @@ class SectionsScreen extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(1),
                         ),
-                        child: getSectionView()
+                        child: Section60(beds: beds,)
+                        // child: getSectionView()
 
 
                       ),
@@ -405,7 +406,7 @@ class H_BedNumberStyle extends StatelessWidget {
     return Container(
       height: 20,
       width: 20,
-      margin: bed.isReserved!? EdgeInsets.only(  left: 20):EdgeInsets.only(  right: 20),
+      margin: bed.isReserved==true? EdgeInsets.only(  left: 20):EdgeInsets.only(  right: 20),
 
       decoration: BoxDecoration(
           color: Colors.red[300],
@@ -429,7 +430,7 @@ class V_BedNumberStyle extends StatelessWidget {
     return Container(
       height: 20,
       width: 20,
-      margin: bed.isReserved!? EdgeInsets.only(  bottom: 20):EdgeInsets.only(  right: 0,top: 10),
+      margin: bed.isReserved==true? EdgeInsets.only(  bottom: 20):EdgeInsets.only(  right: 0,top: 10),
       decoration: BoxDecoration(
           color: Colors.red[300],
           shape: BoxShape.circle

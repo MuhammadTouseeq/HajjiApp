@@ -49,7 +49,7 @@ class SectionsController extends GetxController {
   //   userDetails = LoginModel.fromJson(userMap);
   // }
 
-generateBedData({int count=24})
+generateBedData({int count=30})
 {
   print("available beds $availableBedList");
 generateBedList.value= List.generate(
