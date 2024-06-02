@@ -85,16 +85,16 @@ class Section32 extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
+                                        HBedWidget(bed: beds[13]),
                                         HBedWidget(bed: beds[14]),
                                         HBedWidget(bed: beds[15]),
-                                        HBedWidget(bed: beds[16]),
                                       ],
                                     ),
                                     Row(
                                       children: [
+                                        HBedWidget(bed: beds[16]),
                                         HBedWidget(bed: beds[17]),
                                         HBedWidget(bed: beds[18]),
-                                        HBedWidget(bed: beds[19]),
                                       ],
                                     ),
 
@@ -120,10 +120,10 @@ class Section32 extends StatelessWidget {
               FittedBox(
                 child: Row(
                   children: [
-                    HBedWidget(bed: beds[20]),
+                    HBedWidget(bed: beds[19]),
+                    HBedWidget(bed: beds[10]),
                     HBedWidget(bed: beds[21]),
                     HBedWidget(bed: beds[22]),
-                    HBedWidget(bed: beds[23]),
                   ],
                 ),
               ),

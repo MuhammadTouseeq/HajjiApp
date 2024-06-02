@@ -36,9 +36,9 @@ class Section35 extends StatelessWidget {
                     Column(
                       children: [
                         VBedWidget(bed: beds[0]),
-                        VBedWidget(bed: beds[1]),
-                        VBedWidget(bed: beds[2]),
-                        VBedWidget(bed: beds[3]),
+                        VBedWidget(bed: beds[8]),
+                        VBedWidget(bed: beds[13]),
+                        VBedWidget(bed: beds[21]),
                       ],
                     ),
                     // SizedBox(width: getVerticalSize(10),),
@@ -49,10 +49,10 @@ class Section35 extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            HBedWidget(bed: beds[1]),
+                            HBedWidget(bed: beds[2]),
+                            HBedWidget(bed: beds[3]),
                             HBedWidget(bed: beds[4]),
-                            HBedWidget(bed: beds[5]),
-                            HBedWidget(bed: beds[6]),
-                            HBedWidget(bed: beds[7]),
                           ],
                         ),
                         SizedBox(height: getVerticalSize(20),),
@@ -60,26 +60,26 @@ class Section35 extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                HBedWidget(bed: beds[8]),
+                                HBedWidget(bed: beds[5]),
                                 HBedWidget(bed: beds[9]),
                               ],
                             ),
                             Column(
                               children: [
+                                HBedWidget(bed: beds[6]),
                                 HBedWidget(bed: beds[10]),
-                                HBedWidget(bed: beds[11]),
                               ],
                             ),
                             Column(
                               children: [
-                                HBedWidget(bed: beds[12]),
-                                HBedWidget(bed: beds[13]),
+                                HBedWidget(bed: beds[7]),
+                                HBedWidget(bed: beds[11]),
                               ],
                             ),
                             SizedBox(width: getHorizontalSize(50),),
                             Column(
                               children: [
-                                VBedWidget(bed: beds[14]),
+                                VBedWidget(bed: beds[12]),
                               ],
                             ),
                           ],
@@ -89,26 +89,26 @@ class Section35 extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                HBedWidget(bed: beds[15]),
-                                HBedWidget(bed: beds[16]),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                HBedWidget(bed: beds[17]),
+                                HBedWidget(bed: beds[14]),
                                 HBedWidget(bed: beds[18]),
                               ],
                             ),
                             Column(
                               children: [
+                                HBedWidget(bed: beds[15]),
                                 HBedWidget(bed: beds[19]),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                HBedWidget(bed: beds[16]),
                                 HBedWidget(bed: beds[20]),
                               ],
                             ),
                             SizedBox(width: getHorizontalSize(50),),
                             Column(
                               children: [
-                                VBedWidget(bed: beds[21]),
+                                VBedWidget(bed: beds[17]),
                               ],
                             ),
                           ],
