@@ -46,20 +46,15 @@ class Section9 extends StatelessWidget {
               ),
               FittedBox(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             VBedWidget(bed: beds[5]),
-                            SizedBox(height: getVerticalSize(30),),
-                            VBedWidget(bed: beds[6]),
+                            VBedWidget(bed: beds[13]),
                           ],
                         ),
                         Column(
@@ -67,39 +62,31 @@ class Section9 extends StatelessWidget {
 
                             Row(
                               children: [
+                                HBedWidget(bed: beds[6]),
                                 HBedWidget(bed: beds[7]),
                                 HBedWidget(bed: beds[8]),
-                                HBedWidget(bed: beds[9]),
-                                HBedWidget(bed: beds[10]),
                               ],
                             ),
                             Row(
                               children: [
-                                //  SizedBox(width: getHorizontalSize(25),),
+                                HBedWidget(bed: beds[9]),
+                                HBedWidget(bed: beds[10]),
                                 HBedWidget(bed: beds[11]),
-                                HBedWidget(bed: beds[12]),
-                                HBedWidget(bed: beds[13]),
-                                HBedWidget(bed: beds[14]),
                               ],
                             ),
                             SizedBox(height: 20,),
                             Row(
                               children: [
-                                // SizedBox(width: getHorizontalSize(30),),
+                                HBedWidget(bed: beds[14]),
                                 HBedWidget(bed: beds[15]),
                                 HBedWidget(bed: beds[16]),
-                                HBedWidget(bed: beds[17]),
-                                HBedWidget(bed: beds[18]),
                               ],
                             ),
                             Row(
                               children: [
-
-                                // SizedBox(width: getHorizontalSize(25),),
+                                HBedWidget(bed: beds[18]),
                                 HBedWidget(bed: beds[19]),
                                 HBedWidget(bed: beds[20]),
-                                HBedWidget(bed: beds[21]),
-                                HBedWidget(bed: beds[22]),
 
 
                               ],
@@ -108,16 +95,13 @@ class Section9 extends StatelessWidget {
 
                             SizedBox(height: getVerticalSize(30),),
                             Container(
-                              // color: ColorConstant.blackColor,
+                              padding: getPadding(right: 10),
                               child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
+                                    HBedWidget(bed: beds[21]),
+                                    HBedWidget(bed: beds[22]),
                                     HBedWidget(bed: beds[23]),
                                     HBedWidget(bed: beds[24]),
-                                    HBedWidget(bed: beds[25]),
-                                    HBedWidget(bed: beds[26]),
-                                    SizedBox(width: 10,),
-                                    VBedWidget(bed: beds[28]),
                                   ]),
                             ),
 
@@ -129,9 +113,9 @@ class Section9 extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        VBedWidget(bed: beds[29]),
-                        SizedBox(height: 20,),
-                        VBedWidget(bed: beds[30]),
+                        VBedWidget(bed: beds[12]),
+                        VBedWidget(bed: beds[17]),
+                        VBedWidget(bed: beds[25]),
                         // VBedWidget(bed: beds[0]),
                       ],
                     ),

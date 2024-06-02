@@ -7,10 +7,10 @@ import 'custom_ac.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
 
-class Section20 extends StatelessWidget {
+class Section58 extends StatelessWidget {
   final List<Bed> beds;
 
-  Section20({required this.beds});
+  Section58({required this.beds});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class Section20 extends StatelessWidget {
                   SizedBox(width: getHorizontalSize(10),),
                   HBedWidget(bed: beds[1]),
                   SizedBox(width: getHorizontalSize(10),),
-                  HBedWidget(bed: beds[0]),
+                  HBedWidget(bed: beds[2]),
                 ],
               ),
               SizedBox(
@@ -44,9 +44,13 @@ class Section20 extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
+                  Column(
+                    children: [
+                      VBedWidget(bed: beds[5]),
+                      VBedWidget(bed: beds[8]),
+                    ],
+                  ),
                   Row(
-
                     children: [
                       Column(
                         children: [
@@ -56,15 +60,15 @@ class Section20 extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      HBedWidget(bed: beds[0]),
-                                      HBedWidget(bed: beds[1]),
+                                      HBedWidget(bed: beds[3]),
+                                      HBedWidget(bed: beds[4]),
 
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      HBedWidget(bed: beds[0]),
-                                      HBedWidget(bed: beds[1]),
+                                      HBedWidget(bed: beds[6]),
+                                      HBedWidget(bed: beds[7]),
                                     ],
                                   ),
 
@@ -79,14 +83,14 @@ class Section20 extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      HBedWidget(bed: beds[0]),
-                                      HBedWidget(bed: beds[1]),
+                                      HBedWidget(bed: beds[9]),
+                                      HBedWidget(bed: beds[10]),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      HBedWidget(bed: beds[0]),
-                                      HBedWidget(bed: beds[1]),
+                                      HBedWidget(bed: beds[11]),
+                                      HBedWidget(bed: beds[12]),
                                     ],
                                   ),
 
@@ -98,12 +102,7 @@ class Section20 extends StatelessWidget {
                       )
                     ],
                   ),
-                  Column(
-                    children: [
-                      VBedWidget(bed: beds[1]),
-                      VBedWidget(bed: beds[4]),
-                    ],
-                  ),
+
 
                 ],
               ),
@@ -115,11 +114,11 @@ class Section20 extends StatelessWidget {
 
               Row(
                 children: [
-                  HBedWidget(bed: beds[0]),
+                  HBedWidget(bed: beds[13]),
                   SizedBox(width: getHorizontalSize(10),),
-                  HBedWidget(bed: beds[1]),
+                  HBedWidget(bed: beds[14]),
                   SizedBox(width: getHorizontalSize(10),),
-                  HBedWidget(bed: beds[0]),
+                  HBedWidget(bed: beds[15]),
                 ],
               ),
 

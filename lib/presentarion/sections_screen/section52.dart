@@ -26,6 +26,7 @@ class Section52 extends StatelessWidget {
             borderRadius: BorderRadius.circular(1),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // First row with 4 beds
               FittedBox(
@@ -49,7 +50,7 @@ class Section52 extends StatelessWidget {
                       children: [
                         VBedWidget(bed: beds[4]),
                         SizedBox(height: getVerticalSize(5),),
-                        VBedWidget(bed: beds[5]),
+                        VBedWidget(bed: beds[11]),
 
                       ],
                     ),
@@ -58,18 +59,18 @@ class Section52 extends StatelessWidget {
                         Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              HBedWidget(bed: beds[5]),
                               HBedWidget(bed: beds[6]),
                               HBedWidget(bed: beds[7]),
-                              HBedWidget(bed: beds[8]),
 
                             ]),
 
                         Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              HBedWidget(bed: beds[8]),
                               HBedWidget(bed: beds[9]),
                               HBedWidget(bed: beds[10]),
-                              HBedWidget(bed: beds[11]),
                             ]),
                       ],
                     )

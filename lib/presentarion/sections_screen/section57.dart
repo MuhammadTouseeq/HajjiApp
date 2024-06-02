@@ -44,23 +44,23 @@ class Section57 extends StatelessWidget {
                     Column(
                       children: [
                         VBedWidget(bed: beds[4]),
-                        VBedWidget(bed: beds[5]),
-                        VBedWidget(bed: beds[6]),
+                        VBedWidget(bed: beds[8]),
+                        VBedWidget(bed: beds[12]),
                       ],
                     ),
                     Column(
                       children: [
                         Row(
                             children: [
+                              HBedWidget(bed: beds[5]),
+                              HBedWidget(bed: beds[6]),
                               HBedWidget(bed: beds[7]),
-                              HBedWidget(bed: beds[8]),
-                              HBedWidget(bed: beds[9]),
                             ]),
 
                         Row(
                             children: [
+                              HBedWidget(bed: beds[9]),
                               HBedWidget(bed: beds[10]),
-                              HBedWidget(bed: beds[11]),
                               HBedWidget(bed: beds[12]),
                             ]),
 
