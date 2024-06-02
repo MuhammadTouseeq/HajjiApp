@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hajjiapp/core/utils/image_constant.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section10.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section12.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section14.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section57.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section11.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section13.dart';
@@ -18,7 +20,7 @@ import 'package:hajjiapp/presentarion/sections_screen/section36.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section5.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section6.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section52.dart';
-import 'package:hajjiapp/presentarion/sections_screen/section8.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section53.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section9.dart';
 import 'package:hajjiapp/widgets/common_image_view.dart';
 import 'package:hajjiapp/widgets/custom_text.dart';
@@ -168,7 +170,7 @@ class SectionsScreen extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(1),
                         ),
-                        child: Section60(beds: beds,)
+                        child: Section58(beds: beds,)
                         // child: getSectionView()
 
 
@@ -245,7 +247,7 @@ class SectionsScreen extends StatelessWidget {
         break;
       case '9':
       case '10':
-        return Section8(beds: controller.generateBedList.value);
+        return Section5(beds: controller.generateBedList.value);
         break;
       case '11':
       case '12':
@@ -285,7 +287,7 @@ class SectionsScreen extends StatelessWidget {
         return Section19(beds: controller.generateBedList.value);
         break;
       case '36,37':
-        return Section20(beds: controller.generateBedList.value);
+        return Section58(beds: controller.generateBedList.value);
         break;
       case '38':
         return Section32(beds: controller.generateBedList.value);

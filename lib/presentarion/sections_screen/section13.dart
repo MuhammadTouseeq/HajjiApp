@@ -5,7 +5,7 @@ import 'package:hajjiapp/core/utils/size_utils.dart';
 import '../../core/utils/color_constant.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
-///also 15 16 27
+///also 15 16 77
 class Section13 extends StatelessWidget {
   final List<Bed> beds;
 

@@ -7,10 +7,10 @@ import 'custom_ac.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
 
-class Section8 extends StatelessWidget {
+class Section53 extends StatelessWidget {
   final List<Bed> beds;
 
-  Section8({required this.beds});
+  Section53({required this.beds});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,9 @@ class Section8 extends StatelessWidget {
                 child: Row(
                   children: [
                     HBedWidget(bed: beds[0]),
-                    HBedWidget(bed: beds[1]),
-                    HBedWidget(bed: beds[0]),
-                    HBedWidget(bed: beds[1]),
+                    HBedWidget(bed: beds[2]),
+                    HBedWidget(bed: beds[3]),
+                    HBedWidget(bed: beds[4]),
                   ],
                 ),
               ),
@@ -43,11 +43,11 @@ class Section8 extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      VBedWidget(bed: beds[0]),
-                      VBedWidget(bed: beds[1]),
-                      VBedWidget(bed: beds[0]),
-                      VBedWidget(bed: beds[1]),
-                      VBedWidget(bed: beds[0]),
+                      VBedWidget(bed: beds[4]),
+                      VBedWidget(bed: beds[5]),
+                      VBedWidget(bed: beds[11]),
+                      VBedWidget(bed: beds[17]),
+                      VBedWidget(bed: beds[23]),
 
                     ],
                   ),
@@ -55,26 +55,26 @@ class Section8 extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          VBedWidget(bed: beds[1]),
-                          VBedWidget(bed: beds[1]),
+                          VBedWidget(bed: beds[6]),
+                          VBedWidget(bed: beds[7]),
                         ],
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[0]),
-                          VBedWidget(bed: beds[0]),
+                          VBedWidget(bed: beds[12]),
+                          VBedWidget(bed: beds[13]),
                         ],
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[1]),
-                          VBedWidget(bed: beds[1]),
+                          VBedWidget(bed: beds[18]),
+                          VBedWidget(bed: beds[19]),
                         ],
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[1]),
-                          VBedWidget(bed: beds[1]),
+                          VBedWidget(bed: beds[124]),
+                          VBedWidget(bed: beds[25]),
                         ],
                       ),
                     ],
@@ -83,37 +83,37 @@ class Section8 extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          VBedWidget(bed: beds[1]),
-                          VBedWidget(bed: beds[1]),
+                          VBedWidget(bed: beds[8]),
+                          VBedWidget(bed: beds[9]),
                         ],
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[0]),
-                          VBedWidget(bed: beds[0]),
+                          VBedWidget(bed: beds[14]),
+                          VBedWidget(bed: beds[15]),
                         ],
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[1]),
-                          VBedWidget(bed: beds[1]),
+                          VBedWidget(bed: beds[20]),
+                          VBedWidget(bed: beds[21]),
                         ],
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[1]),
-                          VBedWidget(bed: beds[1]),
+                          VBedWidget(bed: beds[26]),
+                          VBedWidget(bed: beds[27]),
                         ],
                       ),
                     ],
                   ),
                   Column(
                     children: [
-                      VBedWidget(bed: beds[0]),
-                      VBedWidget(bed: beds[1]),
-                      VBedWidget(bed: beds[0]),
-                      VBedWidget(bed: beds[1]),
-                      VBedWidget(bed: beds[0]),
+                      VBedWidget(bed: beds[10]),
+                      VBedWidget(bed: beds[16]),
+                      VBedWidget(bed: beds[22]),
+                      VBedWidget(bed: beds[28]),
+                     // VBedWidget(bed: beds[30]),
 
                     ],
                   ),
@@ -123,10 +123,10 @@ class Section8 extends StatelessWidget {
               FittedBox(
                 child: Row(
                   children: [
-                    HBedWidget(bed: beds[0]),
-                    HBedWidget(bed: beds[1]),
-                    HBedWidget(bed: beds[0]),
-                    HBedWidget(bed: beds[1]),
+                    HBedWidget(bed: beds[29]),
+                    HBedWidget(bed: beds[30]),
+                    HBedWidget(bed: beds[31]),
+                    HBedWidget(bed: beds[32]),
                   ],
                 ),
               ),
