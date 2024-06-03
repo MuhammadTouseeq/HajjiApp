@@ -50,7 +50,7 @@ class LoginScreen extends GetWidget<LoginController> {
                 ),
                   SizedBox(height: getVerticalSize(10),),
                   MyText(
-                    title: "Lorem Ipsum is simply dummy text of the printing and type industry.",
+                    title: "Please enter your Haaji ID. You can find your Haaji ID on your Nusuk card.",
                   clr: ColorConstant.whiteA700,
                   fontSize: 16,
                    // customWeight: FontWeight.bold,

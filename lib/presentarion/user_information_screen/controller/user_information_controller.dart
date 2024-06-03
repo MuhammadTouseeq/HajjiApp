@@ -93,7 +93,7 @@ class UserInformationController extends GetxController {
               data: {
                 'device_type': (Platform.isIOS) ? 'ios' : 'android',
                 'user_id': userDetails!.userId,
-                'email_id': emailController.text,
+                'email_id': "",//emailController.text
                 //'phone_number': phoneNumber.text,
                 'phone_number': phoneNo.value,
                 'token': userDetails!.token,

@@ -5,6 +5,7 @@ class ColorConstant {
 
   ///
   static Color anbtnBlue = fromHex('#7FE0CD');
+  static Color anbtngreen = fromHex('#');
   static Color anhintTextgray = fromHex('#bababa');
   static Color antextGrayDark = fromHex('#5C5D5E');
   static Color antextlightgray = fromHex('#797979');

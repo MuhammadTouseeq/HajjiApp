@@ -18,6 +18,7 @@ class LoginModel {
   String? hajjStatus;
   String? status;
   String? deleted;
+  String? verified;
   String? sessionCode;
   String? token;
 
@@ -41,6 +42,7 @@ class LoginModel {
         this.hajjStatus,
         this.status,
         this.deleted,
+        this.verified,
         this.sessionCode,
         this.token
       });
@@ -65,6 +67,7 @@ class LoginModel {
     hajjStatus = json['hajj_status'];
     status = json['status'];
     deleted = json['deleted'];
+    verified = json['verified'];
     sessionCode = json['session_code'];
     token = json['token'];
   }
@@ -90,6 +93,7 @@ class LoginModel {
     data['hajj_status'] = this.hajjStatus;
     data['status'] = this.status;
     data['deleted'] = this.deleted;
+    data['verified'] = this.verified;
     data['session_code'] = this.sessionCode;
     data['token'] = this.token;
     return data;
