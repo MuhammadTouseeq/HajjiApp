@@ -61,14 +61,29 @@ class LoginController extends GetxController {
                   print('[ LOGIN dev1 ===> ${response.data}]');
 
                   _appPreferences.setIsLoggedIn(loggedIn: true);
-                  _appPreferences.setAccessToken(token: loginResponseModel!.token!);
+                  if(loginResponseModel.verified=="1") {
+                    _appPreferences.setAccessToken(
+                        token: loginResponseModel!.sessionCode!);
+                  }else
+                    {
+                      _appPreferences.setAccessToken(
+                          token:
+                          loginResponseModel!.token!);
+                    }
                   _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
                   await _appPreferences.isPreferenceReady;
 
                   Utils.showToast(response.data['message'], false,);
                   print("masg ${response.data['message']}");
-                  Get.toNamed(AppRoutes.userInformationPage);
+                if(loginResponseModel.verified=="1")
+                {
+                Get.toNamed(AppRoutes.dashboradPage);
+                }
+                else{
+                Get.toNamed(AppRoutes.userInformationPage);
+
+                }
                 } else {
                   Utils.showToast('', true);
                   // Handle the case where data is null in the response

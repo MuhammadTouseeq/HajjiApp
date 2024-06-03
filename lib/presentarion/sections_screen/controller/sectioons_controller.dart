@@ -168,8 +168,10 @@ myBedMapURL.value=bedList.value[index].reservation_map!;
 
 
               data: {
-                  "user_id": 778,
-                  "session_code": "b6b845e9d24faffae128"
+                  // "user_id": 779,
+                  "user_id": userDetails?.userId,
+                  // "session_code": "a044317036aabd81983a4e381bbd1b"
+                  "session_code": userDetails?.sessionCode
               }
           );
 
@@ -232,8 +234,8 @@ print("====section number ${sectionNumber}");
 
 
             data: {
-              "user_id": 778,
-              "session_code": "b6b845e9d24faffae128",
+              "user_id": userDetails?.userId,
+              "session_code": userDetails?.sessionCode,
               "section_number":sectionNumber
             }
         );
@@ -291,10 +293,10 @@ if(url.isEmpty)
 
 
             data: {
-              "user_id": 778,
-              "session_code": "b6b845e9d24faffae128",
+              "user_id": userDetails?.userId,
+              "session_code": userDetails?.sessionCode,
               "section_number":selectedValueConditions.value,
-              "bed_number":bedNumber+1,
+              "bed_number":bedNumber,
             }
         );
 
@@ -313,7 +315,7 @@ if(url.isEmpty)
   @override
   void onInit() {
     super.onInit();
-
+getProfileData();
 getSectionData();
 
 
