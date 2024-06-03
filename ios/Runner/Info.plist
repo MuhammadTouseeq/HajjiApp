@@ -14,6 +14,20 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>hajjiapp</string>
+	<key>aps-environment</key>
+    <string>development</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>We use your location to provide personalized content and services while you are using the app.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>We use your location to provide personalized content and services even when the app is in the background.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We use your location to provide personalized content and services while you are using the app.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need your location to provide personalized content and services both while you are using the app and in the background.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library to allow you to upload photos to your profile.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to allow you to take photos and videos for your profile and posts.</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

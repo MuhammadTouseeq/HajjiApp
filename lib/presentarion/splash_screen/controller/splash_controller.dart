@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:package_info/package_info.dart';
 
 import '../../../Shared_prefrences/app_prefrences.dart';
+import '../../../routes/app_routes.dart';
 import '../../../service/local_database.dart';
 import '../models/splash_model.dart';
 
@@ -32,14 +33,28 @@ class SplashController extends GetxController {
   @override
   void onInit() {
   super.onInit();
-  initPackageInfo();
 
-  Future.delayed(Duration(seconds: 3), () async{
+  getRoute();
 
-   // Get.toNamed(AppRoutes.onboardingScreen);
-   // Get.toNamed(AppRoutes.homeOneScreen);
+  }
 
-  });
+  Future<void> getRoute() async {
+    await appPreferences.isPreferenceReady;
+    appPreferences.getIsLoggedIn().then((value) async => {
+      print('getIsLoggedIn $value'),
+      await Future.delayed(3000.milliseconds),
+
+
+      if(value==null || !value){
+        Get.offAndToNamed(AppRoutes.loginPage),
+      }
+      else {
+        Get.offAllNamed(AppRoutes.dashboradPage)
+      }
+    }).catchError((err) async {
+      await Future.delayed(3000.milliseconds);
+      Get.offAndToNamed(AppRoutes.loginPage);
+    });
   }
 
 

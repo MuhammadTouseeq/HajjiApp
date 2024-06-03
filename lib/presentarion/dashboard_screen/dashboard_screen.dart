@@ -33,21 +33,35 @@ class DashboardScreen extends StatelessWidget {
           ),
          // centerTitle: true,
 
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back,color: ColorConstant.black900,),
-            onPressed: () {
-              // Handle back button press
-              Navigator.pop(context);
-            },
-          ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back,color: ColorConstant.black900,),
+          //   onPressed: () {
+          //     // Handle back button press
+          //    // Navigator.pop(context);
+          //   },
+          // ),
           actions: [
-            IconButton(
-              icon: Icon(Icons.notifications_none_outlined,color: ColorConstant.black900,),
-              onPressed: () {
-                Get.toNamed(AppRoutes.notificationPage);
-                // Handle notification icon press here
-              },
-            ),
+           Row(
+             children: [
+
+               IconButton(
+                 icon: Icon(Icons.notifications_none_outlined,color: ColorConstant.black900,),
+                 onPressed: () {
+                   Get.toNamed(AppRoutes.notificationPage);
+
+                   // Handle notification icon press here
+                 },
+               ),
+               SizedBox(width: 10,),
+               IconButton(
+                 icon: Icon(Icons.logout,color: ColorConstant.black900,),
+                 onPressed: () {
+                   controller.logoutConfirmation(context);
+                 },
+               ),
+
+             ],
+           )
           ],
 
         ),
@@ -82,7 +96,7 @@ class DashboardScreen extends StatelessWidget {
                     fontSize: 18,
                     bgColor: ColorConstant.anbtnBlue,
                     controller: controller.btnController,
-                    title: "Reserved Bed".tr,
+                    title: "Reserve Bed".tr,
                     onTap: () async {
                       Get.toNamed(AppRoutes.sectionsPage);
                     },

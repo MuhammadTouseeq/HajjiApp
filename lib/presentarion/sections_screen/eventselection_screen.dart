@@ -53,7 +53,7 @@ class SectionsScreen extends StatelessWidget {
           backgroundColor: ColorConstant.aappbarColor,
           title: Padding(
             padding: getPadding(left: 0,),
-            child: MyText(title: 'Event Selection',fontSize: 18,customWeight: FontWeight.bold,),
+            child: MyText(title: 'Reserve Bed',fontSize: 18,customWeight: FontWeight.bold,),
           ),
           centerTitle: false,
           leading: IconButton(
@@ -198,7 +198,7 @@ class SectionsScreen extends StatelessWidget {
                 height: getVerticalSize(60),
                 width: getHorizontalSize(400),
                 fontSize: 20 ,
-                bgColor: ColorConstant.anbtnBlue,
+                bgColor: ColorConstant.aappbarColor,
                 controller: controller.btnController,
                 title: "View My Bed in Full Layout".tr,
                 onTap: () async {
@@ -223,7 +223,7 @@ class SectionsScreen extends StatelessWidget {
                 height: getVerticalSize(60),
                 width: getHorizontalSize(400),
                 fontSize: 20 ,
-                bgColor: ColorConstant.anbtnBlue,
+                bgColor: ColorConstant.aappbarColor,
                 controller: controller.btnController,
                 title: "View Full Layout".tr,
                 onTap: ()  {

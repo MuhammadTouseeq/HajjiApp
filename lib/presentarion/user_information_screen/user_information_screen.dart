@@ -51,7 +51,7 @@ class UserInformationScreen extends GetWidget<UserInformationController> {
                 ),
                   SizedBox(height: getVerticalSize(10),),
                   MyText(
-                    title: "Lorem Ipsum is simply dummy text of the printing and type industry.",
+                    title: "Please enter your phone number to proceed. Email address is optional.",
                   clr: ColorConstant.whiteA700,
                   fontSize: 16,
                    customWeight: FontWeight.w400,
@@ -156,23 +156,23 @@ class UserInformationScreen extends GetWidget<UserInformationController> {
                   ),
 
                   SizedBox(height: getVerticalSize(20),),
-                  MyText(
-                    title: "Email Address",
-                    clr: ColorConstant.black900,
-                    fontSize: 19,
-                    // customWeight: FontWeight.bold,
-                  ),
-                  SizedBox(height: getVerticalSize(10),),
-                  CustomTextField(
-                    hintText: 'Email@domain.com',
-                    controller: controller.emailController,
-                    isFinal: false,
-                    keyboardType: TextInputType.emailAddress,
-                    limit: HelperFunction.EMAIL_VALIDATION,
-                    validator: (value) {
-                      return HelperFunction.emailValidate(value!);
-                    },
-                  ),
+                  // MyText(
+                  //   title: "Email Address",
+                  //   clr: ColorConstant.black900,
+                  //   fontSize: 19,
+                  //   // customWeight: FontWeight.bold,
+                  // ),
+                  // SizedBox(height: getVerticalSize(10),),
+                  // CustomTextField(
+                  //   hintText: 'Email@domain.com',
+                  //   controller: controller.emailController,
+                  //   isFinal: false,
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   limit: HelperFunction.EMAIL_VALIDATION,
+                  //   validator: (value) {
+                  //     return HelperFunction.emailValidate(value!);
+                  //   },
+                  // ),
                   SizedBox(height: getVerticalSize(16),),
 
 
