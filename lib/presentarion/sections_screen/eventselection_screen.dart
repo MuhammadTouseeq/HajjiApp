@@ -4,7 +4,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:hajjiapp/core/utils/image_constant.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section10.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section12.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section13_m.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section14.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section55.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section57.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section11.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section13.dart';
@@ -293,20 +295,20 @@ class SectionsScreen extends StatelessWidget {
         break;
       case '9':
       case '10':
-        return Section5(beds: controller.generateBedList.value);
+        return Section9(beds: controller.generateBedList.value);
         break;
       case '11':
       case '12':
-        return Section9(beds: controller.generateBedList.value);
+        return Section11(beds: controller.generateBedList.value);
         break;
       case '13':
       case '14':
-      // return Section10(beds: controller.generateBedList.value);
+      return Section13(beds: controller.generateBedList.value);
         break;
       case '15':
       case '16':
       case '17':
-        return Section11(beds: controller.generateBedList.value);
+        return Section13(beds: controller.generateBedList.value);
         break;
       case '19':
       case '20':
@@ -315,48 +317,66 @@ class SectionsScreen extends StatelessWidget {
       case '23':
       case '24':
       case '25':
-      // return Section12(beds: controller.generateBedList.value);
+      return Section19(beds: controller.generateBedList.value);
         break;
-      case '26':
+
       case '27':
       case '28':
       case '29':
       case '30':
       case '31':
-        return Section13(beds: controller.generateBedList.value);
+        return Section13_m(beds: controller.generateBedList.value);
         break;
 
       case '32':
-      // return Section14(beds: controller.generateBedList.value);
+      return Section32(beds: controller.generateBedList.value);
         break;
       case '35':
-        return Section19(beds: controller.generateBedList.value);
-        break;
-      case '36,37':
-        return Section58(beds: controller.generateBedList.value);
-        break;
-      case '38':
-        return Section32(beds: controller.generateBedList.value);
-        break;
-
-
-      case '40,41,42,45,46,47,48,49,50':
         return Section35(beds: controller.generateBedList.value);
         break;
-      case '51':
+      case '36':
+      case '37':
         return Section36(beds: controller.generateBedList.value);
         break;
+      case '38':
+        return Section38(beds: controller.generateBedList.value);
+        break;
+
+
+      case '40':
+      case '41':
+      return Section57(beds: controller.generateBedList.value);
+      break;
+
+
+      case '42':
+        return Section52(beds: controller.generateBedList.value);
+        break;
+      case '45':
+      case '46':
+      case '47':
+      case '48':
+      case '49':
+      case '50':
+      case '51':
+
+        return Section40(beds: controller.generateBedList.value);
+        break;
+
       case '52':
         return Section40(beds: controller.generateBedList.value);
         break;
       case '53':
-        return Section51(beds: controller.generateBedList.value);
+        return Section53(beds: controller.generateBedList.value);
         break;
-      case '55,56,57':
-        return Section52(beds: controller.generateBedList.value);
+      case '55':
+      case '56':
+      case '57':
+        return Section55(beds: controller.generateBedList.value);
         break;
-      case '58,59':
-        return Section57(beds: controller.generateBedList.value);
+      case '58':
+      case '59':
+        return Section13(beds: controller.generateBedList.value);
         break;
       case '60':
         return Section60(beds: controller.generateBedList.value);

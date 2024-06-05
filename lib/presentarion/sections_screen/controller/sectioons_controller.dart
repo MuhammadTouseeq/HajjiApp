@@ -66,7 +66,7 @@ class SectionsController extends GetxController {
      mapURL.value = "";
      myBedMapURL.value = "";
   }
-generateBedData1({int count=30})
+generateBedData1({int count=35})
 {
   print("available beds $availableBedList");
 generateBedList.value= List.generate(
@@ -81,7 +81,7 @@ generateBedList.value= List.generate(
   );
 }
 
-  void generateBedData({int count = 30}) {
+  void generateBedData({int count = 40}) {
 
     if(availableBedList.isEmpty)
       return;
@@ -91,9 +91,9 @@ generateBedList.value= List.generate(
       bedList.add(Bed(
         id: index + 1,
         name: 'Bed ${index + 1}',
-        mapURL: getMap(index + 1),
-        isMyBed: checkisMyBed(index + 1),
-        isReserved: isReserve(index + 1),
+        mapURL: getMap(index ),
+        isMyBed: checkisMyBed(index ),
+        isReserved: isReserve(index ),
       ));
     }
     generateBedList.value = bedList;

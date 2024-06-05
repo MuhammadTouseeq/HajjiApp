@@ -73,7 +73,7 @@ class Section53 extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          VBedWidget(bed: beds[124]),
+                          VBedWidget(bed: beds[24]),
                           VBedWidget(bed: beds[25]),
                         ],
                       ),
