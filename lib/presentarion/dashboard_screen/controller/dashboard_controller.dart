@@ -29,20 +29,34 @@ import '../../../widgets/paginations/paged_view.dart';
 class DashboardController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
   final RoundedLoadingButtonController btn1Controller = RoundedLoadingButtonController();
- // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
+
   AppPreferences _appPreferences = AppPreferences();
- // AppPreferences appPreferences = AppPreferences();
   LoginModel? userDetails;
   RxBool isLoading = true.obs;
   Future<void> getProfileData() async {
-    await _appPreferences.isPreferenceReady;
-    var data = await _appPreferences.getProfileData();
-    if (data != null) {
-      Map<String, dynamic> userMap = jsonDecode(data);
-      userDetails = LoginModel.fromJson(userMap);
-    }
+    // Simulating data fetching delay
+    await Future.delayed(Duration(seconds: 1));
+
+
+    userDetails = LoginModel(
+       userId: "1",
+      haajiName: "test",
+      haajiId: "321",
+      phoneNumber: "+923111888909",
+      sessionCode: "48a953d604d7dc4c0ceff2b1ce43a9"
+    );
+
     isLoading.value = false;
   }
+  // Future<void> getProfileData() async {
+  //   await _appPreferences.isPreferenceReady;
+  //   var data = await _appPreferences.getProfileData();
+  //   if (data != null) {
+  //     Map<String, dynamic> userMap = jsonDecode(data);
+  //     userDetails = LoginModel.fromJson(userMap);
+  //   }
+  //   isLoading.value = false;
+  // }
 
   void logoutConfirmation(BuildContext context) async {
     showDialog(
@@ -62,7 +76,7 @@ class DashboardController extends GetxController {
               await _appPreferences.getAppPreferences()
                   .clearPreference();
 
-              Get.offAllNamed(AppRoutes.loginPage);
+              Get.offAllNamed(AppRoutes.signInPage);
 
             },
             second: () {
@@ -72,15 +86,6 @@ class DashboardController extends GetxController {
         });
   }
 
-  // Future<dynamic> getProfileData() async {
-  //   await _appPreferences.isPreferenceReady;
-  //   var data= await _appPreferences.getProfileData();
-  //   Map<String,dynamic> userMap = jsonDecode(data!);
-  //   print('map $userMap');
-  //
-  //   userDetails = LoginModel.fromJson(userMap);
-  //   print('map1 $userDetails');
-  // }
 
 
 

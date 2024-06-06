@@ -1,4 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:hajjiapp/presentarion/signin_screen/binding/signin_binding.dart';
+import 'package:hajjiapp/presentarion/signin_screen/signin_screen.dart';
 import '../presentarion/dashboard_screen/binding/dashboard_binding.dart';
 import '../presentarion/dashboard_screen/dashboard_screen.dart';
 
@@ -14,6 +16,8 @@ import '../presentarion/reservedbed_screen/binding/reservedbed_binding.dart';
 import '../presentarion/reservedbed_screen/reservedbed_screen.dart';
 import '../presentarion/sections_screen/binding/eventselection_binding.dart';
 import '../presentarion/sections_screen/eventselection_screen.dart';
+import '../presentarion/signup_screen/binding/signup_binding.dart';
+import '../presentarion/signup_screen/signup_screen.dart';
 import '../presentarion/splash_screen/binding/splash_binding.dart';
 import '../presentarion/splash_screen/splash_screen.dart';
 import '../presentarion/user_information_screen/binding/user_information_binding.dart';
@@ -33,6 +37,8 @@ class AppRoutes {
   static const String notificationPage = '/Notification_screen';
   static const String ongroundPage = '/onground_screen';
   static const String sectionsPage = '/sections_screen';
+  static const String signInPage = '/signin_screen';
+  static const String signUpPage = '/signup_screen';
 
 
   static const String appNavigationScreen = '/app_navigation_screen';
@@ -54,6 +60,20 @@ class AppRoutes {
       page: () => LoginScreen(),
       bindings: [
         LoginBinding(),
+      ],
+    ),
+    GetPage(
+      name: signInPage,
+      page: () => SignInScreen(),
+      bindings: [
+        SignInBinding(),
+      ],
+    ),
+    GetPage(
+      name: signUpPage,
+      page: () => SignUpScreen(),
+      bindings: [
+        SignUpBinding(),
       ],
     ),
     GetPage(
