@@ -16,6 +16,8 @@
 	<string>hajjiapp</string>
 	<key>aps-environment</key>
     <string>development</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We need camera access to scan barcodes</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>We use your location to provide personalized content and services while you are using the app.</string>
 	<key>NSLocationAlwaysUsageDescription</key>

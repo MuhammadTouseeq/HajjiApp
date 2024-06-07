@@ -2,13 +2,15 @@ class ImageConstant {
   // Image folder path
   static String imagePath = 'assets/images';
 
-  /// for anchorage Loading 1.png
+
 
   static String imgSplash = '$imagePath/hajj.png';
   static String backgroundImage = '$imagePath/Vector.png';
   static String logoImage = '$imagePath/logo.png';
   static String notificationImage = '$imagePath/Notification.png';
   static String dotImage = '$imagePath/Ellipse 175.png';
+  static String minahImage = '$imagePath/Rectangle 5235.png';
+  static String qrCodeImage = '$imagePath/Group 25027.png';
   static String mapImage = '$imagePath/pict--single-bed-1-(blue)-bedroom-vector-stencils-libfsffrary.png';
 
   static String profileIcon = '$imagePath/Group 18.png';
