@@ -31,9 +31,9 @@ class Section53 extends StatelessWidget {
                 child: Row(
                   children: [
                     HBedWidget(bed: beds[0]),
+                    HBedWidget(bed: beds[1]),
                     HBedWidget(bed: beds[2]),
                     HBedWidget(bed: beds[3]),
-                    HBedWidget(bed: beds[4]),
                   ],
                 ),
               ),

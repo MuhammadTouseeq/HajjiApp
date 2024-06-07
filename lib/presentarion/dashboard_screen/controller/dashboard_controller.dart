@@ -7,7 +7,30 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:hajjiapp/presentarion/sections_screen/models/sections_model.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../Shared_prefrences/app_prefrences.dart';
+import '../../../core/model_classes/deal_model.dart';
+import '../../../core/model_classes/login_model.dart';
+import '../../../core/model_classes/page_model.dart';
+import '../../../core/utils/constants.dart';
+import '../../../core/utils/utils.dart';
+import '../../../data/services/api_call_status.dart';
+import '../../../data/services/api_exceptions.dart';
+import '../../../data/services/base_client.dart';
+import '../../../localization/strings_enum.dart';
+import '../../../widgets/custom_snackbar.dart';
+import '../../../widgets/paginations/paged_view.dart';
 import '../../../Shared_prefrences/app_prefrences.dart';
 import '../../../core/model_classes/deal_model.dart';
 import '../../../core/model_classes/login_model.dart';
@@ -43,6 +66,7 @@ class DashboardController extends GetxController {
     }
     isLoading.value = false;
   }
+  final Rx<BedData?> myReserveBed = Rx<BedData?>(null);
 
   void logoutConfirmation(BuildContext context) async {
     showDialog(
@@ -84,6 +108,58 @@ class DashboardController extends GetxController {
 
 
 
+  Future<void> CheckMyreserveBed() async {
+    Utils.check().then((value) async {
+      if (value) {
+        await BaseClient.post(
+            Constants.bedDataUrl,
+            onSuccess: (response) async {
+
+              // apiCallStatus = ApiCallStatus.success;
+              List<BedData> dataBeds = [];
+              print("Bed Api response========  ${response.data['data']}");
+              if (response.data['status'] == true) {
+                // clear();
+                // mapURL.value = response.data['reservation_map'] ;
+                // print("maping url========  ${mapURL.value}");
+
+                response.data['data'].forEach((v) {
+                  dataBeds.add(new BedData.fromJson(v));
+                });
+
+                if(dataBeds!=null) {
+                  myReserveBed.value = dataBeds[0];
+                  print("Reserve Bed ========  ${dataBeds[0]}");
+
+                }
+
+              } else {
+                Utils.showToast('', true);
+                // Handle the case where data is null in the response
+              }
+            },
+            onError: (error) {
+
+              BaseClient.handleApiError(error);
+              // apiCallStatus = ApiCallStatus.error;
+            },
+
+
+            data: {
+              "user_id": userDetails?.userId,
+              "reserved_by_user_id": userDetails?.userId,
+              "session_code": userDetails?.sessionCode,
+            }
+        );
+
+      } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
+
+  }
 
 
 
@@ -92,7 +168,7 @@ class DashboardController extends GetxController {
   void onInit() {
     super.onInit();
     getProfileData();
-
+    CheckMyreserveBed();
   }
 
 

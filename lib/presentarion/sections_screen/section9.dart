@@ -5,6 +5,8 @@ import 'package:hajjiapp/core/utils/size_utils.dart';
 import '../../core/utils/color_constant.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
+import 'custom_ac.dart';
+
 
 class Section9 extends StatelessWidget {
   final List<Bed> beds;
@@ -127,6 +129,52 @@ class Section9 extends StatelessWidget {
 
 
             ],
+          ),
+        ),
+        // Left border AC labels
+        Positioned(
+          // top: (MediaQuery.of(context).size.height / 2) - 40, // Adjust the position as needed
+          left: -25, // Adjust the position as needed
+          top: 80,
+          // bottom: -10,
+          child: ACLabel(
+            title: "AC",
+            backgroundColor: ColorConstant.blackColor,
+            textColor: ColorConstant.whiteA700,
+            isVertical: true,
+          ),
+        ),
+        Positioned(
+          // top: (MediaQuery.of(context).size.height / 2) - 40, // Adjust the position as needed
+          left: -25, // Adjust the position as needed
+          top: 200,
+          // bottom: -10,
+          child: ACLabel(
+            title: "AC",
+            backgroundColor: ColorConstant.blackColor,
+            textColor: ColorConstant.whiteA700,
+            isVertical: true,
+          ),
+        ),
+        // Right border AC labels
+        Positioned(
+          top: 200, // Adjust the position as needed
+          right: -25, // Adjust the position as needed
+          child: ACLabel(
+            title: "AC",
+            backgroundColor: ColorConstant.blackColor,
+            textColor: ColorConstant.whiteA700,
+            isVertical: true,
+          ),
+        ),
+        Positioned(
+          top: 80, // Adjust the position as needed
+          right: -25, // Adjust the position as needed
+          child: ACLabel(
+            title: "AC",
+            backgroundColor: ColorConstant.blackColor,
+            textColor: ColorConstant.whiteA700,
+            isVertical: true,
           ),
         ),
       ],

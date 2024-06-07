@@ -61,7 +61,7 @@ class Section57 extends StatelessWidget {
                             children: [
                               HBedWidget(bed: beds[9]),
                               HBedWidget(bed: beds[10]),
-                              HBedWidget(bed: beds[12]),
+                              HBedWidget(bed: beds[11]),
                             ]),
 
 

@@ -13,6 +13,7 @@ class Section13_m extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("${beds[0].isReserved}");
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
