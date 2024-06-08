@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:hajjiapp/presentarion/sections_screen/models/sections_model.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,15 +34,18 @@ class SectionsController extends GetxController {
 
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
   late List<String> itemsContidions = [ ];
-  final selectedValueConditions = ''.obs;
+  final dynamic  selectedValueConditions = ''.obs;
 
-  RxList<DataItem> sectionList = List<DataItem>.empty().obs;
+  RxList<DataItem?> sectionList = List<DataItem?>.empty().obs;
   RxList<String> sections = List<String>.empty().obs;
+  RxList<String> sectionsType = List<String>.empty().obs;
   RxList<BedData> bedList = List<BedData>.empty().obs;
   RxList<String?> availableBedList = List<String?>.empty().obs;
   RxList<Bed> generateBedList = List<Bed>.empty().obs;
   AppPreferences _appPreferences = AppPreferences();
   // AppPreferences appPreferences = AppPreferences();
+  final Rx<BedData?> myReserveBed = Rx<BedData?>(null);
+  final Rx<DataItem?> selectedSection = Rx<DataItem?>(null);
   LoginModel? userDetails;
   RxBool isLoading = true.obs;
   RxBool isMyBed = false.obs;
@@ -72,8 +76,8 @@ generateBedData1({int count=35})
 generateBedList.value= List.generate(
     count,
         (index) => Bed(
-      id: index+1,
-      name: 'Bed ${index + 1}',
+      id: index,
+      name: 'Bed ',
       mapURL: getMap(index+1),
       isMyBed: checkisMyBed(index+1),
       isReserved: isReserve(index), // Specify indices where isReserved should be true
@@ -89,10 +93,10 @@ generateBedList.value= List.generate(
     List<Bed> bedList = [];
     for (int index = 0; index < count; index++) {
       bedList.add(Bed(
-        id: index + 1,
-        name: 'Bed ${index + 1}',
+        id: index ,
+        name: 'Bed ',
         mapURL: getMap(index ),
-        isMyBed: checkisMyBed(index ),
+        isMyBed: checkisMyBed(index),
         isReserved: isReserve(index ),
       ));
     }
@@ -110,10 +114,17 @@ generateBedList.value= List.generate(
 
 checkisMyBed(int index)
 {
+  if(myReserveBed.value!=null)
+    {print("$index ${myReserveBed.value?.bedNumber } == ${selectedValueConditions.value}  ${myReserveBed.value?.bedNumber==(index+1).toString()}  ${myReserveBed.value?.sectionNumber==selectedValueConditions.value}");
+
+    return myReserveBed.value?.bedNumber==(index+1).toString()&& myReserveBed.value?.sectionNumber==selectedValueConditions.value;
+    }
+  return false;
   if(availableBedList.contains(index.toString()))
     {
       if(bedList.value[index].isMyBed==true)
         {
+          print("my bed is ${bedList.value[index].bedNumber} == ${bedList.value[index].isMyBed}");
 isMyBed.value=true;
 myBedMapURL.value=bedList.value[index].reservation_map!;
         }
@@ -149,10 +160,19 @@ myBedMapURL.value=bedList.value[index].reservation_map!;
                     });
 
                     sections.value=dataSection.map((e) => e.sectionNumber).toSet().toList();
+                    sectionsType.value=dataSection.map((e) => e.type).toSet().toList();
                     sectionList.value.addAll(dataSection);
                     sectionList.refresh();
 
-                    selectedValueConditions.value=sections.value[0];
+                    if(myReserveBed.value!=null)
+                      {
+                        selectedValueConditions.value =myReserveBed?.value?.sectionNumber;
+                        selectedSection.value=findSectionById(myReserveBed?.value?.sectionNumber);
+
+                      }
+                    else {
+                      selectedValueConditions.value = sections.value[0];
+                    }
                     getBedsData(selectedValueConditions.value);
 
                 } else {
@@ -184,6 +204,60 @@ myBedMapURL.value=bedList.value[index].reservation_map!;
 
   }
 
+
+  Future<void> CheckMyreserveBed() async {
+    Utils.check().then((value) async {
+      if (value) {
+        await BaseClient.post(
+            Constants.bedDataUrl,
+            onSuccess: (response) async {
+
+              apiCallStatus = ApiCallStatus.success;
+              List<BedData> dataBeds = [];
+              print("Bed Api response========  ${response.data['data']}");
+              if (response.data['status'] == true) {
+                clear();
+                mapURL.value = response.data['reservation_map'] ;
+                print("maping url========  ${mapURL.value}");
+
+                response.data['data'].forEach((v) {
+                  dataBeds.add(new BedData.fromJson(v));
+                });
+
+if(dataBeds!=null) {
+  myReserveBed.value = dataBeds[0];
+  print("Reserve Bed ========  ${dataBeds[0]}");
+
+}
+                getSectionData();
+                // getBedsData(selectedValueConditions.value);
+              } else {
+                Utils.showToast('', true);
+                // Handle the case where data is null in the response
+              }
+            },
+            onError: (error) {
+
+              BaseClient.handleApiError(error);
+              apiCallStatus = ApiCallStatus.error;
+            },
+
+
+            data: {
+              "user_id": userDetails?.userId,
+              "reserved_by_user_id": userDetails?.userId,
+              "session_code": userDetails?.sessionCode,
+            }
+        );
+
+      } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
+
+  }
 
   Future<void> getBedsData(String sectionNumber) async {
 print("====section number ${sectionNumber}");
@@ -248,7 +322,10 @@ print("====section number ${sectionNumber}");
     });
 
   }
-
+// Function to find a section by ID
+  DataItem? findSectionById(String? id) {
+    return sectionList.firstWhere((section) => section?.sectionNumber == id, orElse: () => null);
+  }
   launchURL(String url) async {
     print("url===$url");
 if(url.isEmpty)
@@ -277,7 +354,8 @@ if(url.isEmpty)
                   message:response.data['message'],
                 );
                 availableBedList.clear();
-                getBedsData(selectedValueConditions.value);
+                CheckMyreserveBed();
+
               } else {
                 CustomSnackBar.showCustomErrorToast(
                   message:response.data['message'],
@@ -296,7 +374,7 @@ if(url.isEmpty)
               "user_id": userDetails?.userId,
               "session_code": userDetails?.sessionCode,
               "section_number":selectedValueConditions.value,
-              "bed_number":bedNumber,
+              "bed_number":bedNumber+1,
             }
         );
 
@@ -316,7 +394,8 @@ if(url.isEmpty)
   void onInit() {
     super.onInit();
 getProfileData();
-getSectionData();
+    CheckMyreserveBed();
+
 
 
   }

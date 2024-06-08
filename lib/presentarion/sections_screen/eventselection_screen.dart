@@ -108,6 +108,17 @@ class SectionsScreen extends StatelessWidget {
                   ),
                 ],
               ),
+
+           Obx(() =>    controller?.myReserveBed!=null?   Container(
+             width: double.infinity,
+             padding: getPadding(all: 10),
+             color: ColorConstant.appBackgroundgrayColor,
+             child: MyText(
+               center: true,
+               title: 'Bed ${controller.myReserveBed.value?.bedNumber} is reserved in section # ${controller.myReserveBed.value?.sectionNumber}  ',
+             ),
+           ):Container(),),
+
               Container(
                 width: double.infinity,
                 padding: getPadding(all: 10),
@@ -125,7 +136,7 @@ class SectionsScreen extends StatelessWidget {
                   border: Border.all(color: Colors.grey), // Add border decoration
                   borderRadius: BorderRadius.circular(8.0), // Optional: Add border radius
                 ),
-                child: DropdownButton<String>(
+                child: DropdownButton<DataItem?>(
                   //  isExpanded: false,
                   hint: Text(
                     "Select Camp",
@@ -138,19 +149,21 @@ class SectionsScreen extends StatelessWidget {
                   iconEnabledColor: ColorConstant.blackColor,
                   iconDisabledColor: ColorConstant.appDescriptionTextColor,
                   underline: SizedBox(),
-                  value: controller.selectedValueConditions.value.isNotEmpty ? controller.selectedValueConditions.value : null,
-                  items: controller.sections.value.map<DropdownMenuItem<String>>((String item) {
-                    return DropdownMenuItem<String>(
+                  value: controller.selectedSection.value,
+                  // value: controller.selectedValueConditions.value.isNotEmpty ? controller.selectedValueConditions.value : null,
+                  items: controller.sectionList.value.map<DropdownMenuItem<DataItem?>>((DataItem? item) {
+                    return DropdownMenuItem<DataItem?>(
                       value: item,
                       child: MyText(
-                        title: "Section $item",
+                        title: "Section ${item?.sectionNumber} (${item?.type})",
                         clr: ColorConstant.black900,
                       ),
                     );
                   }).toList(),
-                  onChanged: (String? newValue) {
+                  onChanged: (DataItem? newValue) {
                     if (newValue != null) {
-                      controller.selectedValueConditions.value = newValue;
+                      controller.selectedSection.value = newValue;
+                      controller.selectedValueConditions.value = newValue.sectionNumber;
                       controller.getBedsData(controller.selectedValueConditions.value);
                     }
                   },
@@ -202,10 +215,11 @@ class SectionsScreen extends StatelessWidget {
                 fontSize: 20 ,
                 bgColor: ColorConstant.aappbarColor,
                 controller: controller.btnController,
-                title: "View My Bed in Full Layout".tr,
+                title: "View my bed in camp View".tr,
                 onTap: () async {
-                  if(controller.myBedMapURL.value.isNotEmpty) {
-                    controller.launchURL(controller.myBedMapURL.value);
+                  if(controller.myReserveBed.value!=null) {
+                    String? mapurl=controller.myReserveBed.value!.reservation_map;
+                    controller.launchURL(mapurl!);
                   }
                   else
                     {
@@ -227,7 +241,7 @@ class SectionsScreen extends StatelessWidget {
                 fontSize: 20 ,
                 bgColor: ColorConstant.aappbarColor,
                 controller: controller.btnController,
-                title: "View Full Layout".tr,
+                title: "View Camp Layout".tr,
                 onTap: ()  {
                   controller.launchURL(controller.mapURL.value);
 
@@ -255,7 +269,7 @@ class SectionsScreen extends StatelessWidget {
           ),
           child: AlertDialog(
             title: Text("Alert",style:TextStyle(color: Colors.red)),
-            content: Text("Your bed is not found in section ${controller.selectedValueConditions.value}",style: TextStyle(color: Colors.black),),
+            content: Text("You have not reserved the bed from any section",style: TextStyle(color: Colors.black),),
             actions: <Widget>[
               Container(
                 height: 30,
@@ -364,7 +378,7 @@ class SectionsScreen extends StatelessWidget {
         break;
 
       case '52':
-        return Section40(beds: controller.generateBedList.value);
+        return Section52(beds: controller.generateBedList.value);
         break;
       case '53':
         return Section53(beds: controller.generateBedList.value);
@@ -405,8 +419,27 @@ class HBedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        if(bed.isReserved==true) {
-          Utils.showToast('Bed Already reserved', false);
+        if(controller.myReserveBed.value==null) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alert'),
+                content: Text('Are you sure you want to change your reserved bed'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      // Close the AlertDialog
+                      Navigator.of(context).pop();
+                      controller.reserveBed(bed.id as int);
+
+                    },
+                    child: Text('Confirm'),
+                  ),
+                ],
+              );
+            },
+          );
         }
         else
         {
@@ -415,7 +448,7 @@ class HBedWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Alert'),
-                content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
+                content: Text('You already had bed # ${controller.myReserveBed?.value?.bedNumber} reserved bed in section ${controller.myReserveBed?.value?.sectionNumber}. Are you sure you want to change your reserved bed'),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -438,7 +471,7 @@ class HBedWidget extends StatelessWidget {
             height: 50,
             padding: EdgeInsets.symmetric(horizontal: 3),
             child:
-            bed.isReserved==true && bed.isMyBed==true?
+             bed.isMyBed==true?
             Image.asset(
               "assets/images/my_bed.png",
               width: 90,
@@ -486,7 +519,7 @@ class H_BedNumberStyle extends StatelessWidget {
           color: Colors.red[300],
           shape: BoxShape.circle
       ),
-      child: Center(child: Text(bed.id.toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
+      child: Center(child: Text((bed.id+1).toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
     );
   }
 }
@@ -509,7 +542,7 @@ class V_BedNumberStyle extends StatelessWidget {
           color: Colors.red[300],
           shape: BoxShape.circle
       ),
-      child: Center(child: Text(bed.id.toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
+      child: Center(child: Text((bed.id+1).toString(),style: TextStyle(fontSize: 10,color:Colors.white ),)),
     );
   }
 }
@@ -559,7 +592,7 @@ class VBedWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 3),
 
             child:
-            bed.isReserved==true && bed.isMyBed==true? RotatedBox(
+             bed.isMyBed==true? RotatedBox(
               quarterTurns: -1,
               child: Image.asset(
                 "assets/images/my_bed.png",

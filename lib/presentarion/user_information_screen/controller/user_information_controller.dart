@@ -28,7 +28,7 @@ class UserInformationController extends GetxController {
   Rx<bool> isShowPassword = false.obs;
   RxBool isValidate = false.obs;
   RxString phoneNo = "".obs;
-  PhoneNumber initialPhone = PhoneNumber(isoCode: 'PK');
+  PhoneNumber initialPhone = PhoneNumber(isoCode: 'SAU');
   GlobalKey<FormState> formKey = new GlobalKey();
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
   AppPreferences _appPreferences = AppPreferences();

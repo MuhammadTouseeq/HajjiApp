@@ -28,33 +28,45 @@ class Section38 extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-               mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  HBedWidget(bed: beds[0]),
-                  HBedWidget(bed: beds[1]),
-                  HBedWidget(bed: beds[2]),
-                ],
+              FittedBox(
+                child:  Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(width: getHorizontalSize(150),),
+
+                    HBedWidget(bed: beds[0]),
+                    HBedWidget(bed: beds[1]),
+                    HBedWidget(bed: beds[2]),
+                  ],
+                ),
               ),
+
               SizedBox(height: getVerticalSize(10),),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    children: [
-                      HBedWidget(bed: beds[3]),
-                      HBedWidget(bed: beds[4]),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      HBedWidget(bed: beds[5]),
-                      HBedWidget(bed: beds[6]),
-                    ],
-                  ),
-                  SizedBox(width: getHorizontalSize(80),),
-                ],
-              ),
+    FittedBox(child:
+    Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        SizedBox(width: getHorizontalSize(180),),
+
+        Column(
+          children: [
+            HBedWidget(bed: beds[3]),
+            HBedWidget(bed: beds[4]),
+          ],
+        ),
+        Column(
+          children: [
+            HBedWidget(bed: beds[5]),
+            HBedWidget(bed: beds[6]),
+          ],
+        ),
+        SizedBox(width: getHorizontalSize(40),),
+
+        // SizedBox(width: getHorizontalSize(80),),
+      ],
+    ),
+    ),
+
               SizedBox(height: getVerticalSize(10),),
               FittedBox(
                 child: Row(

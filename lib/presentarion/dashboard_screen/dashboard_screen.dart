@@ -75,6 +75,16 @@ class DashboardScreen extends StatelessWidget {
               padding: getPadding(all: 10),
               child: Column(
                 children: [
+                  Obx(() =>    controller?.myReserveBed!=null?   Container(
+                    width: double.infinity,
+                    padding: getPadding(all: 10),
+                    // color: ColorConstant.appBackgroundgrayColor,
+                    child: MyText(
+                      center: true,
+                      title: 'Bed ${controller.myReserveBed.value?.bedNumber} is reserved in section # ${controller.myReserveBed.value?.sectionNumber}  ',
+                    ),
+                  ):Container(),),
+
                   SizedBox(height: getVerticalSize(30),),
                   CommonImageView(
                     imagePath: ImageConstant.logoImage,
