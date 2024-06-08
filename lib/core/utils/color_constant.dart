@@ -16,6 +16,8 @@ class ColorConstant {
   static Color bluecolor = fromHex('#02affc');
   static Color dropdowncolor = fromHex('#7FE0CD');
   static Color layoutcolor = fromHex('#64748B');
+  static Color green1 = fromHex('#00C058');
+  static Color orange1 = fromHex('#FF8A00');
 
   ///
   static Color whiteA700B0 = fromHex('#b0ffffff');

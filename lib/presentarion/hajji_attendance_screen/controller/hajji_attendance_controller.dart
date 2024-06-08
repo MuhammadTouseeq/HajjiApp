@@ -12,6 +12,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../../Shared_prefrences/app_prefrences.dart';
 import '../../../core/model_classes/deal_model.dart';
 import '../../../core/model_classes/login_model.dart';
+import '../../../core/model_classes/manager_login_model.dart';
 import '../../../core/model_classes/page_model.dart';
 import '../../../core/utils/constants.dart';
 import '../../../core/utils/utils.dart';
@@ -30,17 +31,23 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
   RxInt tabChange = 0.obs;
   late TabController tabsController =
   Get.put(TabController(vsync: this, length: 2,initialIndex: tabChange.value));
- // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
+  GlobalKey<FormState> formKey = new GlobalKey();
+  ApiCallStatus apiCallStatus = ApiCallStatus.holding;
+  AppPreferences _appPreferences = AppPreferences();
+  ManagerLoginModel? userDetails;
 
-  // LoginModel? userDetails;
-  //
-  // Future<dynamic> getProfileData() async {
-  //   await appPreferences.isPreferenceReady;
-  //   var data= await appPreferences.getProfileData();
-  //   Map<String,dynamic> userMap = jsonDecode(data!);
-  //   print('map $userMap');
-  //   userDetails = LoginModel.fromJson(userMap);
-  // }
+  Future<dynamic> getProfileData() async {
+    await _appPreferences.isPreferenceReady;
+    var data= await _appPreferences.getProfileData();
+    Map<String,dynamic> userMap = jsonDecode(data!);
+    print('manager $userMap');
+
+    userDetails = ManagerLoginModel.fromJson(userMap);
+    print('manaager $userDetails');
+  }
+
+
+
 
 
 
@@ -51,7 +58,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
   @override
   void onInit() {
     super.onInit();
-
+    getProfileData();
 
 
   }

@@ -31,25 +31,36 @@ class ManualEntryScreen extends StatelessWidget {
                 center: true,
                 title: "Lorem Ipsum   is simply dummy text of the printing and type setting industry"),
             SizedBox(height: getVerticalSize(80),),
-            Align(
-              alignment: Alignment.topLeft,
-              child: MyText(
-                title: "Hajji Id",
-                clr: ColorConstant.black900,
-                fontSize: 16,
-                // customWeight: FontWeight.bold,
+            Padding(
+              padding: getPadding(left: 20),
+              child: Column(
+
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: MyText(
+                      title: "Hajji Id",
+                      clr: ColorConstant.black900,
+                      fontSize: 16,
+                      // customWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: getVerticalSize(10),),
+                  CustomTextField(
+                    hintText: '1234567',
+                    controller: controller.hajjiIdController,
+                    isFinal: false,
+                    keyboardType: TextInputType.emailAddress,
+                    limit: HelperFunction.EMAIL_VALIDATION,
+                    validator: (value) {
+                      return HelperFunction.stringValidate(value!);
+                    },
+                    onTap: (){
+
+                    },
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: getVerticalSize(10),),
-            CustomTextField(
-              hintText: '1234567',
-              controller: controller.hajjiIdController,
-              isFinal: false,
-              keyboardType: TextInputType.emailAddress,
-              limit: HelperFunction.EMAIL_VALIDATION,
-              validator: (value) {
-                return HelperFunction.stringValidate(value!);
-              },
             ),
 
             SizedBox(height: getVerticalSize(40),),
@@ -62,6 +73,7 @@ class ManualEntryScreen extends StatelessWidget {
               controller: controller.btnController,
               title: "Hajji Arrived".tr,
               onTap: () async {
+                controller.managerLoginAPI(context);
 
               },
             ),

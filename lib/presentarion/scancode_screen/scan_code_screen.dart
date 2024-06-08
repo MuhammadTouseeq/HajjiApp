@@ -43,8 +43,12 @@ class ScanCodeScreen extends StatelessWidget {
               controller: controller.btnController,
               title: "Scan".tr,
               onTap: () async {
-                controller.scanBarcode();
-                print( controller.scannedCode.value,);
+                String scannedResult = await controller.scanBarcode();
+                print(scannedResult);
+                if (scannedResult != 'Scan cancelled' && !scannedResult.startsWith('Error:')) {
+                  // Set the haaji_id with the scanned code
+                  await controller.managerLoginAPI(context, scannedResult);
+                }
               },
             ),
             SizedBox(height: 10,),

@@ -53,20 +53,20 @@ class SignInScreen extends GetWidget<SignInController> {
                   ),
                   SizedBox(height: getVerticalSize(50),),
                   MyText(
-                    title: "Email",
+                    title: "User Name",
                     clr: ColorConstant.black900,
                     fontSize: 19,
                     // customWeight: FontWeight.bold,
                   ),
                   SizedBox(height: getVerticalSize(10),),
                   CustomTextField(
-                    hintText: 'Email@domain.com',
+                    hintText: 'Waseemqayyum',
                     controller: controller.emailController,
                     isFinal: false,
                     keyboardType: TextInputType.emailAddress,
                     limit: HelperFunction.EMAIL_VALIDATION,
                     validator: (value) {
-                      return HelperFunction.emailValidate(value!);
+                      return HelperFunction.stringValidate(value!);
                     },
                   ),
                   SizedBox(height: getVerticalSize(10),),
@@ -111,64 +111,14 @@ class SignInScreen extends GetWidget<SignInController> {
                       bgColor: ColorConstant.anbtnBlue,
                       controller: controller.btnController,
                       title: "Sign In".tr,
-                      onTap: () async {
-                        String email = controller.emailController.text;
-                        String password = controller.passController.text;
-
-                        if (email.isEmpty || password.isEmpty) {
-                          Fluttertoast.showToast(
-                            msg: "Fields can't be empty",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
-                          );
-                          return;
-                        }
-
-                        if (controller.formKey.currentState!.validate()) {
-                          // Perform your validation logic here
-                          if (email == 'test@gmail.com' && password == '123456') {
-                            Fluttertoast.showToast(
-                              msg: "User details found",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 2,
-                              backgroundColor: Colors.green,
-                              textColor: Colors.white,
-                              fontSize: 16.0,
-                            );
-                            Get.toNamed(AppRoutes.dashboradPage);
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: "Invalid account",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0,
-                            );
-                          }
-                        }
-                      }
+                     onTap: (){
+                       controller.managerLoginAPI(context);
+                     },
                   ),
                   SizedBox(height: getVerticalSize(20),),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      MyText(title: "Don't have an account?"),
-                      GestureDetector(
-                          onTap: (){
-                          //  Get.toNamed(AppRoutes.signUpPage);
-                          },
-                          child: MyText(title: "  Sign up",clr: ColorConstant.whiteA700,customWeight: FontWeight.bold,))
-                    ],
-                  ),
-                  SizedBox(height: getVerticalSize(20),),
+
+
                 ],
               ),
             ),

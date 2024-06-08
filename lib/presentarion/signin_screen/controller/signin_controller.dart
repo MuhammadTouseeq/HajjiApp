@@ -8,6 +8,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../../Shared_prefrences/app_prefrences.dart';
 import '../../../core/model_classes/login_model.dart';
+import '../../../core/model_classes/manager_login_model.dart';
 import '../../../core/utils/constants.dart';
 import '../../../core/utils/utils.dart';
 import '../../../data/services/api_call_status.dart';
@@ -23,8 +24,8 @@ import '../../../widgets/custom_snackbar.dart';
 class SignInController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
   final RoundedLoadingButtonController btnsignupController = RoundedLoadingButtonController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: 'test_ogm_1');
+  TextEditingController passController = TextEditingController(text: 'Karachi@123');
 
 
   Rx<bool> isShowPassword = false.obs;
@@ -35,11 +36,7 @@ class SignInController extends GetxController {
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
   AppPreferences _appPreferences = AppPreferences();
   LoginModel? userDetails;
-  void sendPhoneNumber() {
-    String fullPhoneNumber = phoneNo.value;
-    // Code to send the phone number to your backend or another service
-    print("Sending phone number: $fullPhoneNumber");
-  }
+
 
 
   Future<dynamic> getProfileData() async {
@@ -54,37 +51,34 @@ class SignInController extends GetxController {
 
 
 
-  Future<void> UserApi(context) async {
+  Future<void> managerLoginAPI(context) async {
     final formState = formKey.currentState;
     if (formState!.validate()) {
       Utils.check().then((value) async {
         if (value) {
           btnController.start();
           await BaseClient.post(
-              Constants.userUrl,
+              Constants.managerLoginUrl,
               onSuccess: (response) async {
                 btnController.stop();
                 apiCallStatus = ApiCallStatus.success;
 
                 if (response.data['data'] != null) {
-                  LoginModel loginResponseModel = LoginModel.fromJson(response.data['data']);
-                  print('[ otp RESPONSE ===> ${loginResponseModel.toJson()}]');
+                  ManagerLoginModel loginResponseModel = ManagerLoginModel.fromJson(response.data['data']);
+                  print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
 
-                  if (loginResponseModel.status == '1') {
-                    // _appPreferences.setIsLoggedIn(loggedIn: true);
-                    //   _appPreferences.setAccessToken(token: loginResponseModel.token!);
-                    // _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
-                    await _appPreferences.isPreferenceReady;
 
-                    Utils.showToast(response.data['message'], false);
-                    print("msg ${response.data['message']}");
-                    Get.toNamed(AppRoutes.otpPage);
-                  } else {
-                    Utils.showToast("${response.data['message']}", true);
-                  }
+
+                  await _appPreferences.isPreferenceReady;
+                  _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
+
+                  Utils.showToast(response.data['message'], false,);
+                  print(response.data['message']);
+                   Get.toNamed(AppRoutes.hajjiAttendancePage);
                 } else {
-                  Utils.showToast('', true);
+                  Utils.showToast('Incorrect Password or Email', true);
+                  // Handle the case where data is null in the response
                 }
               },
               onError: (error) {
@@ -93,14 +87,13 @@ class SignInController extends GetxController {
                 apiCallStatus = ApiCallStatus.error;
               },
               data: {
+                // 'device_id': '12345Testing1',
                 'device_type': (Platform.isIOS) ? 'ios' : 'android',
-                'user_id': userDetails!.userId,
-                'email_id': "",//emailController.text
-                //'phone_number': phoneNumber.text,
-                'phone_number': phoneNo.value,
-                'token': userDetails!.token,
+                'user_name': emailController.text,
+                'user_password': passController.text,
               }
           );
+
         } else {
           CustomSnackBar.showCustomErrorToast(
             message: Strings.noInternetConnection.tr,
