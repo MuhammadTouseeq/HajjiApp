@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         fallbackLocale: Locale('en', 'US'),
         title: 'hajji app',
         initialBinding: InitialBindings(),
-        initialRoute: AppRoutes.eventSelectionPage,
+        initialRoute: AppRoutes.splashScreen,
         getPages: AppRoutes.pages,
       );
     });
