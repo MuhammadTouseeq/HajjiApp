@@ -138,21 +138,28 @@ class OtpController extends GetxController {
          // _appPreferences.setAccessToken(token: loginResponseModel.token!);
           _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
-          if (loginResponseModel.status == "1") {
+          if (response.data['status']) {
             apiCallStatus = ApiCallStatus.success;
-            update();
-
+            // update();
+            _appPreferences.setAccessToken(
+                token: loginResponseModel!.sessionCode!);
             _appPreferences.setIsLoggedIn(loggedIn: true);
-            Get.offAllNamed(AppRoutes.dashboradPage);
-          } else {
             Utils.showToast("${response.data['message']}", true);
+
+            Get.offAllNamed(AppRoutes.dashboradPage);
+
           }
+            else
+              {
+                Utils.showToast("${response.data['message']}", true);
+
+              }
         },
         onError: (error) {
           BaseClient.handleApiError(error);
 
           apiCallStatus = ApiCallStatus.error;
-          update();
+          // update();
         },
         data: {
           'user_id': userDetails!.userId,
