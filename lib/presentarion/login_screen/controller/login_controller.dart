@@ -64,7 +64,6 @@ class LoginController extends GetxController {
                     _appPreferences.setAccessToken(
                         token: loginResponseModel!.sessionCode!);
                     _appPreferences.setIsLoggedIn(loggedIn: true);
-                    _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
 
                   }else
@@ -73,6 +72,7 @@ class LoginController extends GetxController {
                           token:
                           loginResponseModel!.token!);
                     }
+                  _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
                   await _appPreferences.isPreferenceReady;
 

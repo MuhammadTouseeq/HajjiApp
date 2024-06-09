@@ -43,10 +43,12 @@ class UserInformationController extends GetxController {
   Future<dynamic> getProfileData() async {
     await _appPreferences.isPreferenceReady;
     var data= await _appPreferences.getProfileData();
-    Map<String,dynamic> userMap = jsonDecode(data!);
-    print('map $userMap');
+    if(data!=null) {
+      Map<String, dynamic> userMap = jsonDecode(data!);
+      print('map $userMap');
 
-    userDetails = LoginModel.fromJson(userMap);
+      userDetails = LoginModel.fromJson(userMap);
+    }
     print('map1 $userDetails');
   }
 
@@ -92,11 +94,11 @@ class UserInformationController extends GetxController {
               },
               data: {
                 'device_type': (Platform.isIOS) ? 'ios' : 'android',
-                'user_id': userDetails!.userId,
+                'user_id': userDetails?.userId,
                 'email_id': "",//emailController.text
                 //'phone_number': phoneNumber.text,
                 'phone_number': phoneNo.value,
-                'token': userDetails!.token,
+                'token': userDetails?.token,
               }
           );
         } else {
