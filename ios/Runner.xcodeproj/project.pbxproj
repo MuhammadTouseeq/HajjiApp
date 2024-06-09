@@ -472,7 +472,7 @@
 				DEVELOPMENT_TEAM = UUZ895MSDP;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "the haaji app";
+				INFOPLIST_KEY_CFBundleDisplayName = "The hajji app";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -657,7 +657,7 @@
 				DEVELOPMENT_TEAM = UUZ895MSDP;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "the haaji app";
+				INFOPLIST_KEY_CFBundleDisplayName = "The hajji app";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -686,7 +686,7 @@
 				DEVELOPMENT_TEAM = UUZ895MSDP;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "the haaji app";
+				INFOPLIST_KEY_CFBundleDisplayName = "The hajji app";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
