@@ -33,6 +33,8 @@ class SectionsController extends GetxController {
   ApiCallStatus apiCallStatus = ApiCallStatus.holding;
 
  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
+  List<int> sectionsToMarkAsBooked = [60, 19, 20, 22];
+
   late List<String> itemsContidions = [ ];
   final dynamic  selectedValueConditions = ''.obs;
 
@@ -85,7 +87,7 @@ generateBedList.value= List.generate(
   );
 }
 
-  void generateBedData({int count = 40}) {
+  void generateBedData({bool isAllBooked=false, int count = 40}) {
 
     if(availableBedList.isEmpty)
       return;
@@ -97,7 +99,7 @@ generateBedList.value= List.generate(
         name: 'Bed ',
         mapURL: getMap(index ),
         isMyBed: checkisMyBed(index),
-        isReserved: isReserve(index ),
+        isReserved: isAllBooked?isAllBooked :isReserve(index ),
       ));
     }
     generateBedList.value = bedList;
@@ -173,8 +175,8 @@ myBedMapURL.value=bedList.value[index].reservation_map!;
                     else {
                       selectedValueConditions.value = sections.value[0];
                     }
-                    getBedsData(selectedValueConditions.value);
-
+                    // -------checked booked sections and marked it reserved
+                    getBedsData(selectedValueConditions.value,sectionsToMarkAsBooked.contains(selectedValueConditions.value));
                 } else {
                   Utils.showToast('', true);
                   // Handle the case where data is null in the response
@@ -259,7 +261,7 @@ if(dataBeds!=null) {
 
   }
 
-  Future<void> getBedsData(String sectionNumber) async {
+  Future<void> getBedsData(String sectionNumber,[bool isAllBooked=false]) async {
 print("====section number ${sectionNumber}");
     Utils.check().then((value) async {
       if (value) {

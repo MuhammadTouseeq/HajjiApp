@@ -6,6 +6,8 @@ import 'package:hajjiapp/presentarion/sections_screen/section10.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section12.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section13_m.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section14.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section29.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section33.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section55.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section57.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section11.dart';
@@ -115,7 +117,7 @@ class SectionsScreen extends StatelessWidget {
              color: ColorConstant.appBackgroundgrayColor,
              child: MyText(
                center: true,
-               title: 'Bed ${controller.myReserveBed.value?.bedNumber} is reserved in section # ${controller.myReserveBed.value?.sectionNumber}  ',
+               title: 'Bed ${controller.myReserveBed.value?.bedNumber} is reserved in خيمة  # ${controller.myReserveBed.value?.sectionNumber}  ',
              ),
            ):Container(),),
 
@@ -155,7 +157,7 @@ class SectionsScreen extends StatelessWidget {
                     return DropdownMenuItem<DataItem?>(
                       value: item,
                       child: MyText(
-                        title: "Section ${item?.sectionNumber} (${item?.type})",
+                        title: " خيمة${item?.sectionNumber} (${item?.type})",
                         clr: ColorConstant.black900,
                       ),
                     );
@@ -269,7 +271,7 @@ class SectionsScreen extends StatelessWidget {
           ),
           child: AlertDialog(
             title: Text("Alert",style:TextStyle(color: Colors.red)),
-            content: Text("You have not reserved the bed from any section",style: TextStyle(color: Colors.black),),
+            content: Text("You have not reserved the bed from any خيمة ",style: TextStyle(color: Colors.black),),
             actions: <Widget>[
               Container(
                 height: 30,
@@ -294,7 +296,6 @@ class SectionsScreen extends StatelessWidget {
 
     switch (controller.selectedValueConditions.value) {
       case '1':
-      case '2':
       case '3':
       case '4':
         return Section3(beds: controller.generateBedList.value);
@@ -328,15 +329,19 @@ class SectionsScreen extends StatelessWidget {
       case '20':
       case '21':
       case '22':
-      case '23':
-      case '24':
-      case '25':
+      // case '23':
+      // case '24':
+      // case '25':
       return Section19(beds: controller.generateBedList.value);
         break;
 
+      case '2':
+      case '29':
+      return Section29(beds: controller.generateBedList.value);
+      break;
+      case '26':
       case '27':
       case '28':
-      case '29':
       case '30':
       case '31':
         return Section13_m(beds: controller.generateBedList.value);
@@ -344,6 +349,9 @@ class SectionsScreen extends StatelessWidget {
 
       case '32':
       return Section32(beds: controller.generateBedList.value);
+        break;
+      case '33':
+        return Section33(beds: controller.generateBedList.value);
         break;
       case '35':
         return Section35(beds: controller.generateBedList.value);
@@ -377,9 +385,9 @@ class SectionsScreen extends StatelessWidget {
         return Section40(beds: controller.generateBedList.value);
         break;
 
-      case '52':
-        return Section52(beds: controller.generateBedList.value);
-        break;
+      // case '52':
+      //   return Section52(beds: controller.generateBedList.value);
+      //   break;
       case '53':
         return Section53(beds: controller.generateBedList.value);
         break;
@@ -392,12 +400,19 @@ class SectionsScreen extends StatelessWidget {
       case '59':
         return Section13(beds: controller.generateBedList.value);
         break;
+      // case '62':
       case '60':
         return Section60(beds: controller.generateBedList.value);
         break;
 
       default:
-        return Center(child: Text('Section data not found'),);
+        return Center(child: Container(
+            height: 100,
+            width: 100,
+            color: ColorConstant.primaryColor,
+            child: Text('Utility Section',style: TextStyle(
+              color: Colors.white
+            ),)),);
     }
   }
 

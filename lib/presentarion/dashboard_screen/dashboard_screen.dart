@@ -81,7 +81,7 @@ class DashboardScreen extends StatelessWidget {
                     // color: ColorConstant.appBackgroundgrayColor,
                     child: MyText(
                       center: true,
-                      title: 'Bed ${controller.myReserveBed.value?.bedNumber} is reserved in section # ${controller.myReserveBed.value?.sectionNumber}  ',
+                      title: 'Bed ${controller.myReserveBed.value?.bedNumber} is reserved in خيمة # ${controller.myReserveBed.value?.sectionNumber}  ',
                     ),
                   ):Container(),),
 
