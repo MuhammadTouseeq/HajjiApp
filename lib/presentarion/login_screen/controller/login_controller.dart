@@ -54,23 +54,25 @@ class LoginController extends GetxController {
                 btnController.stop();
                 apiCallStatus = ApiCallStatus.success;
 
-                if (response.data['data'] != null) {
+                if (response.data['data'] != null&&response.data['status']) {
                   LoginModel loginResponseModel = LoginModel.fromJson(response.data['data']);
                   print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
                   print('[ LOGIN dev ===> ${response.data['data']}]');
                   print('[ LOGIN dev1 ===> ${response.data}]');
 
-                  _appPreferences.setIsLoggedIn(loggedIn: true);
                   if(loginResponseModel.verified=="1") {
                     _appPreferences.setAccessToken(
                         token: loginResponseModel!.sessionCode!);
+                    _appPreferences.setIsLoggedIn(loggedIn: true);
+                    _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
+
+
                   }else
                     {
                       _appPreferences.setAccessToken(
                           token:
                           loginResponseModel!.token!);
                     }
-                  _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
                   await _appPreferences.isPreferenceReady;
 
@@ -85,7 +87,7 @@ class LoginController extends GetxController {
 
                 }
                 } else {
-                  Utils.showToast('', true);
+                  Utils.showToast(response.data['message'], true);
                   // Handle the case where data is null in the response
                 }
               },

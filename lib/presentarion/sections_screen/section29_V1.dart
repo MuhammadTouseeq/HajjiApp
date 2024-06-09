@@ -6,10 +6,10 @@ import '../../core/utils/color_constant.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
 ///also 15 16 77
-class Section29 extends StatelessWidget {
+class Section29_V1 extends StatelessWidget {
   final List<Bed> beds;
 
-  Section29({required this.beds});
+  Section29_V1({required this.beds});
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +77,8 @@ class Section29 extends StatelessWidget {
                               ),
                               Row(
                                 children: [
+                                  HBedWidget(bed: beds[10]),
                                   HBedWidget(bed: beds[11]),
-                                  HBedWidget(bed: beds[12]),
                                 ],
                               ),
 
@@ -93,7 +93,7 @@ class Section29 extends StatelessWidget {
               Column(
                 children: [
                   VBedWidget(bed: beds[5]),
-                  VBedWidget(bed: beds[10]),
+                  EmptyBedWidget(bed: beds[8]),
                 ],
               ),
 
@@ -109,11 +109,11 @@ class Section29 extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              HBedWidget(bed: beds[12]),
+              SizedBox(width: getHorizontalSize(10),),
               HBedWidget(bed: beds[13]),
               SizedBox(width: getHorizontalSize(10),),
               HBedWidget(bed: beds[14]),
-              SizedBox(width: getHorizontalSize(10),),
-              HBedWidget(bed: beds[15]),
             ],
           ),
 

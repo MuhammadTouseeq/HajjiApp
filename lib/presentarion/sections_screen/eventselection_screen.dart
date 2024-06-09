@@ -6,7 +6,9 @@ import 'package:hajjiapp/presentarion/sections_screen/section10.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section12.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section13_m.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section14.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section26.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section29.dart';
+import 'package:hajjiapp/presentarion/sections_screen/section29_V1.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section33.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section55.dart';
 import 'package:hajjiapp/presentarion/sections_screen/section57.dart';
@@ -111,7 +113,7 @@ class SectionsScreen extends StatelessWidget {
                 ],
               ),
 
-           Obx(() =>    controller?.myReserveBed!=null?   Container(
+           Obx(() =>    controller?.myReserveBed.value!=null?   Container(
              width: double.infinity,
              padding: getPadding(all: 10),
              color: ColorConstant.appBackgroundgrayColor,
@@ -157,7 +159,7 @@ class SectionsScreen extends StatelessWidget {
                     return DropdownMenuItem<DataItem?>(
                       value: item,
                       child: MyText(
-                        title: " خيمة${item?.sectionNumber} (${item?.type})",
+                        title: " خيمة  ${item?.sectionNumber} (${item?.type})",
                         clr: ColorConstant.black900,
                       ),
                     );
@@ -294,6 +296,9 @@ class SectionsScreen extends StatelessWidget {
   }
   dynamic getSectionView() {
 
+    if(controller.generateBedList.value.isEmpty)
+      return Center(child: Text("Bed list not found"),);
+
     switch (controller.selectedValueConditions.value) {
       case '1':
       case '3':
@@ -336,12 +341,18 @@ class SectionsScreen extends StatelessWidget {
         break;
 
       case '2':
+        return Section29(beds: controller.generateBedList.value);
+        break;
       case '29':
-      return Section29(beds: controller.generateBedList.value);
+      return Section29_V1(beds: controller.generateBedList.value);
       break;
+
       case '26':
       case '27':
       case '28':
+        return Section26(beds: controller.generateBedList.value);
+        break;
+
       case '30':
       case '31':
         return Section13_m(beds: controller.generateBedList.value);
@@ -440,7 +451,7 @@ class HBedWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Alert'),
-                content: Text('Are you sure you want to change your reserved bed'),
+                content: Text('Are you sure you want to reserve bed?'),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -463,7 +474,7 @@ class HBedWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Alert'),
-                content: Text('You already had bed # ${controller.myReserveBed?.value?.bedNumber} reserved bed in section ${controller.myReserveBed?.value?.sectionNumber}. Are you sure you want to change your reserved bed'),
+                content: Text('You already had bed # ${controller.myReserveBed?.value?.bedNumber} reserved bed in section ${controller.myReserveBed?.value?.sectionNumber}. Are you sure you want to change your reserved bed?'),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -573,8 +584,27 @@ class VBedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        if(bed.isReserved==true) {
-          Utils.showToast('Bed Already reserved', false);
+        if(controller.myReserveBed.value==null) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alert'),
+                content: Text('Are you sure you want to reserve bed?'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      // Close the AlertDialog
+                      Navigator.of(context).pop();
+                      controller.reserveBed(bed.id as int);
+
+                    },
+                    child: Text('Confirm'),
+                  ),
+                ],
+              );
+            },
+          );
         }
         else
         {
@@ -583,7 +613,7 @@ class VBedWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Alert'),
-                content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
+                content: Text('You already had bed # ${controller.myReserveBed?.value?.bedNumber} reserved bed in section ${controller.myReserveBed?.value?.sectionNumber}. Are you sure you want to change your reserved bed?'),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -631,6 +661,64 @@ class VBedWidget extends StatelessWidget {
               child: V_BedNumberStyle(bed: bed),
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class EmptyBedWidget extends StatelessWidget {
+  SectionsController controller = Get.put(SectionsController());
+
+  final Bed bed;
+
+  EmptyBedWidget({required this.bed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        return;
+        if(bed.isReserved==true) {
+          Utils.showToast('Bed Already reserved', false);
+        }
+        else
+        {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alert'),
+                content: Text('Are you sure you want to reserve the bed number ${bed.id}.'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      // Close the AlertDialog
+                      Navigator.of(context).pop();
+                      controller.reserveBed(bed.id as int);
+
+                    },
+                    child: Text('Confirm'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      },
+      child: Stack(
+        children: [
+          Container(
+            width: 90,
+            height: 90,
+            // padding: EdgeInsets.symmetric(vertical: 3),
+          ),
+          // Positioned.fill(
+          //   child: Align(
+          //     alignment: Alignment.center,
+          //     child: V_BedNumberStyle(bed: bed),
+          //   ),
+          // )
         ],
       ),
     );

@@ -75,7 +75,7 @@ class DashboardScreen extends StatelessWidget {
               padding: getPadding(all: 10),
               child: Column(
                 children: [
-                  Obx(() =>    controller?.myReserveBed!=null?   Container(
+                  Obx(() =>    controller?.myReserveBed.value!=null?   Container(
                     width: double.infinity,
                     padding: getPadding(all: 10),
                     // color: ColorConstant.appBackgroundgrayColor,

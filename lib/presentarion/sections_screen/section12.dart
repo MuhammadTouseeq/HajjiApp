@@ -74,26 +74,26 @@ class Section38 extends StatelessWidget {
                     VBedWidget(bed: beds[7]),
                     Column(
                       children: [
-                        HBedWidget(bed: beds[19]),
-                        HBedWidget(bed: beds[23]),
+                        HBedWidget(bed: beds[8]),
+                        HBedWidget(bed: beds[12]),
                       ],
                     ),
                     Column(
                       children: [
-                        HBedWidget(bed: beds[20]),
-                        HBedWidget(bed: beds[24]),
+                        HBedWidget(bed: beds[11]),
+                        HBedWidget(bed: beds[13]),
                       ],
                     ),
                     Column(
                       children: [
-                        HBedWidget(bed: beds[21]),
-                        HBedWidget(bed: beds[25]),
+                        HBedWidget(bed: beds[10]),
+                        HBedWidget(bed: beds[14]),
                       ],
                     ),
                     Column(
                       children: [
-                        HBedWidget(bed: beds[22]),
-                        HBedWidget(bed: beds[26]),
+                        HBedWidget(bed: beds[11]),
+                        HBedWidget(bed: beds[15]),
                       ],
                     ),
                   ],
@@ -103,11 +103,11 @@ class Section38 extends StatelessWidget {
               FittedBox(
                 child: Row(
                   children: [
-                    HBedWidget(bed: beds[27]),
-                    HBedWidget(bed: beds[28]),
-                    HBedWidget(bed: beds[29]),
-                    HBedWidget(bed: beds[30]),
-                    HBedWidget(bed: beds[31]),
+                    HBedWidget(bed: beds[16]),
+                    HBedWidget(bed: beds[17]),
+                    HBedWidget(bed: beds[18]),
+                    HBedWidget(bed: beds[19]),
+                    HBedWidget(bed: beds[20]),
 
                   ],
                 ),

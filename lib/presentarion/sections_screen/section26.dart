@@ -6,10 +6,10 @@ import '../../core/utils/color_constant.dart';
 import 'eventselection_screen.dart';
 import 'models/sections_model.dart';
 ///also 15 16 77
-class Section29 extends StatelessWidget {
+class Section26 extends StatelessWidget {
   final List<Bed> beds;
 
-  Section29({required this.beds});
+  Section26({required this.beds});
 
   @override
   Widget build(BuildContext context) {
