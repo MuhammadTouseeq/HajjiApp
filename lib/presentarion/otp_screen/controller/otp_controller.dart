@@ -144,7 +144,7 @@ class OtpController extends GetxController {
             _appPreferences.setAccessToken(
                 token: loginResponseModel!.sessionCode!);
             _appPreferences.setIsLoggedIn(loggedIn: true);
-            Utils.showToast("${response.data['message']}", true);
+            Utils.showToast("${response.data['message']}", false);
 
             Get.offAllNamed(AppRoutes.dashboradPage);
 
