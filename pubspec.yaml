@@ -74,6 +74,13 @@ dependencies:
   intl_phone_number_input:
   url_launcher:
   flutter_barcode_scanner: ^2.0.0
+  firebase_core: ^2.4.1
+  firebase_analytics:
+  firebase_crashlytics: ^3.0.11
+  awesome_notifications:
+  firebase_messaging: any
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
