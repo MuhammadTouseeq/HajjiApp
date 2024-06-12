@@ -1,9 +1,9 @@
-class EventtsModel {
+class EventsModel {
   List<Events>? events;
 
-  EventtsModel({this.events});
+  EventsModel({this.events});
 
-  EventtsModel.fromJson(Map<String, dynamic> json) {
+  EventsModel.fromJson(Map<String, dynamic> json) {
     if (json['events'] != null) {
       events = <Events>[];
       json['events'].forEach((v) {

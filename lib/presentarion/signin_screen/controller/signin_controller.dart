@@ -51,50 +51,116 @@ class SignInController extends GetxController {
 
 
 
-  Future<void> managerLoginAPI(context) async {
+  // Future<void> managerLoginAPI(context) async {
+  //   final formState = formKey.currentState;
+  //   if (formState!.validate()) {
+  //     Utils.check().then((value) async {
+  //       if (value) {
+  //         btnController.start();
+  //         await BaseClient.post(
+  //             Constants.managerLoginUrl,
+  //             onSuccess: (response) async {
+  //               btnController.stop();
+  //               apiCallStatus = ApiCallStatus.success;
+  //
+  //               if (response.data['data'] != null) {
+  //                 ManagerLoginModel loginResponseModel = ManagerLoginModel.fromJson(response.data['data']);
+  //                 print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
+  //
+  //
+  //
+  //
+  //                 await _appPreferences.isPreferenceReady;
+  //                 _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
+  //
+  //                 Utils.showToast(response.data['message'], false,);
+  //                 print(response.data['message']);
+  //                  Get.toNamed(AppRoutes.hajjiAttendancePage);
+  //               } else {
+  //                 Utils.showToast('Incorrect Password or Email', true);
+  //                 // Handle the case where data is null in the response
+  //               }
+  //             },
+  //             onError: (error) {
+  //               BaseClient.handleApiError(error);
+  //               btnController.stop();
+  //               apiCallStatus = ApiCallStatus.error;
+  //             },
+  //             data: {
+  //               // 'device_id': '12345Testing1',
+  //               'device_type': (Platform.isIOS) ? 'ios' : 'android',
+  //               'user_name': emailController.text,
+  //               'user_password': passController.text,
+  //             }
+  //         );
+  //
+  //       } else {
+  //         CustomSnackBar.showCustomErrorToast(
+  //           message: Strings.noInternetConnection.tr,
+  //         );
+  //       }
+  //     });
+  //   } else {
+  //     print("Form validation failed");
+  //   }
+  // }
+
+  Future<void> managerLoginAPI(BuildContext context) async {
     final formState = formKey.currentState;
+
+    // Validate the form
     if (formState!.validate()) {
+      // Check internet connection
       Utils.check().then((value) async {
         if (value) {
+          // Start button loading animation
           btnController.start();
+
+          // Make the API call
           await BaseClient.post(
-              Constants.managerLoginUrl,
-              onSuccess: (response) async {
-                btnController.stop();
-                apiCallStatus = ApiCallStatus.success;
+            Constants.managerLoginUrl,
+            onSuccess: (response) async {
+              // Stop button loading animation
+              btnController.stop();
+              apiCallStatus = ApiCallStatus.success;
 
-                if (response.data['data'] != null) {
-                  ManagerLoginModel loginResponseModel = ManagerLoginModel.fromJson(response.data['data']);
-                  print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
+              if (response.data['data'] != null) {
+                // Parse the response
+                ManagerLoginModel loginResponseModel = ManagerLoginModel.fromJson(response.data['data']);
+                print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
 
+                // Save profile data
+                await _appPreferences.isPreferenceReady;
+                _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
 
+                // Show success toast
+                Utils.showToast(response.data['message'], false);
+                print(response.data['message']);
 
-
-                  await _appPreferences.isPreferenceReady;
-                  _appPreferences.setProfileData(data: jsonEncode(loginResponseModel));
-
-                  Utils.showToast(response.data['message'], false,);
-                  print(response.data['message']);
-                   Get.toNamed(AppRoutes.hajjiAttendancePage);
-                } else {
-                  Utils.showToast('Incorrect Password or Email', true);
-                  // Handle the case where data is null in the response
-                }
-              },
-              onError: (error) {
-                BaseClient.handleApiError(error);
-                btnController.stop();
-                apiCallStatus = ApiCallStatus.error;
-              },
-              data: {
-                // 'device_id': '12345Testing1',
-                'device_type': (Platform.isIOS) ? 'ios' : 'android',
-                'user_name': emailController.text,
-                'user_password': passController.text,
+                // Navigate to the next screen
+                Get.toNamed(AppRoutes.eventSelectionPage);
+              } else {
+                // Show error toast if data is null
+                Utils.showToast('Incorrect Password or Email', true);
               }
-          );
+            },
+            onError: (error) {
+              // Handle API error
+              BaseClient.handleApiError(error);
+              btnController.stop();
+              apiCallStatus = ApiCallStatus.error;
 
+              // Show error toast
+              Utils.showToast('Login failed, please try again', true);
+            },
+            data: {
+              'device_type': (Platform.isIOS) ? 'ios' : 'android',
+              'user_name': emailController.text,
+              'user_password': passController.text,
+            },
+          );
         } else {
+          // Show no internet connection error toast
           CustomSnackBar.showCustomErrorToast(
             message: Strings.noInternetConnection.tr,
           );
@@ -102,6 +168,8 @@ class SignInController extends GetxController {
       });
     } else {
       print("Form validation failed");
+      // Optionally show a toast or snackbar for form validation failure
+      Utils.showToast("Form validation failed", true);
     }
   }
 

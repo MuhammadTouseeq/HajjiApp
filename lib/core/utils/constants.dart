@@ -17,6 +17,7 @@ class Constants {
   static const managerLoginUrl = baseUrl1 + 'manager/login';
  // static const attendanceUrl = 'https://haaji.website/events/mark_attendance';
   static const attendanceUrl = baseUrl1 + 'events/mark_attendance';
+  static const eventsUrl = baseUrl1 + 'events';
   static const userUrl = baseUrl + 'send_otp';
   static const otpVerifyUrl = baseUrl + 'verify_otp';
   static const sectionDataUrl = reservationbaseUrl + 'sections_data';
