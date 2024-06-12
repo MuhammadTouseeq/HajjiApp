@@ -203,7 +203,6 @@ myBedMapURL.value=bedList.value[index].reservation_map!;
           );
         }
       });
-
   }
 
 
