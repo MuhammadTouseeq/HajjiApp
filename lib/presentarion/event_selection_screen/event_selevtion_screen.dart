@@ -91,7 +91,7 @@ class EventSelectionScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20.0), // Adjust the radius as needed
                           child: CommonImageView(
-                            url: event.eventImage ?? "N/A",
+                            url: "https://haaji.website/${event.eventImage}" ?? "N/A",
                             fit: BoxFit.cover,
                             height: 150,
                             width: double.infinity,

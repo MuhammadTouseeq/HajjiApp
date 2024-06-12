@@ -56,6 +56,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
     print('manager $userMap');
 
     userDetails = ManagerLoginModel.fromJson(userMap);
+    getEventsDetailsApi();
     print('manaager $userDetails');
   }
 
@@ -72,7 +73,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
       apiCallStatus = ApiCallStatus.loading;
 
       var response = await BaseClient.get(
-        'https://haaji.website/events/details?user_id=1&session_code=a1ccfb676c9416b933cde11fddf414&event_id=1',
+        'https://haaji.website/events/details?user_id=${userDetails!.userId}&session_code=${userDetails!.sessionCode}&event_id=${eventsId!.eventId}',
         // Replace with your URL and parameters
         onSuccess: (response) {
           EventsDetailsModel eventsResponse = EventsDetailsModel.fromJson(response.data['data']);
@@ -139,6 +140,8 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
 
                 Utils.showToast(response.data['message'], false);
                 print(response.data['message']);
+
+                getEventsDetailsApi();
                 // Get.toNamed(AppRoutes.homeOneScreen);
               } else {
                 Utils.showToast('Incorrect Password or Email', true);
@@ -184,6 +187,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
 
                 Utils.showToast(response.data['message'], false);
                 print(response.data['message']);
+                getEventsDetailsApi();
                 // Get.toNamed(AppRoutes.homeOneScreen);
               } else {
                 Utils.showToast('Incorrect Password or Email', true);
@@ -229,10 +233,10 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
 class ApiService {
   final Dio _dio = Dio();
 
-  Future<EventsDetailsModel?> fetchEventDetails() async {
+  Future<EventsDetailsModel?> fetchEventDetails(ManagerLoginModel userDetails,String eventId) async {
     try {
       final response = await _dio.get(
-          'https://haaji.website/events/details?user_id=1&session_code=a1ccfb676c9416b933cde11fddf414&event_id=1'
+          'https://haaji.website/events/details?user_id=${userDetails!.userId}&session_code=${userDetails.sessionCode}&event_id=$eventId'
       );
       if (response.statusCode == 200) {
         return EventsDetailsModel.fromJson(response.data);
