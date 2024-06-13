@@ -98,6 +98,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
       isLoading.value = false; // Update loading state
       // Handle exception as needed
     }
+
   }
 
 
