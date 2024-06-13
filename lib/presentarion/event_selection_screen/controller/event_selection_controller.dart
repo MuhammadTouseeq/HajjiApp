@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -17,6 +19,8 @@ import '../../../core/utils/utils.dart';
 import '../../../data/services/api_call_status.dart';
 import '../../../data/services/api_exceptions.dart';
 import '../../../data/services/base_client.dart';
+import '../../../localization/strings_enum.dart';
+import '../../../widgets/custom_snackbar.dart';
 import '../../../widgets/paginations/paged_view.dart';
 
 /// A controller class for the DiscoverScreen.
@@ -54,6 +58,8 @@ class EventSelectionController extends GetxController {
 
     userDetails = ManagerLoginModel.fromJson(userMap);
     print('map1 $userDetails');
+
+    UpdateDeviceToken();
   }
 
   Future<dynamic> getevetsApi({bool isRefresh = false}) async {
@@ -168,5 +174,35 @@ class EventSelectionController extends GetxController {
 
   }
 
+  Future<void> UpdateDeviceToken() async {
+
+
+    Utils.check().then((value) async {
+      if (value) {
+        await _appPreferences.isPreferenceReady;
+        _appPreferences
+            .getAccessToken(prefName: AppPreferences.prefAccessToken)
+            .then((token) async {
+          print("Device Token $token");
+          await BaseClient.post(Constants.deviceToken,
+              onSuccess: (response) async {
+
+              }, onError: (error) {
+                BaseClient.handleApiError(error);
+                // apiCallStatus = ApiCallStatus.error;
+              }, data: {
+                "user_id": userDetails?.userId,
+                'device_type': (Platform.isIOS) ? 'ios' : 'android',
+                "session_code": userDetails?.sessionCode,
+                'device_token': token
+              });
+        });
+      } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
+  }
 
 }
