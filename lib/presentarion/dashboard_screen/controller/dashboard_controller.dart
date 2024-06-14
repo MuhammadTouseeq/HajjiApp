@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,13 +51,18 @@ import '../../../widgets/paginations/paged_view.dart';
 /// current discoverModelObj
 ///
 class DashboardController extends GetxController {
-  final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
-  final RoundedLoadingButtonController btn1Controller = RoundedLoadingButtonController();
- // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
+  final RoundedLoadingButtonController btnController =
+      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController btn1Controller =
+      RoundedLoadingButtonController();
+  // Rx<DiscoverModel> discoverModelObj = DiscoverModel().obs;
   AppPreferences _appPreferences = AppPreferences();
- // AppPreferences appPreferences = AppPreferences();
+  // AppPreferences appPreferences = AppPreferences();
   LoginModel? userDetails;
   RxBool isLoading = true.obs;
+  AppPreferences appPreferences = AppPreferences();
+
+
   Future<void> getProfileData() async {
     await _appPreferences.isPreferenceReady;
     var data = await _appPreferences.getProfileData();
@@ -65,7 +71,10 @@ class DashboardController extends GetxController {
       userDetails = LoginModel.fromJson(userMap);
     }
     isLoading.value = false;
+
+    UpdateDeviceToken();
   }
+
   final Rx<BedData?> myReserveBed = Rx<BedData?>(null);
 
   void logoutConfirmation(BuildContext context) async {
@@ -79,15 +88,11 @@ class DashboardController extends GetxController {
             secondButtonContent: "No".tr,
             first: () async {
               // Get.offAllNamed(AppRoutes.loginScreen);
-             // logout();
-              await _appPreferences
-                  .getAppPreferences()
-                  .isPreferenceReady;
-              await _appPreferences.getAppPreferences()
-                  .clearPreference();
+              // logout();
+              await _appPreferences.getAppPreferences().isPreferenceReady;
+              await _appPreferences.getAppPreferences().clearPreference();
 
               Get.offAllNamed(AppRoutes.loginPage);
-
             },
             second: () {
               Get.back();
@@ -106,70 +111,83 @@ class DashboardController extends GetxController {
   //   print('map1 $userDetails');
   // }
 
-
-
   Future<void> CheckMyreserveBed() async {
     Utils.check().then((value) async {
       if (value) {
-        await BaseClient.post(
-            Constants.bedDataUrl,
+        await BaseClient.post(Constants.bedDataUrl,
             onSuccess: (response) async {
+          // apiCallStatus = ApiCallStatus.success;
+          List<BedData> dataBeds = [];
+          print("Bed Api response========  ${response.data['data']}");
+          if (response.data['status'] == true) {
+            // clear();
+            // mapURL.value = response.data['reservation_map'] ;
+            // print("maping url========  ${mapURL.value}");
 
-              // apiCallStatus = ApiCallStatus.success;
-              List<BedData> dataBeds = [];
-              print("Bed Api response========  ${response.data['data']}");
-              if (response.data['status'] == true) {
-                // clear();
-                // mapURL.value = response.data['reservation_map'] ;
-                // print("maping url========  ${mapURL.value}");
+            response.data['data'].forEach((v) {
+              dataBeds.add(new BedData.fromJson(v));
+            });
 
-                response.data['data'].forEach((v) {
-                  dataBeds.add(new BedData.fromJson(v));
-                });
-
-                if(dataBeds!=null) {
-                  myReserveBed.value = dataBeds[0];
-                  print("Reserve Bed ========  ${dataBeds[0]}");
-
-                }
-
-              } else {
-                Utils.showToast('', true);
-                // Handle the case where data is null in the response
-              }
-            },
-            onError: (error) {
-
-              BaseClient.handleApiError(error);
-              // apiCallStatus = ApiCallStatus.error;
-            },
-
-
-            data: {
-              "user_id": userDetails?.userId,
-              "reserved_by_user_id": userDetails?.userId,
-              "session_code": userDetails?.sessionCode,
+            if (dataBeds != null) {
+              myReserveBed.value = dataBeds[0];
+              print("Reserve Bed ========  ${dataBeds[0]}");
             }
-        );
-
+          } else {
+            Utils.showToast('', true);
+            // Handle the case where data is null in the response
+          }
+        }, onError: (error) {
+          BaseClient.handleApiError(error);
+          // apiCallStatus = ApiCallStatus.error;
+        }, data: {
+          "user_id": userDetails?.userId,
+          "reserved_by_user_id": userDetails?.userId,
+          "session_code": userDetails?.sessionCode,
+        });
       } else {
         CustomSnackBar.showCustomErrorToast(
           message: Strings.noInternetConnection.tr,
         );
       }
     });
-
   }
 
+  Future<void> UpdateDeviceToken() async {
 
 
+    Utils.check().then((value) async {
+      if (value) {
+        await appPreferences.isPreferenceReady;
+        appPreferences
+            .getAccessToken(prefName: AppPreferences.prefAccessToken)
+            .then((token) async {
+          print("DeviceToken $token");
+          await BaseClient.post(Constants.deviceToken,
+              onSuccess: (response) async {
+
+              }, onError: (error) {
+                BaseClient.handleApiError(error);
+                // apiCallStatus = ApiCallStatus.error;
+              }, data: {
+                "user_id": userDetails?.userId,
+                'device_type': (Platform.isIOS) ? 'ios' : 'android',
+                "session_code": userDetails?.sessionCode,
+                'device_token': token
+              });
+        });
+            } else {
+        CustomSnackBar.showCustomErrorToast(
+          message: Strings.noInternetConnection.tr,
+        );
+      }
+    });
+  }
 
   @override
   void onInit() {
     super.onInit();
     getProfileData();
     CheckMyreserveBed();
+
   }
-
-
 }
