@@ -24,8 +24,8 @@ import '../../../widgets/custom_snackbar.dart';
 class SignInController extends GetxController {
   final RoundedLoadingButtonController btnController = RoundedLoadingButtonController();
   final RoundedLoadingButtonController btnsignupController = RoundedLoadingButtonController();
-  TextEditingController emailController = TextEditingController(text: 'test_ogm_1');
-  TextEditingController passController = TextEditingController(text: 'Karachi@123');
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
 
   Rx<bool> isShowPassword = false.obs;

@@ -122,9 +122,6 @@ class EventSelectionController extends GetxController {
             print("events data check ${response}");
             List<Events> dataEvents = [];
             if (response.data['status'] == true) {
-
-              // findEventsCategories.value = response.data['data'];
-              // print("maping url========  ${findEventsCategories.value}");
             var jsonData=  response.data['data'];
               jsonData['events'].forEach((v) {
                 dataEvents.add(new Events.fromJson(v));
