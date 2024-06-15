@@ -37,4 +37,5 @@ import Firebase
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+ }
 

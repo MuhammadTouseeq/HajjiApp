@@ -124,7 +124,7 @@ class SignInController extends GetxController {
               btnController.stop();
               apiCallStatus = ApiCallStatus.success;
 
-              if (response.data['data'] != null) {
+              if (response.data['data'] != null && response.data['status']) {
                 // Parse the response
                 ManagerLoginModel loginResponseModel = ManagerLoginModel.fromJson(response.data['data']);
                 print('[ LOGIN RESPONSE ===> ${loginResponseModel.toJson()}]');
@@ -172,6 +172,9 @@ class SignInController extends GetxController {
       Utils.showToast("Form validation failed", true);
     }
   }
+
+
+
 
 
 
