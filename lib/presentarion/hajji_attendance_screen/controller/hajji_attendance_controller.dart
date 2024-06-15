@@ -55,7 +55,9 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
     Map<String,dynamic> userMap = jsonDecode(data!);
     print('manager $userMap');
 
+
     userDetails = ManagerLoginModel.fromJson(userMap);
+    getEventsDetailsApi();
     print('manaager $userDetails');
   }
 
@@ -140,6 +142,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
 
                 Utils.showToast(response.data['message'], false);
                 print(response.data['message']);
+                getEventsDetailsApi();
                 // Get.toNamed(AppRoutes.homeOneScreen);
               } else {
                 Utils.showToast('Incorrect Password or Email', true);
@@ -185,6 +188,7 @@ class HajjiAttendanceController extends GetxController with GetSingleTickerProvi
 
                 Utils.showToast(response.data['message'], false);
                 print(response.data['message']);
+                getEventsDetailsApi();
                 // Get.toNamed(AppRoutes.homeOneScreen);
               } else {
                 Utils.showToast('Incorrect Password or Email', true);
