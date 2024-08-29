@@ -102,6 +102,7 @@ class HajjiAttendanceScreen extends StatelessWidget {
       ),
     );
   }
+  ///
 
 
   Widget scannerScreen (){
@@ -281,8 +282,4 @@ class HajjiAttendanceScreen extends StatelessWidget {
     );
   }
 
-  /// Navigates to the previous screen.
-  onTapArrowLeft() {
-    Get.back();
-  }
 }
